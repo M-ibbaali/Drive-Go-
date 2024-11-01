@@ -1,7 +1,9 @@
+import {useState} from 'react'
 import { FaGoogle, FaFacebookF } from 'react-icons/fa'
 import { AiOutlineEye } from 'react-icons/ai'
 
 function SignIn() {
+    const [showPassword, setShowPassword] = useState(false)
 
     return (
         <div className="p-10 w-full">
@@ -21,11 +23,16 @@ function SignIn() {
                 <div className="relative">
                 <label className="text-gray-500">Password</label>
                 <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     placeholder="6+ characters"
                     className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-                <AiOutlineEye className="absolute right-3 top-10 text-gray-400 cursor-pointer" />
+                <AiOutlineEye
+                    className="absolute right-3 top-10 text-gray-400 cursor-pointer"
+                    onMouseDown={() => setShowPassword(true)}
+                    onMouseUp={() => setShowPassword(false)}
+                    onMouseLeave={() => setShowPassword(false)}
+                />
                 </div>
 
                 <div className="text-right">
