@@ -9,6 +9,7 @@ export default {
       colors:{
         primary: 'white',
         secondary: 'blue',
+        tertiary: 'rgb(246 247 249)',
       },
     },
   },
