@@ -23,11 +23,11 @@ function Test() {
             {/* <AdminDashboard></AdminDashboard> */}
             {/* <Aide></Aide> */}
             {/* <Profile></Profile> */}
-            {/* <Router>
+            <Router>
                 <Routes>
                     <Route path="/*" element={<Login />} />
                 </Routes>
-            </Router> */}
+            </Router>
             {/* <Reservation></Reservation> */}
             {/* <Categories></Categories> */}
         </>

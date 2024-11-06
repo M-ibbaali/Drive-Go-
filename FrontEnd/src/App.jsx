@@ -8,8 +8,8 @@ function App() {
 
     return (
         <>
-            <Home></Home>
-            {/* <Test></Test> */}
+            {/* <Home></Home> */}
+            <Test></Test>
         </>
     )
 }
