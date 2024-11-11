@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaGasPump, FaCogs, FaUsers, FaHeart} from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 function Car({index, car, favorites, handleFavoriteToggle}) {
     return (
@@ -23,7 +24,7 @@ function Car({index, car, favorites, handleFavoriteToggle}) {
                     <p className="text-black font-bold">
                         {car.price} /<span className="text-gray-300 font-semibold">day</span>
                     </p>
-                    <button className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded">Rent Now</button>
+                    <Link to="/reservation" className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded">Rent Now</Link>
                 </div>
                 <p className="text-gray-500 line-through">{car.lastPrice}</p>
             </div>

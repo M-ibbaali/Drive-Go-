@@ -26,7 +26,7 @@ function Notification({ notifications = [] }) {
                 <span className="absolute top-0 -right-1 inline-block w-4 h-4 bg-red-500 rounded-full text-xs text-white text-center">{notifications.length}</span>
             </div>
             {isOpen && (
-                <div ref={menuRef} className="absolute right-32 mt-[21.5rem] w-56 bg-white border border-gray-200 rounded-lg shadow-lg">
+                <div ref={menuRef} className="absolute right-[11rem] mt-[21.5rem] w-56 bg-white border border-gray-200 rounded-lg shadow-lg">
                     <ul className="py-1">
                         {notifications.length > 0 ? (
                             notifications.map((notification, index) => (

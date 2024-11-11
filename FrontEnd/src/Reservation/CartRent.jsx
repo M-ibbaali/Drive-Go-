@@ -9,10 +9,11 @@ import RecommandCar from '../Home/RecommandCar'
 function CarRentalDashboard() {
     const [price, setPrice] = useState(80)
     const [reviews] = useState([
+        { name: "Alex Stanton", date: "21/09/2022", text: "This car is amazing with the best acceleration...", rating: 5 },
+        { name: "Skylar Dias", date: "10/10/2022", text: "I loved driving this car on the highways...", rating: 3 },
         { name: "Alex Stanton", date: "21/09/2022", text: "This car is amazing with the best acceleration...", rating: 4 },
         { name: "Skylar Dias", date: "10/10/2022", text: "I loved driving this car on the highways...", rating: 4 },
-        { name: "Skylar Dias", date: "10/10/2022", text: "I loved driving this car on the highways...", rating: 5 },
-        { name: "Skylar Dias", date: "10/10/2022", text: "I loved driving this car on the highways...", rating: 5 },
+        { name: "Alex Stanton", date: "21/09/2022", text: "This car is amazing with the best acceleration...", rating: 3 },
         { name: "Skylar Dias", date: "10/10/2022", text: "I loved driving this car on the highways...", rating: 5 },
     ])
 

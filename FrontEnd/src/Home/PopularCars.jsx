@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {FaHeart, FaGasPump, FaCogs, FaUsers } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 function PopularCars() {
     const cars = [
@@ -58,7 +59,7 @@ function PopularCars() {
             <div className="p-4">
                 <h2 className="text-xl font-bold mb-4 flex items-center">
                     Popular Car
-                    <a href="/popularCars" className="text-blue-500 font-normal ml-auto hover:underline mb-4 inline-block text-base">View All</a>
+                    <Link to="/popularCars" className="text-blue-500 font-normal ml-auto hover:underline mb-4 inline-block text-base">View All</Link>
                 </h2>
                 <div className="grid grid-cols-4 gap-8">
                     {cars.map((car, index) => (
@@ -81,7 +82,9 @@ function PopularCars() {
                                 <p className="text-black font-bold">
                                     {car.price} /<span className="text-gray-300 font-semibold">day</span>
                                 </p>
-                                <button className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded">Rent Now</button>
+                                <Link to="/reservation">
+                                    <button className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded">Rent Now</button>
+                                </Link>
                             </div>
                             <p className="text-gray-300 font-semibold line-through">{car.lastPrice}</p>
                         </div>

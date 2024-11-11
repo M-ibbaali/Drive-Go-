@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { FaGasPump, FaCogs, FaUsers, FaHeart} from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 function RecommandCar() {
     const cars = [
@@ -117,14 +118,16 @@ function RecommandCar() {
                             <p className="text-black font-bold">
                                 {car.price} /<span className="text-gray-300 font-semibold">day</span>
                             </p>
-                            <button className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded">Rent Now</button>
+                            <Link to="/reservation">
+                                <button className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded">Rent Now</button>
+                            </Link>
                         </div>
                         <p className="text-gray-500 line-through">{car.lastPrice}</p>
                     </div>
                 ))}
             </div>
             <div className="flex  items-center mt-4">
-                <a href="/category" className="ml-[50%] px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded text-center">Show more cars</a>
+                <Link to="/categories" className="ml-[50%] px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded text-center cursor-pointer">Show more cars</Link>
                 <p className="ml-auto text-gray-700">{cars.length} car</p>
             </div>
         </div>

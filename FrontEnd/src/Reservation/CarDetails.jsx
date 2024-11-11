@@ -1,7 +1,15 @@
+import {useState} from 'react'
 import {FaHeart} from 'react-icons/fa'
 import {AiFillStar } from 'react-icons/ai'
+import { Link } from 'react-router-dom'
 
 function CarDetails({ price }) {
+    const [favorites, setFavorites] = useState(false)
+
+    const handleFavoriteToggle = () => {
+        setFavorites(!favorites);
+    }
+
     return (
         <div className="bg-white p-6 rounded-lg shadow-md mb-6">
             <div className="flex">
@@ -20,7 +28,7 @@ function CarDetails({ price }) {
                 
                 <div className="w-1/2 pl-6">
                     <h1 className="text-3xl font-bold flex items-center justify-between">Nissan GT – R
-                        <FaHeart className="text-red-500 text-2xl ml-3 cursor-pointer" />
+                        <FaHeart onClick={handleFavoriteToggle} className={`${favorites ? 'text-red-600' : 'text-gray-500'} text-2xl ml-3 cursor-pointer`} />
                     </h1>
                     <div className="flex items-center mt-2">
                         {[...Array(5)].map((_, index) => (
@@ -38,7 +46,9 @@ function CarDetails({ price }) {
                         <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm ml-2">70L</span>
                     </div>
                     <p className="text-2xl font-bold mt-6">${price}.00/day</p>
-                    <button className="bg-blue-500 text-white px-6 py-3 mt-4 rounded-lg">Rent Now</button>
+                    <Link to="/payment">
+                        <button className="bg-blue-500 text-white px-6 py-3 mt-4 rounded-lg">Rent Now</button>
+                    </Link>
                 </div>
             </div>
         </div>

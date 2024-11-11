@@ -3,7 +3,8 @@ import Search from './Search'
 import Favorite from './Favorite'
 import Notification from './Notification'
 import Settings from './Settings'
-import Profile from './Profile'
+import Inscription from './Inscription'
+import { Link } from 'react-router-dom'
 
 function Header() {
     const notifications = [
@@ -17,7 +18,9 @@ function Header() {
     return (
         <>
             <header className="flex justify-between items-center p-4 bg-white shadow">
-                <h1 className="text-3xl font-semibold text-blue-600 cursor-pointer">DriveGo</h1>
+                <Link to="/">
+                    <h1 className="text-3xl font-semibold text-blue-600 cursor-pointer">DriveGo</h1>
+                </Link>
                 
                 {/* Search Input with Icon */}
                 <Search></Search>
@@ -33,8 +36,8 @@ function Header() {
                     {/* Settings Icon */}
                     <Settings></Settings>
 
-                    {/* User Icon */}
-                    <Profile></Profile>
+                    {/* SignUp Icon */}
+                    <Inscription></Inscription>
                 </div>
             </header>
         </>

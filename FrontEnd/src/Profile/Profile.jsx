@@ -1,18 +1,23 @@
 import {useState} from 'react'
-import { FaPencilAlt, FaEnvelope, FaHeart, FaBell, FaCog } from "react-icons/fa"
+import { FaPencilAlt, FaEnvelope } from "react-icons/fa"
 
 function Profile() {
     const currentDate = new Date()
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
     const formattedDate = currentDate.toLocaleDateString('en-US', options)
-
+    
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [username, setUsername] = useState("Guest")
+    const [NewUsername, setNewUsername] = useState("")
     const [email, setEmail] = useState("mohamed@gmail.com")
     const [newEmail, setNewEmail] = useState("")
 
     const toggleModal = () => setIsModalOpen(!isModalOpen)
 
     const handleSaveChanges = () => {
+        if (NewUsername.trim()) {
+            setUsername(NewUsername)
+        }
         if (newEmail.trim()) {
             setEmail(newEmail)
         }
@@ -20,22 +25,12 @@ function Profile() {
     }
 
     return (
-        <div className="min-h-screen bg-gray-100 p-8">
+        <div className="min-h-screen p-8">
             <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
                 {/* Header */}
                 <div className="px-6 py-4 bg-gradient-to-r from-blue-300 to-purple-200">
-                    <h2 className="text-3xl font-semibold text-gray-800">Welcome, Mohamed</h2>
+                    <h2 className="text-3xl font-semibold text-gray-800">Welcome, {username}</h2>
                     <p className="text-gray-600">{formattedDate}</p>
-                    <div className="absolute top-4 right-4 flex items-center space-x-4">
-                        <FaHeart className="w-6 h-6 text-gray-500 cursor-pointer hover:text-red-500" />
-                        <FaBell className="w-6 h-6 text-gray-500 cursor-pointer hover:text-blue-500" />
-                        <FaCog className="w-6 h-6 text-gray-500 cursor-pointer hover:text-black" />
-                        <img
-                            className="w-10 h-10 rounded-full cursor-pointer hover:border-2 hover:border-blue-500"
-                            src="/Pictures/User-1.jpg"
-                            alt="User"
-                        />
-                    </div>
                 </div>
 
                 {/* Profile Info */}
@@ -47,7 +42,7 @@ function Profile() {
                             alt="Profile"
                         />
                         <div>
-                            <h3 className="text-xl font-bold text-gray-800">Mohamed</h3>
+                            <h3 className="text-xl font-bold text-gray-800">{username}</h3>
                             <p className="text-gray-500">{email}</p>
                         </div>
                         <button onClick={toggleModal} className="ml-auto px-4 py-2 flex items-center space-x-1 text-white bg-blue-600 rounded-lg hover:bg-blue-500 transition-all">
@@ -128,6 +123,12 @@ function Profile() {
                         <h3 className="text-2xl font-semibold mb-4">Edit Profile</h3>
                         <div className="mb-4">
                             <label className="block text-gray-600">Email</label>
+                            <input
+                                type="text"
+                                onChange={(e) => setNewUsername(e.target.value)}
+                                placeholder="Enter new name"
+                                className="w-full px-4 py-2 mt-1 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
                             <input
                                 type="email"
                                 onChange={(e) => setNewEmail(e.target.value)}
