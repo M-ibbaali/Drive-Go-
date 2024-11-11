@@ -10,6 +10,7 @@ import Settings from '../Settings/Settings'
 import SignUp from '../Login/SignUp'
 import SignIn from '../Login/SignIn'
 import Reservation from '../Reservation/Reservation'
+import Payment from '../Payment/Payment'
 import AdminDashboard from '../Admin/AdminDashboard'
 
 
@@ -28,6 +29,7 @@ function Home() {
                     <Route path="/signUp" element={<SignUp />}/>
                     <Route path="/signIn" element={<SignIn />}/>
                     <Route path="/reservation" element={<Reservation />}/>
+                    <Route path="/payment" element={<Payment />}/>
                     <Route path="/administration" element={<AdminDashboard />}/>
                 </Routes>
                 <Footer></Footer>
