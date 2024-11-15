@@ -1,26 +1,38 @@
--- Create the database
+DROP DATABASE IF EXISTS DriveGo;
+
 CREATE DATABASE DriveGo;
 USE DriveGo;
 
 -- 1. Users Table
 CREATE TABLE Users (
-    user_id UUID PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    nick_name VARCHAR(100),
+    gender ENUM('Male', 'Female'),
+    address VARCHAR(255),
+    cin VARCHAR(8) UNIQUE NOT NULL,
+    phone_number VARCHAR(20) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
-    role ENUM('Client', 'Owner', 'Admin') NOT NULL,
+    role ENUM('Client', 'Employer', 'Admin') NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CHECK (cin REGEXP '^[A-Z]{1,2}[0-9]{6}$')
 );
 
 -- 2. Vehicles Table
 CREATE TABLE Vehicles (
-    vehicle_id UUID PRIMARY KEY,
-    owner_id UUID NOT NULL,
-    make VARCHAR(50) NOT NULL,
-    model VARCHAR(50) NOT NULL,
-    year INT NOT NULL,
-    price_per_day DECIMAL(10, 2) NOT NULL,
+    vehicle_id INT AUTO_INCREMENT PRIMARY KEY,
+    owner_id INT NOT NULL,
+    name VARCHAR(100) NOT NULL, 
+    type ENUM('Supercar', 'Sedan', 'Sport', 'SUV', 'Hatchback', 'Convertible', 'Coupe', 'Wagon', 'Truck', 'Van') NOT NULL, -- Car type options
+    price DECIMAL(10, 2) NOT NULL, 
+    last_price DECIMAL(10, 2),
+    img VARCHAR(255) NOT NULL,
+    type_gas ENUM('Diesel', 'Petrol', 'Electric', 'Hybrid') NOT NULL, -- Fuel type
+    gas_capacity VARCHAR(20) NOT NULL,
+    gear ENUM('Automatic', 'Manual') NOT NULL,
+    passengers INT NOT NULL,
     availability_status BOOLEAN DEFAULT TRUE,
     location VARCHAR(100) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -30,9 +42,9 @@ CREATE TABLE Vehicles (
 
 -- 3. Reservations Table
 CREATE TABLE Reservations (
-    reservation_id UUID PRIMARY KEY,
-    user_id UUID NOT NULL,
-    vehicle_id UUID NOT NULL,
+    reservation_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    vehicle_id INT NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     status ENUM('Pending', 'Confirmed', 'Completed', 'Cancelled') DEFAULT 'Pending',
@@ -45,8 +57,8 @@ CREATE TABLE Reservations (
 
 -- 4. Payments Table
 CREATE TABLE Payments (
-    payment_id UUID PRIMARY KEY,
-    reservation_id UUID NOT NULL,
+    payment_id INT AUTO_INCREMENT PRIMARY KEY,
+    reservation_id INT NOT NULL,
     amount DECIMAL(10, 2) NOT NULL,
     payment_method ENUM('Credit Card', 'PayPal', 'Stripe') NOT NULL,
     status ENUM('Pending', 'Completed', 'Failed') DEFAULT 'Pending',
@@ -56,8 +68,8 @@ CREATE TABLE Payments (
 
 -- 5. Notifications Table
 CREATE TABLE Notifications (
-    notification_id UUID PRIMARY KEY,
-    user_id UUID NOT NULL,
+    notification_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
     message TEXT NOT NULL,
     status ENUM('Unread', 'Read') DEFAULT 'Unread',
     sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -66,9 +78,9 @@ CREATE TABLE Notifications (
 
 -- 6. Reviews Table
 CREATE TABLE Reviews (
-    review_id UUID PRIMARY KEY,
-    reservation_id UUID NOT NULL,
-    user_id UUID NOT NULL,
+    review_id INT AUTO_INCREMENT PRIMARY KEY,
+    reservation_id INT NOT NULL,
+    user_id INT NOT NULL,
     rating INT CHECK (rating BETWEEN 1 AND 5),
     comment TEXT,
     review_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -78,10 +90,10 @@ CREATE TABLE Reviews (
 
 -- 7. Historique Table
 CREATE TABLE Historique (
-    historique_id UUID PRIMARY KEY,
-    user_id UUID NOT NULL,
+    historique_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
     action_type ENUM('Reservation Created', 'Reservation Cancelled', 'Payment Made', 'Vehicle Status Updated') NOT NULL,
-    related_id UUID,
+    related_id INT,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     details TEXT,
     FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
