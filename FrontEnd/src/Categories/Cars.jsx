@@ -188,13 +188,13 @@ function Cars() {
     const [visibleCount, setVisibleCount] = useState(9)
 
     const handleFavoriteToggle = (index) => {
-        const newFavorites = [...favorites];
-        newFavorites[index] = !newFavorites[index];
-        setFavorites(newFavorites);
+        const newFavorites = [...favorites]
+        newFavorites[index] = !newFavorites[index]
+        setFavorites(newFavorites)
     }
 
     const handleShowMore = () => {
-        setVisibleCount((prevCount) => Math.min(prevCount + 3, cars.length));
+        setVisibleCount((prevCount) => Math.min(prevCount + 3, cars.length))
     }
 
     return (

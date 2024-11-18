@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import { FaGoogle, FaFacebookF } from 'react-icons/fa'
 import { AiOutlineEye } from 'react-icons/ai'
-import { Link, Routes, Route, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 function SignIn() {
     const location = useLocation()
@@ -44,7 +44,7 @@ function SignIn() {
                             <input
                                 type="email"
                                 placeholder="name@gmail.com"
-                                className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             />
                             </div>
 
@@ -54,7 +54,7 @@ function SignIn() {
                             <input
                                 type={showPassword ? "text" : "password"}
                                 placeholder="6+ characters"
-                                className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             />
                             <AiOutlineEye
                                 className="absolute right-3 top-10 text-gray-400 cursor-pointer"

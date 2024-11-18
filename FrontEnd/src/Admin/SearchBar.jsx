@@ -4,8 +4,8 @@ function SearchBar() {
     const [pickDrop, setPickDrop] = useState('pick');
 
     const handleRadioChange = (event) => {
-        setPickDrop(event.target.id);
-    };
+        setPickDrop(event.target.id)
+    }
 
     return (
         <div className="bg-white p-4 rounded-lg">
@@ -77,7 +77,7 @@ function SearchBar() {
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
-export default SearchBar;
+export default SearchBar

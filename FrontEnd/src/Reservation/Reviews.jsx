@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { AiFillStar } from 'react-icons/ai'
 
 function Reviews({ reviews }) {
-    const [showAll, setShowAll] = useState(false);
-    const reviewsToShow = showAll ? reviews : reviews.slice(0, 2);
+    const [showAll, setShowAll] = useState(false)
+    const reviewsToShow = showAll ? reviews : reviews.slice(0, 2)
     
     return (
         <div className="bg-white p-6 rounded-lg shadow-md mb-6">

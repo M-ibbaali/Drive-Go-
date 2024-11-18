@@ -5,7 +5,7 @@ function SearchBar() {
     const [pickDrop, setPickDrop] = useState('pick')
     
     const handleRadioChange = (event) => {
-        setPickDrop(event.target.id);
+        setPickDrop(event.target.id)
     }
 
     return (

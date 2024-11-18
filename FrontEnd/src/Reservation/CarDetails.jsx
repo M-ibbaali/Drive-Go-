@@ -7,7 +7,7 @@ function CarDetails({ price }) {
     const [favorites, setFavorites] = useState(false)
 
     const handleFavoriteToggle = () => {
-        setFavorites(!favorites);
+        setFavorites(!favorites)
     }
 
     return (

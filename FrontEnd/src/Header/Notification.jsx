@@ -6,17 +6,17 @@ function Notification({ notifications = [] }) {
     const menuRef = useRef(null)
 
     const toggleMenu = () => {
-        setIsOpen(!isOpen);
+        setIsOpen(!isOpen)
     }
 
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
-                setIsOpen(false);
+                setIsOpen(false)
             }
         };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [])
 
     return (

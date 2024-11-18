@@ -89,9 +89,9 @@ function RecommandCar() {
     const [favorites, setFavorites] = useState(Array(cars.length).fill(false))
 
     const handleFavoriteToggle = (index) => {
-        const newFavorites = [...favorites];
-        newFavorites[index] = !newFavorites[index];
-        setFavorites(newFavorites);
+        const newFavorites = [...favorites]
+        newFavorites[index] = !newFavorites[index]
+        setFavorites(newFavorites)
     }
 
     return (

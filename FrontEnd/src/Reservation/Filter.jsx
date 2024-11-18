@@ -1,3 +1,5 @@
+import React from "react"
+
 function Filter({ price, setPrice }) {
     return (
         <div className="w-1/4 bg-white p-4 rounded-lg shadow-md">

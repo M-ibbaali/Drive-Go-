@@ -1,24 +1,30 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { FaCog} from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Settings() {
     const [isOpen, setIsOpen] = useState(false)
     const menuRef = useRef(null)
+    const navigate = useNavigate()
 
     const toggleMenu = () => {
-        setIsOpen(!isOpen);
+        setIsOpen(!isOpen)
     }
 
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
-                setIsOpen(false);
+                setIsOpen(false)
             }
         };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [])
+
+    const handleLogout = () => {
+        localStorage.removeItem('isLoggedIn')
+        navigate('/login')
+      };
 
     return (
         <>
@@ -37,7 +43,7 @@ function Settings() {
                         <Link to="/settings">
                             <li className="px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer">Settings</li>
                         </Link>
-                        <li className="px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer">Logout</li>
+                        <li onClick={handleLogout} className="px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer">Logout</li>
                     </ul>
                 </div>
             )}

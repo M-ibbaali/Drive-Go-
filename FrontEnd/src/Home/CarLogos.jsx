@@ -20,7 +20,7 @@ function CarLogos() {
                 />
             ))}
         </div>
-    );
+    )
 }
 
 export default CarLogos
