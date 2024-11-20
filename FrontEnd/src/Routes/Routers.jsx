@@ -18,16 +18,16 @@ function Routers({ isLoggedIn }) {
         <>
             <Header isLoggedIn={isLoggedIn}></Header>
             <Routes>
-                <Route path="/" element={<Home />}/>
+                <Route path="/:user" element={<Home />}/>
                 <Route path="/categories" element={<Categories />}/>
-                <Route path="/profile" element={<Profile />}/>
+                <Route path="/profile/:user" element={<Profile />}/>
                 <Route path="/aide" element={<Aide />}/>
                 <Route path="/settings" element={<Settings />}/>
                 <Route path="/signUp" element={<SignUp />}/>
                 <Route path="/signIn" element={<SignIn />}/>
-                <Route path="/reservation" element={<Reservation />}/>
+                <Route path="/reservation/:car" element={<Reservation />}/>
                 <Route path="/payment" element={<Payment />}/>
-                <Route path="/administration" element={<AdminDashboard />}/>
+                <Route path="/administration/:admin" element={<AdminDashboard />}/>
             </Routes>
             <Footer></Footer>
         </>

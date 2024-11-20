@@ -4,7 +4,6 @@ import Routers from './Routes/Routers'
 import FirstTimeIn from './Login/FirstTimeIn'
 import FirstTimeUp from './Login/FirstTimeUp'
 import ProgressBar from './Progress/ProgressBar'
-import { MoonLoader } from 'react-spinners'
 import Loading from './Progress/Loading'
 
 function App() {
@@ -24,7 +23,6 @@ function App() {
         return (
             <>
                 <div className="flex items-center justify-center h-screen bg-gray-100">
-                    {/* <MoonLoader color="#3B82F6" /> */}
                     <Loading></Loading>
                 </div>
             </>

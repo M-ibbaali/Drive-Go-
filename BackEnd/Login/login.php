@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $message = 'Welcome back , champion! Ready to take on the road?';
             }
 
-            if (empty($result['others'])) {
+            if (empty($result['nick_name']) || empty($result['gender']) || empty($result['address']) || empty($result['cin']) || empty($result['phone_number'])) {
                 $redirectToProfile = true;
             } else {
                 $redirectToProfile = false;

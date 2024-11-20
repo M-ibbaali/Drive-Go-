@@ -46,12 +46,12 @@ function FirstTimeIn({ setIsLoggedIn }) {
                         const userId = data.id
 
                         if (role === 'Admin') {
-                            navigate(`/administration?id=${userId}`)
+                            navigate(`/administration/admin=${userId}`)
                         } else {
                             if (data.redirectToProfile) {
-                                navigate(`/profile?id=${userId}`);
+                                navigate(`/profile/user=${userId}`);
                             } else {
-                                navigate(`/?id=${userId}`)
+                                navigate(`/user=${userId}`)
                             }
                         }
                     }

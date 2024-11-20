@@ -1,196 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Car from './Car'
 
 function Cars() {
-    const cars = [
-        { 
-            name: "McLaren P1", 
-            type: "Supercar", 
-            price: "$120.00", 
-            lastPrice: "$130.00",
-            img: "/Pictures/Audi.jfif", 
-            gas: "40L", 
-            gear: "Automatic", 
-            passengers: 2 
-        },
-        { 
-            name: "Lamborghini Aventador", 
-            type: "Supercar", 
-            price: "$150.00", 
-            lastPrice: "$160.00",
-            img: "/Pictures/Porcshe.jfif", 
-            gas: "45L", 
-            gear: "Automatic", 
-            passengers: 2 
-        },
-        { 
-            name: "BMW M3", 
-            type: "Sedan", 
-            price: "$85.00", 
-            lastPrice: "$95.00",
-            img: "/Pictures/Audi.jfif", 
-            gas: "55L", 
-            gear: "Manual", 
-            passengers: 5 
-        },
-        { 
-            name: "Audi R8", 
-            type: "Coupe", 
-            price: "$110.00", 
-            lastPrice: "$115.00",
-            img: "/Pictures/Porcshe.jfif", 
-            gas: "50L", 
-            gear: "Automatic", 
-            passengers: 2 
-        },
-        { 
-            name: "Porsche 911", 
-            type: "Sport", 
-            price: "$95.00", 
-            lastPrice: "$100.00", 
-            img: "/Pictures/Audi.jfif", 
-            gas: "60L", 
-            gear: "Manual", 
-            passengers: 4 
-        },
-        { 
-            name: "Tesla Model S", 
-            type: "Electric", 
-            price: "$110.00", 
-            lastPrice: "$120.00", 
-            img: "/Pictures/Porcshe.jfif", 
-            gas: "0L", 
-            gear: "Automatic", 
-            passengers: 5 
-        },
-        { 
-            name: "Nissan GT - R", 
-            type: "Sport", 
-            price: "$80.00", 
-            lastPrice: "$90.00",
-            img: "/Pictures/Audi.jfif", 
-            gas: "60L", 
-            gear: "Automatic", 
-            passengers: 4 
-        },
-        { 
-            name: "Rolls - Royce", 
-            type: "Sedan", 
-            price: "$96.00", 
-            lastPrice: "$105.00",
-            img: "/Pictures/Porcshe.jfif", 
-            gas: "70L", 
-            gear: "Automatic", 
-            passengers: 5 
-        },
-        {
-            name: "BMW M5",
-            type: "Sport",
-            price: "$100.00",
-            lastPrice: "$125.00",
-            img: "/Pictures/Audi.jfif",
-            gas: "60L",
-            gear: "Manual",
-            passengers: 4
-        },
-        { 
-            name: "McLaren P1", 
-            type: "Supercar", 
-            price: "$120.00", 
-            lastPrice: "$130.00",
-            img: "/Pictures/Audi.jfif", 
-            gas: "40L", 
-            gear: "Automatic", 
-            passengers: 2 
-        },
-        { 
-            name: "Lamborghini Aventador", 
-            type: "Supercar", 
-            price: "$150.00", 
-            lastPrice: "$160.00",
-            img: "/Pictures/Porcshe.jfif", 
-            gas: "45L", 
-            gear: "Automatic", 
-            passengers: 2 
-        },
-        { 
-            name: "BMW M3", 
-            type: "Sedan", 
-            price: "$85.00", 
-            lastPrice: "$95.00",
-            img: "/Pictures/Audi.jfif", 
-            gas: "55L", 
-            gear: "Manual", 
-            passengers: 5 
-        },
-        { 
-            name: "Audi R8", 
-            type: "Coupe", 
-            price: "$110.00", 
-            lastPrice: "$115.00",
-            img: "/Pictures/Porcshe.jfif", 
-            gas: "50L", 
-            gear: "Automatic", 
-            passengers: 2 
-        },
-        { 
-            name: "Porsche 911", 
-            type: "Sport", 
-            price: "$95.00", 
-            lastPrice: "$100.00", 
-            img: "/Pictures/Audi.jfif", 
-            gas: "60L", 
-            gear: "Manual", 
-            passengers: 4 
-        },
-        { 
-            name: "Tesla Model S", 
-            type: "Electric", 
-            price: "$110.00", 
-            lastPrice: "$120.00", 
-            img: "/Pictures/Porcshe.jfif", 
-            gas: "0L", 
-            gear: "Automatic", 
-            passengers: 5 
-        },
-        { 
-            name: "Nissan GT - R", 
-            type: "Sport", 
-            price: "$80.00", 
-            lastPrice: "$90.00",
-            img: "/Pictures/Audi.jfif", 
-            gas: "60L", 
-            gear: "Automatic", 
-            passengers: 4 
-        },
-        { 
-            name: "Rolls - Royce", 
-            type: "Sedan", 
-            price: "$96.00", 
-            lastPrice: "$105.00",
-            img: "/Pictures/Porcshe.jfif", 
-            gas: "70L", 
-            gear: "Automatic", 
-            passengers: 5 
-        },
-        {
-            name: "BMW M5",
-            type: "Sport",
-            price: "$100.00",
-            lastPrice: "$125.00",
-            img: "/Pictures/Audi.jfif",
-            gas: "60L",
-            gear: "Manual",
-            passengers: 4
-        },
-    ]
-    const [favorites, setFavorites] = useState(Array(cars.length).fill(false))
+    const [cars, setCars] = useState([])
+    const [error, setError] = useState(null)
+
+    const [favorites, setFavorites] = useState([])
     const [visibleCount, setVisibleCount] = useState(9)
 
+    useEffect(() => {
+        const fetchCars = async () => {
+            try {
+                const response = await fetch('http://localhost/drive-go/BackEnd/Cars/cars.php')
+                    if (!response.ok) {
+                    throw new Error('Failed to fetch cars data')
+                }
+                const data = await response.json()
+                if (data.error) {
+                    throw new Error(data.error)
+                }
+                setCars(data.data)
+            } catch (error) {
+                setError(error.message)
+            }
+        }
+
+        fetchCars()
+    }, [])
+
+    useEffect(() => {
+        setFavorites(Array(cars.length).fill(false))
+    }, [cars])
+
     const handleFavoriteToggle = (index) => {
-        const newFavorites = [...favorites]
-        newFavorites[index] = !newFavorites[index]
-        setFavorites(newFavorites)
+        setFavorites((prevFavorites) =>
+            prevFavorites.map((favorite, i) => (i === index ? !favorite : favorite))
+        )
     }
 
     const handleShowMore = () => {
@@ -199,10 +44,16 @@ function Cars() {
 
     return (
         <>
+            {error && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong className="font-bold">Error:</strong>
+                    <span className="block sm:inline"> {error}</span>
+                </div>
+            )}
             <div className="p-4">
                 <div className="grid grid-cols-3 gap-8">
                     {cars.slice(0, visibleCount).map((car, index) => (
-                        <Car index={index} car={car} favorites={favorites} handleFavoriteToggle={handleFavoriteToggle}></Car>
+                        <Car key={index} index={index} car={car} favorites={favorites} handleFavoriteToggle={handleFavoriteToggle}></Car>
                     ))}
                 </div>
                 <div className="flex  items-center mt-4">

@@ -114,7 +114,9 @@ VALUES
 ('Bouzouggar Abdelhak', 'Bouzouggar', 'Male', '10 Rue Al-Madina, Casablanca, Morocco', 'AB123456', '0123456789', 'abdelhak@example.com', '$2y$10$2Oi7ey5QSw9zjYMiGR2SF.bezA309oBKTL785zO/.A5dUfL15k6F2', 'Admin'),
 ('Ettahiri Abdessamad', 'Ettahiri', 'Male', '25 Avenue Hassan II, Rabat, Morocco', 'CD654321', '0987654321', 'abdessamad@example.com', '$2y$10$k90r/3O/PigtT4UIHDuOfOW5n1vEtD5J7LkmWG4IbIZSgDNKgJLrW', 'Admin'),
 ('Mohamed Karim Kribi', 'Kribi', 'Male', '12 Boulevard Mohammed V, Marrakech, Morocco', 'EF987654', '0654321987', 'karim.kribi@example.com', '$2y$10$hX3G9h5YAkMDTHY0RHZHQOuHJaoLT1DhNjPJ52.iz4wcHkqrmRx9y', 'Admin'),
-('Mohamed Ibaali', 'Ibaali', 'Male', '30 Rue Fes, Tangier, Morocco', 'GH123987', '0601234567', 'ibaali@example.com', '$2y$10$SLBE1jAJRPqtMWQJS40lOODvuQDmae64EN/VcVZoGWSweDVxxJLdu', 'Admin');
+('Mohamed Ibaali', 'Ibaali', 'Male', '30 Rue Fes, Tangier, Morocco', 'GH123987', '0601234567', 'ibaali@example.com', '$2y$10$SLBE1jAJRPqtMWQJS40lOODvuQDmae64EN/VcVZoGWSweDVxxJLdu', 'Admin'),
+
+('Guest', 'Guest', 'Male', '30 Rue Fes, Guest, Morocco', 'G120007', '0609244961', 'guest@example.com', '$2y$10$GmQ7n2OWXzcv1KT2.HrdCui47WTeVre.sY/jTP5fmhXEB4qHh2NGe', 'Client');
 
 -- Passwords :
 
@@ -122,3 +124,30 @@ VALUES
 -- ('Ettahiri', 'abdessamad@example.com', 'hashedpassword456');
 -- ('Kribi', 'karim.kribi@example.com', 'hashedpassword789');
 -- ('Ibaali', 'ibaali@example.com', 'hashedpassword101');
+
+-- ('Guest', 'guest@example.com', 'hashedpassword102');
+
+-- Vehicles :
+
+INSERT INTO Vehicles (owner_id, name, type, price, last_price, img, type_gas, gas_capacity, gear, passengers, availability_status, location)
+VALUES 
+(1, 'Lamborghini Aventador', 'Supercar', 15000.00, NULL, 'aventador.jpg', 'Petrol', '80L', 'Automatic', 2, TRUE, 'Casablanca'),
+(1, 'Toyota Corolla', 'Sedan', 500.00, NULL, 'corolla.jpg', 'Petrol', '50L', 'Automatic', 5, TRUE, 'Rabat'),
+(2, 'Tesla Model S', 'Sedan', 2000.00, 1800.00, 'model_s.jpg', 'Electric', '100kWh', 'Automatic', 5, TRUE, 'Marrakech'),
+(2, 'Ford Mustang', 'Coupe', 1200.00, NULL, 'mustang.jpg', 'Petrol', '60L', 'Manual', 4, TRUE, 'Tangier'),
+(3, 'Porsche Cayenne', 'SUV', 2500.00, 2300.00, 'cayenne.jpg', 'Diesel', '90L', 'Automatic', 5, TRUE, 'Agadir'),
+(3, 'Volkswagen Golf', 'Hatchback', 600.00, NULL, 'golf.jpg', 'Petrol', '50L', 'Manual', 5, TRUE, 'Fez'),
+(4, 'Chevrolet Camaro', 'Sport', 1000.00, NULL, 'camaro.jpg', 'Petrol', '60L', 'Automatic', 4, TRUE, 'Oujda'),
+(4, 'BMW X5', 'SUV', 2000.00, 1900.00, 'x5.jpg', 'Diesel', '85L', 'Automatic', 7, TRUE, 'Rabat'),
+(1, 'Mercedes-Benz Sprinter', 'Van', 1500.00, NULL, 'sprinter.jpg', 'Diesel', '70L', 'Manual', 12, TRUE, 'Casablanca'),
+(1, 'Honda Civic', 'Sedan', 600.00, 550.00, 'civic.jpg', 'Petrol', '45L', 'Manual', 5, TRUE, 'Tangier'),
+(2, 'Jeep Wrangler', 'SUV', 1700.00, NULL, 'wrangler.jpg', 'Petrol', '70L', 'Manual', 5, TRUE, 'Marrakech'),
+(2, 'Nissan Patrol', 'SUV', 2000.00, 1800.00, 'patrol.jpg', 'Diesel', '90L', 'Automatic', 7, TRUE, 'Agadir'),
+(3, 'Toyota Yaris', 'Hatchback', 450.00, NULL, 'yaris.jpg', 'Petrol', '40L', 'Automatic', 5, TRUE, 'Casablanca'),
+(3, 'Ford F-150', 'Truck', 1500.00, 1400.00, 'f150.jpg', 'Diesel', '100L', 'Automatic', 5, TRUE, 'Rabat'),
+(4, 'Audi R8', 'Supercar', 10000.00, NULL, 'r8.jpg', 'Petrol', '75L', 'Automatic', 2, TRUE, 'Marrakech'),
+(4, 'Hyundai Elantra', 'Sedan', 550.00, NULL, 'elantra.jpg', 'Petrol', '45L', 'Automatic', 5, TRUE, 'Oujda'),
+(1, 'Kia Sportage', 'SUV', 800.00, 750.00, 'sportage.jpg', 'Diesel', '65L', 'Automatic', 5, TRUE, 'Fez'),
+(1, 'Ferrari 488 Spider', 'Convertible', 12000.00, NULL, '488_spider.jpg', 'Petrol', '70L', 'Automatic', 2, TRUE, 'Casablanca'),
+(2, 'Range Rover Velar', 'SUV', 2500.00, NULL, 'velar.jpg', 'Diesel', '85L', 'Automatic', 5, TRUE, 'Marrakech'),
+(2, 'Mazda CX-5', 'SUV', 900.00, NULL, 'cx5.jpg', 'Petrol', '55L', 'Automatic', 5, TRUE, 'Tangier');
