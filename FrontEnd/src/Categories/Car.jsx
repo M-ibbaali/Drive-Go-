@@ -14,7 +14,7 @@ function Car({index, car, favorites, handleFavoriteToggle}) {
                     />
                 </h3>
                 <p className="text-gray-500">{car.type}</p>
-                <img src={car.img} alt={car.name} className="w-max h-48 object-cover rounded" />
+                <img src={car.first_img} alt={car.name} className="w-max h-48 object-cover rounded" />
                 <div className="flex mt-2 text-gray-700">
                     <p className="mr-5"><FaGasPump className="inline-block mr-2" />{car.gas_capacity}</p>
                     <p className="mr-5"><FaCogs className="inline-block mr-2" />{car.gear}</p>
@@ -24,7 +24,7 @@ function Car({index, car, favorites, handleFavoriteToggle}) {
                     <p className="text-black font-bold">
                         {car.price} MAD /<span className="text-gray-300 font-semibold">day</span>
                     </p>
-                    <Link to={`/reservation/car=${car.vehicle_id}`} className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded">Rent Now</Link>
+                    <Link to={`/reservation/${car.vehicle_id}`} className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded">Rent Now</Link>
                 </div>
                 {car.last_price && (<p className="text-gray-300 font-semibold line-through">{car.last_price}</p>)}
             </div>

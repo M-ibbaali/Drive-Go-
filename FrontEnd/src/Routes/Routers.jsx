@@ -4,6 +4,7 @@ import Footer from '../Footer/Footer'
 import { Routes, Route } from 'react-router-dom'
 import Home from '../Home/Home'
 import Categories from '../Categories/Categories'
+import PopularCars from '../PopularCars/PopularCars'
 import Profile from '../Profile/Profile'
 import Aide from '../Aide/Aide'
 import Settings from '../Settings/Settings'
@@ -18,8 +19,9 @@ function Routers({ isLoggedIn }) {
         <>
             <Header isLoggedIn={isLoggedIn}></Header>
             <Routes>
-                <Route path="/:user" element={<Home />}/>
+                <Route path="/" element={<Home />}/>
                 <Route path="/categories" element={<Categories />}/>
+                <Route path="/popularCars" element={<PopularCars />}/>
                 <Route path="/profile/:user" element={<Profile />}/>
                 <Route path="/aide" element={<Aide />}/>
                 <Route path="/settings" element={<Settings />}/>
