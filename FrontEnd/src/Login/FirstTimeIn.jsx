@@ -49,7 +49,7 @@ function FirstTimeIn({ setIsLoggedIn }) {
                             navigate(`/administration/${userId}`)
                         } else {
                             if (data.redirectToProfile) {
-                                navigate(`/profile/${userId}`);
+                                navigate(`/profile/${userId}`)
                             } else {
                                 navigate(`/`)
                             }

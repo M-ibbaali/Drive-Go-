@@ -7,12 +7,12 @@ include ('../Connection/connect.php');
 try {
     $connexion->exec("USE drivego");
 
-    $query = "SELECT * FROM PopularCars pc JOIN Vehicles v ON pc.vehicle_id = v.vehicle_id";
+    $query = "SELECT * FROM RecentCars rc JOIN Vehicles v ON rc.vehicle_id = v.vehicle_id";
     $stmt = $connexion->prepare($query);
     $stmt->execute();
-    $popularCars = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $recentCars = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    echo json_encode(['data' => $popularCars]);
+    echo json_encode([ 'data' => $recentCars]);
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode(['error' => 'Erreur lors de la récupération des véhicules : ' . $e->getMessage()]);

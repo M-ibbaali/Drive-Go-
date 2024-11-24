@@ -53,9 +53,9 @@ function FirstTimeUp() {
     }
 
     const handleHomeClick = () => {
-        localStorage.setItem('isLoggedIn', 'true');
-        setIsLoggedIn(true);
-        navigate('/');
+        localStorage.setItem('isLoggedIn', 'true')
+        setIsLoggedIn(true)
+        navigate('/')
     }
 
     return (

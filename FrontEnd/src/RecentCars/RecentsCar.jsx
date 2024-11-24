@@ -56,7 +56,7 @@ function RecentCars() {
                                     <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
                                 </div>
                             </>
-                        ) : (cars.slice(0, 4).map((car, index) => (
+                        ) : (cars.map((car, index) => (
                             <div key={index} className="bg-primary p-4 rounded">
                                 <h3 className="text-lg font-semibold flex items-center">
                                     {car.name}

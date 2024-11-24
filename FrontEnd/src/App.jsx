@@ -15,7 +15,7 @@ function App() {
         setIsLoggedIn(isAuthenticated)
 
         setTimeout(() => {
-            setIsLoading(false);
+            setIsLoading(false)
         }, 2000)
     }, [])
 
@@ -26,7 +26,7 @@ function App() {
                     <Loading></Loading>
                 </div>
             </>
-        );
+        )
     }
 
     return (

@@ -2,7 +2,7 @@ import React from "react"
 
 function Filter({ price, setPrice, types, capacities, priceRange, handleTypeChange, handleCapacityChange }) {
     return (
-        <div className="w-1/4 bg-white p-4 rounded-lg shadow-md">
+        <div className="w-1/6 bg-white p-4 rounded-lg shadow-md">
             <h2 className="text-xl font-bold mb-4">Type</h2>
             <ul className="space-y-2">
                 {types.map((type, index) => (

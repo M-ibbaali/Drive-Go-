@@ -16,7 +16,7 @@ function Settings() {
             if (menuRef.current && !menuRef.current.contains(event.target)) {
                 setIsOpen(false)
             }
-        };
+        }
         document.addEventListener('mousedown', handleClickOutside)
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [])
@@ -24,7 +24,7 @@ function Settings() {
     const handleLogout = () => {
         localStorage.removeItem('isLoggedIn')
         navigate('/login')
-      };
+      }
 
     return (
         <>

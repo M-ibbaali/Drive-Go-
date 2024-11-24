@@ -44,8 +44,8 @@ function PopularCars() {
                     Popular Car
                 </h2>
                 {error ? (
-                    <div className="text-red-500 text-center">
-                        <p>Error: {error}</p>
+                    <div className="text-gray-500 text-center">
+                        <p>{error}</p>
                     </div>
                 ) : (
                     <div className={`${loading ? ('flex flex-col items-center') : (' grid grid-cols-4 gap-8')}`}>
@@ -80,7 +80,7 @@ function PopularCars() {
                                             <button className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded">Rent Now</button>
                                         </Link>
                                     </div>
-                                    <p className="text-gray-300 font-semibold line-through">{car.last_rice}</p>
+                                    <p className="text-gray-300 font-semibold line-through">{car.last_price}</p>
                                 </div>
                             ))
                         )}

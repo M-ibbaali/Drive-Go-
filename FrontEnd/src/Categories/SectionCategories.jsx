@@ -88,8 +88,8 @@ function SectionCategories() {
                 <Filter
                     price={price}
                     setPrice={setPrice}
-                    types={types} 
-                    capacities={capacities} 
+                    types={types}
+                    capacities={capacities}
                     priceRange={priceRange}
                     handleTypeChange={handleTypeChange}
                     handleCapacityChange={handleCapacityChange}
