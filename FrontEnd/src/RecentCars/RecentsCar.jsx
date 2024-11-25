@@ -42,7 +42,6 @@ function RecentCars() {
             <div className="p-4">
                 <h2 className="text-xl font-bold mb-4 flex items-center">
                     Recent Car
-                    <Link to="/recentCars" className="text-blue-500 font-normal ml-auto hover:underline mb-4 inline-block text-base cursor-pointer">View All</Link>
                 </h2>
                 {error ? (
                     <div className="text-gray-500 text-center">
