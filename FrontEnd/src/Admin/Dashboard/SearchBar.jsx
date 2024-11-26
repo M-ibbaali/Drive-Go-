@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 function SearchBar() {
-    const [pickDrop, setPickDrop] = useState('pick');
+    const [pickDrop, setPickDrop] = useState('pick')
 
     const handleRadioChange = (event) => {
         setPickDrop(event.target.id)

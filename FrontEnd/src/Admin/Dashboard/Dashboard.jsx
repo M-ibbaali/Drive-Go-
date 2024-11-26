@@ -3,7 +3,7 @@ import RentalDetails from './RentalDetails'
 import TopCarRental from './TopCarRental'
 import Transaction from './Transaction'
 
-function Details() {
+function Dashboard() {
     const transactionsData = [
         {img: "/Pictures/Audi.jfif", name: "Nissan GT - R", type: "sport", date: "20 July", price: "$80.00" },
         {img: "/Pictures/Porcshe.jfif", name: "Koenigsegg", type: "sport", date: "19 July", price: "$99.00" },
@@ -24,4 +24,4 @@ function Details() {
     )
 }
 
-export default Details
+export default Dashboard
