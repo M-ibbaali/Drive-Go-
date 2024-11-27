@@ -3,6 +3,8 @@ import Dashboard from './Dashboard/Dashboard'
 import CarRental from './Cars/CarRental'
 import Insight from './Insight/Insight'
 import Reimburse from './Reimburse/Reimburse'
+import Inbox from './Inbox/Inbox'
+import CalendarPage from './Calendar/CalendarPage'
 
 function Content({ activeItem }) {
     const renderContent = () => {
@@ -16,9 +18,9 @@ function Content({ activeItem }) {
             case 'Reimburse':
                 return <Reimburse></Reimburse>
             case 'Inbox':
-                return <div>Inbox Content</div>
+                return <Inbox></Inbox>
             case 'Calendar':
-                return <div>Calendar Content</div>
+                return <CalendarPage></CalendarPage>
             case 'Settings':
                 return <div>Settings Content</div>
             case 'Help & Center':

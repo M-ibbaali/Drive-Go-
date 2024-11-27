@@ -44,7 +44,7 @@ function Filter({ price, setPrice, types, capacities, priceRange, handleTypeChan
                 onChange={(e) => setPrice(e.target.value)} 
                 className="w-full" 
             />
-            <p className="text-black font-bold mt-2">Max. {price} MAD</p>
+            <p className="text-black font-bold mt-2">Min. {price} MAD</p>
         </div>
     )
 }
