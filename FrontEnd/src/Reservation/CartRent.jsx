@@ -38,10 +38,8 @@ function CarRentalDashboard() {
                     min_price: parseFloat(data.priceRange.min_price),
                     max_price: parseFloat(data.priceRange.max_price),
                 })
-                setLoading(false)
             } catch (error) {
                 setError(error.message)
-                setLoading(false)
             }
         }
     

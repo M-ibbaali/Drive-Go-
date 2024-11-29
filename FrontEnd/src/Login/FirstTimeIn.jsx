@@ -3,7 +3,7 @@ import { FaGoogle, FaFacebookF } from 'react-icons/fa'
 import { AiOutlineEye } from 'react-icons/ai'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
-function FirstTimeIn({ setIsLoggedIn }) {
+function FirstTimeIn({ setIsLoggedIn, setIsGuest }) {
     const location = useLocation()
     const navigate = useNavigate()
     const carImage = location.pathname === '/login' ? '/Pictures/Audi.jfif' : '/Pictures/Porcshe.jfif'
@@ -40,18 +40,19 @@ function FirstTimeIn({ setIsLoggedIn }) {
                     if (progress >= 100) {
                         clearInterval(interval)
                         localStorage.setItem('isLoggedIn', 'true')
+                        localStorage.setItem('userRole', data.role)
+                        localStorage.setItem('userId', data.id)
                         setIsLoggedIn(true)
 
                         const role = data.role
-                        const userId = data.id
 
                         if (role === 'Admin') {
-                            navigate(`/administration/${userId}`)
+                            navigate('/administration')
                         } else {
                             if (data.redirectToProfile) {
-                                navigate(`/profile/${userId}`)
+                                navigate('/profile')
                             } else {
-                                navigate(`/`)
+                                navigate('/')
                             }
                         }
                     }
@@ -66,8 +67,8 @@ function FirstTimeIn({ setIsLoggedIn }) {
     }
 
     const handleHomeClick = () => {
-        localStorage.setItem('isLoggedIn', 'true')
-        setIsLoggedIn(true)
+        localStorage.setItem('isGuest', 'true')
+        setIsGuest(true)
         navigate('/')
     }
 

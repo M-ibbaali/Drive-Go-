@@ -7,7 +7,7 @@ import Inscription from './Inscription'
 import { Link } from 'react-router-dom'
 import Profile from './Profile'
 
-function Header({ isLoggedIn }) {
+function Header({ isLoggedIn, isGuest }) {
     const notifications = [
         "New message from Support",
         "Your reservation has been confirmed",
@@ -38,7 +38,7 @@ function Header({ isLoggedIn }) {
                     <Settings></Settings>
 
                     {/* SignUp Icon */}
-                    {isLoggedIn ? <Profile /> : <Inscription />}
+                    {isLoggedIn ? <Profile /> : isGuest ? <Inscription /> : null}
                 </div>
             </header>
         </>

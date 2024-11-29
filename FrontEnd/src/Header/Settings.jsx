@@ -23,8 +23,9 @@ function Settings() {
 
     const handleLogout = () => {
         localStorage.removeItem('isLoggedIn')
+        localStorage.removeItem('userId')
         navigate('/login')
-      }
+    }
 
     return (
         <>

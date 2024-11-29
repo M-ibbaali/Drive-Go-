@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $redirectToProfile = false;
             }
             
-            echo json_encode(['message' => $message, 'id' => $result['user_id'], 'role' => $result['role'], 'redirectToProfile' => $redirectToProfile]);
+            echo json_encode(['message' => $message, 'id' => $result['user_id'], 'username' => $result['nick_name'], 'role' => $result['role'], 'redirectToProfile' => $redirectToProfile]);
         } else {
             http_response_code(401);
             echo json_encode(['message' => 'Invalid email or password.']);

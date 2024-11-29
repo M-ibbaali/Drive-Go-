@@ -8,10 +8,14 @@ import Loading from './Progress/Loading'
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(null)
+    const [isGuest, setIsGuest] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         const isAuthenticated = localStorage.getItem('isLoggedIn') === 'true'
+        const guestStatus = localStorage.getItem('isGuest') === 'true'
+
+        setIsGuest(guestStatus)
         setIsLoggedIn(isAuthenticated)
 
         setTimeout(() => {
@@ -36,11 +40,11 @@ function App() {
                 <Routes>
                     <Route
                         path="/*"
-                        element={isLoggedIn ? <Routers isLoggedIn={isLoggedIn}/> : <Navigate to="/login" replace />}
+                        element={isLoggedIn || isGuest ? <Routers isLoggedIn={isLoggedIn} isGuest={isGuest}/> : <Navigate to="/login" replace />}
                     />
                     <Route
                         path="/login"
-                        element={<FirstTimeIn setIsLoggedIn={setIsLoggedIn} />}
+                        element={<FirstTimeIn setIsGuest={setIsGuest} setIsLoggedIn={setIsLoggedIn} />}
                     />
                     <Route
                         path="/register"

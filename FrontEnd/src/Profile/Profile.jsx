@@ -1,40 +1,45 @@
 import {useState, useEffect } from 'react'
 import { FaPencilAlt } from "react-icons/fa"
-import { useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function Profile() {
     const currentDate = new Date()
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
     const formattedDate = currentDate.toLocaleDateString('en-US', options)
+    const navigate = useNavigate()
     
-    const { user } = useParams()
+    const user = localStorage.getItem('userId')
     const [userData, setUserData] = useState([])
     const [error, setError] = useState(null)
     const [alertMessage, setAlertMessage] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await fetch(`http://localhost/drive-go/BackEnd/Profile/profile.php?userID=${user}`, {
-                    method: "GET",
-                    headers: { "Content-Type": "application/json" },
-                })
-                if (!response.ok) {
-                    throw new Error("Failed to fetch user data")
+        if (user) {
+            const fetchUserData = async () => {
+                try {
+                    const response = await fetch(`http://localhost/drive-go/BackEnd/Profile/profile.php?userID=${user}`, {
+                        method: "GET",
+                        headers: { "Content-Type": "application/json" },
+                    })
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch user data")
+                    }
+                    const data = await response.json()
+                    if (data.error) {
+                        throw new Error(data.error)
+                    }
+            
+                    setUserData(data.data)
+                } catch (error) {
+                    setError(error.message || 'Something went wrong.')
                 }
-                const data = await response.json()
-                if (data.error) {
-                    throw new Error(data.error)
-                }
-        
-                setUserData(data.data)
-            } catch (error) {
-                setError(error.message || 'Something went wrong.')
             }
+
+            fetchUserData()
+        } else {
+            navigate('/login')
         }
-    
-        fetchUserData()
     }, [user])
 
     const handleSaveChangesToDB = async () => {
