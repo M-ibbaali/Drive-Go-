@@ -18,6 +18,7 @@ function CarDetails({ car, error }) {
     useEffect(() => {
         if (carDetails) {
             setMainImage(carDetails.first_img)
+            document.title = `DriveGo - Reservation - ${carDetails.name}`
         }
     }, [carDetails])
 
@@ -58,7 +59,7 @@ function CarDetails({ car, error }) {
             ) : (
                 loading ? (
                         <div className='flex justify-center items-center'>
-                            <div className="flex items-center mt-4 h-16 w-16 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-blue-500 motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status">
+                            <div className="flex items-center mt-4 h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-blue-500 motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status">
                                 <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
                             </div>
                         </div>
@@ -113,7 +114,7 @@ function CarDetails({ car, error }) {
                                         <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm ml-2">{carDetails.gas_capacity}</span>
                                     </div>
                                     <p className="text-2xl font-bold mt-6">${carDetails.price}/day</p>
-                                    <Link to="/payment">
+                                    <Link to={`/payment/${carDetails.vehicle_id}`}>
                                         <button className="bg-blue-500 text-white px-6 py-3 mt-4 rounded-lg">Rent Now</button>
                                     </Link>
                                 </div>

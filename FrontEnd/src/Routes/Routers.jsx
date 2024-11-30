@@ -9,33 +9,19 @@ import RecentCars from '../RecentCars/RecentsCar'
 import Profile from '../Profile/Profile'
 import Aide from '../Aide/Aide'
 import Settings from '../Settings/Settings'
-import SignUp from '../Login/SignUp'
-import SignIn from '../Login/SignIn'
 import Reservation from '../Reservation/Reservation'
 import Payment from '../Payment/Payment'
 import AdminDashboard from '../Admin/AdminDashboard'
 import NotFound from '../NotFound/NotFound'
 
-function Routers({ isLoggedIn, isGuest }) {
+function Routers({ isLoggedIn, setIsLoggedIn, isGuest }) {
     const userRole = localStorage.getItem('userRole')
     const location = useLocation()
-    const isNotFoundPage = location.pathname === '/404' ||
-                            location.pathname !== '/' &&
-                            location.pathname !== '/categories' &&
-                            location.pathname !== '/popularCars' &&
-                            location.pathname !== '/recentCars' &&
-                            location.pathname !== '/profile' &&
-                            location.pathname !== '/aide' &&
-                            location.pathname !== '/settings' &&
-                            location.pathname !== '/signUp' &&
-                            location.pathname !== '/signIn' &&
-                            !location.pathname.startsWith('/reservation/')
-                            location.pathname !== '/payment' &&
-                            location.pathname !== '/administration'
+    const isNotFoundPage = !['/', '/categories', '/popularCars', '/recentCars', '/profile', '/aide', '/settings', '/signUp', '/signIn', '/administration'].includes(location.pathname) && !location.pathname.startsWith('/reservation/') && !location.pathname.startsWith('/payment/')
 
     return (
         <>
-            {!isNotFoundPage && (<Header isLoggedIn={isLoggedIn} isGuest={isGuest}></Header>)}
+            {!isNotFoundPage && (<Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isGuest={isGuest}></Header>)}
             <Routes>
                 <Route path="/" element={<Home />}/>
                 <Route path="/categories" element={<Categories />}/>
@@ -44,10 +30,8 @@ function Routers({ isLoggedIn, isGuest }) {
                 <Route path="/profile" element={isLoggedIn ? <Profile /> : <Navigate to="/" replace />}/>
                 <Route path="/aide" element={<Aide />}/>
                 <Route path="/settings" element={<Settings />}/>
-                <Route path="/signUp" element={!isLoggedIn ? <SignUp /> : <Navigate to="/" replace />}/>
-                <Route path="/signIn" element={!isLoggedIn ? <SignIn /> : <Navigate to="/" replace />}/>
                 <Route path="/reservation/:car" element={<Reservation />}/>
-                <Route path="/payment" element={<Payment />}/>
+                <Route path="/payment/:car" element={<Payment />}/>
 
                 <Route
                     path="/administration"

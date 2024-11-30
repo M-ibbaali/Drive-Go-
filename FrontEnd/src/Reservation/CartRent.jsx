@@ -29,7 +29,7 @@ function CarRentalDashboard() {
                 if (data.error) {
                     throw new Error(data.error)
                 }
-        
+
                 setCarData(data.data)
                 setTypes(data.types)
                 setCapacities(data.capacities)

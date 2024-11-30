@@ -3,7 +3,7 @@ import { FaGoogle, FaFacebookF } from 'react-icons/fa'
 import { AiOutlineEye } from 'react-icons/ai'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
-function FirstTimeUp() {
+function FirstTimeUp({ setIsGuest }) {
     const location = useLocation()
     const navigate = useNavigate()
     const carImage = location.pathname === '/login' ? '/Pictures/Audi.jfif' : '/Pictures/Porcshe.jfif'
@@ -53,8 +53,8 @@ function FirstTimeUp() {
     }
 
     const handleHomeClick = () => {
-        localStorage.setItem('isLoggedIn', 'true')
-        setIsLoggedIn(true)
+        localStorage.setItem('isGuest', 'true')
+        setIsGuest(true)
         navigate('/')
     }
 
@@ -81,21 +81,12 @@ function FirstTimeUp() {
                     
                     {/* Left Side - Car Image */}
                     <div className="w-1/2 flex items-center justify-center rounded-l-lg">
-                        <img src={carImage} alt="Car" className="object-cover rounded-l-lg w-full"/>
+                        <div className="absolute left-56 inset-0 bg-cover bg-center opacity-10 w-1/3 h-full" style={{ backgroundImage: 'url(/Pictures/Logo.svg)' }}></div>
+                        <img src={carImage} alt="Car" className="object-cover rounded-l-lg w-full mix-blend-multiply"/>
                     </div>
                     
                     {/* Right Side - Form */}
                     <div className="w-1/2 p-10">
-                        {/* Home Link at Top Left */}
-                        <div className="absolute top-4 left-4">
-                            <Link
-                                to="/"
-                                className="flex items-center gap-2 text-2xl font-semibold text-blue-500 hover:underline"
-                                onClick={handleHomeClick}
-                            >
-                                Skip
-                            </Link>
-                        </div>
                         <div className="text-right">
                             <Link
                                 to="/register"

@@ -5,6 +5,7 @@ import FirstTimeIn from './Login/FirstTimeIn'
 import FirstTimeUp from './Login/FirstTimeUp'
 import ProgressBar from './Progress/ProgressBar'
 import Loading from './Progress/Loading'
+import TitleChange from './TitleChange'
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(null)
@@ -12,11 +13,21 @@ function App() {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
+        const currentDate = new Date().toLocaleDateString()
+        const storedDate = localStorage.getItem('lastVisitDate')
+        
+        if (storedDate !== currentDate) {
+            localStorage.removeItem('isGuest')
+            setIsGuest(null)
+        }
+
         const isAuthenticated = localStorage.getItem('isLoggedIn') === 'true'
         const guestStatus = localStorage.getItem('isGuest') === 'true'
 
         setIsGuest(guestStatus)
         setIsLoggedIn(isAuthenticated)
+
+        localStorage.setItem('lastVisitDate', currentDate)
 
         setTimeout(() => {
             setIsLoading(false)
@@ -33,22 +44,28 @@ function App() {
         )
     }
 
+    const future = {
+        v7_relativeSplatPath: true,
+        v7_startTransition: true,
+    }
+
     return (
         <>
-            <BrowserRouter>
+            <BrowserRouter future={future}>
+                <TitleChange></TitleChange>
                 <ProgressBar></ProgressBar>
                 <Routes>
                     <Route
                         path="/*"
-                        element={isLoggedIn || isGuest ? <Routers isLoggedIn={isLoggedIn} isGuest={isGuest}/> : <Navigate to="/login" replace />}
+                        element={isLoggedIn || isGuest ? <Routers isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isGuest={isGuest}/> : <Navigate to="/login" replace />}
                     />
                     <Route
                         path="/login"
-                        element={<FirstTimeIn setIsGuest={setIsGuest} setIsLoggedIn={setIsLoggedIn} />}
+                        element={!isLoggedIn ? <FirstTimeIn setIsGuest={setIsGuest} setIsLoggedIn={setIsLoggedIn} /> : <Navigate to="/" replace />}
                     />
                     <Route
                         path="/register"
-                        element={<FirstTimeUp/>}
+                        element={!isLoggedIn ? <FirstTimeUp setIsGuest={setIsGuest}/> : <Navigate to="/" replace />}
                     />
                 </Routes>
             </BrowserRouter>

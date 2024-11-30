@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { FaCog} from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 
-function Settings() {
+function Settings({ isLoggedIn, setIsLoggedIn }) {
     const [isOpen, setIsOpen] = useState(false)
     const menuRef = useRef(null)
     const navigate = useNavigate()
@@ -24,6 +24,9 @@ function Settings() {
     const handleLogout = () => {
         localStorage.removeItem('isLoggedIn')
         localStorage.removeItem('userId')
+
+        setIsLoggedIn(false)
+        
         navigate('/login')
     }
 
@@ -35,16 +38,31 @@ function Settings() {
             {isOpen && (
                 <div ref={menuRef} className="absolute right-[7.5rem] mt-52 w-40 bg-white border border-gray-200 rounded-lg shadow-lg">
                     <ul className="py-1">
-                        <Link to="/profile">
-                            <li className="px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer">Profile</li>
-                        </Link>
+                        {isLoggedIn && (
+                            <>
+                                <Link to="/profile">
+                                    <li className="px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer">
+                                        Profile
+                                    </li>
+                                </Link>
+                            </>
+                        )}
                         <Link to="/aide">
                             <li className="px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer">Aide</li>
                         </Link>
                         <Link to="/settings">
                             <li className="px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer">Settings</li>
                         </Link>
-                        <li onClick={handleLogout} className="px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer">Logout</li>
+                        {isLoggedIn && (
+                            <>
+                                <li
+                                    onClick={handleLogout}
+                                    className="px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer"
+                                >
+                                    Logout
+                                </li>
+                            </>
+                        )}
                     </ul>
                 </div>
             )}

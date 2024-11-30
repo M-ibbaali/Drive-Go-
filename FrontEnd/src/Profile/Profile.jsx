@@ -11,7 +11,7 @@ function Profile() {
     const user = localStorage.getItem('userId')
     const [userData, setUserData] = useState([])
     const [error, setError] = useState(null)
-    const [alertMessage, setAlertMessage] = useState(null);
+    const [alertMessage, setAlertMessage] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     useEffect(() => {
@@ -48,37 +48,37 @@ function Profile() {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(userData),
-            });
-            const result = await response.json();
+            })
+            const result = await response.json()
             if (result.error) {
-                setAlertMessage({ type: 'error', text: result.error });
+                setAlertMessage({ type: 'error', text: result.error })
             } else {
-                setAlertMessage({ type: 'success', text: 'Profile updated successfully!' });
+                setAlertMessage({ type: 'success', text: 'Profile updated successfully!' })
             }
-            setTimeout(() => setAlertMessage(null), 5000);
+            setTimeout(() => setAlertMessage(null), 5000)
         } catch (error) {
-            setAlertMessage({ type: 'error', text: 'An error occurred while updating the profile.' });
-            setTimeout(() => setAlertMessage(null), 5000);
+            setAlertMessage({ type: 'error', text: 'An error occurred while updating the profile.' })
+            setTimeout(() => setAlertMessage(null), 5000)
         }
     }
 
     const handleInputChange = (e, field) => {
-        setUserData((prevData) => ({ ...prevData, [field]: e.target.value }));
-    };
+        setUserData((prevData) => ({ ...prevData, [field]: e.target.value }))
+    }
 
     const toggleModal = () => setIsModalOpen((prev) => !prev)
 
     const handleSaveChanges = () => {
         if (userData.email.trim() && /\S+@\S+\.\S+/.test(userData.email)) {
-            toggleModal();
-            setAlertMessage({ type: 'success', text: 'Email updated successfully!' });
-            setTimeout(() => setAlertMessage(null), 5000);
+            toggleModal()
+            setAlertMessage({ type: 'success', text: 'Email updated successfully!' })
+            setTimeout(() => setAlertMessage(null), 5000)
         } else {
-            toggleModal();
-            setAlertMessage({ type: 'error', text: 'Please enter a valid email.' });
-            setTimeout(() => setAlertMessage(null), 5000);
+            toggleModal()
+            setAlertMessage({ type: 'error', text: 'Please enter a valid email.' })
+            setTimeout(() => setAlertMessage(null), 5000)
         }
-    };
+    }
 
     return (
         <div className="min-h-screen p-8">
