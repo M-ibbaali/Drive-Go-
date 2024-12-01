@@ -15,6 +15,12 @@ function TitleChange() {
             case location.pathname === '/register':
                 document.title = 'DriveGo - Register'
                 break
+            case location.pathname === '/forgot-password':
+                document.title = 'DriveGo - Forgot Password'
+                break
+            case location.pathname === '/reset-password':
+                document.title = 'DriveGo - Reset Password'
+                break
             case location.pathname === '/categories':
                 document.title = 'DriveGo - Categories'
                 break

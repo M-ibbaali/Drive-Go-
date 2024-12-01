@@ -17,7 +17,7 @@ import NotFound from '../NotFound/NotFound'
 function Routers({ isLoggedIn, setIsLoggedIn, isGuest }) {
     const userRole = localStorage.getItem('userRole')
     const location = useLocation()
-    const isNotFoundPage = !['/', '/categories', '/popularCars', '/recentCars', '/profile', '/aide', '/settings', '/signUp', '/signIn', '/administration'].includes(location.pathname) && !location.pathname.startsWith('/reservation/') && !location.pathname.startsWith('/payment/')
+    const isNotFoundPage = !['/', '/categories', '/popularCars', '/recentCars', '/profile', '/aide', '/settings', '/administration'].includes(location.pathname) && !location.pathname.startsWith('/reservation/') && !location.pathname.startsWith('/payment/')
 
     return (
         <>

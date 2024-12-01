@@ -6,6 +6,8 @@ import FirstTimeUp from './Login/FirstTimeUp'
 import ProgressBar from './Progress/ProgressBar'
 import Loading from './Progress/Loading'
 import TitleChange from './TitleChange'
+import ForgotPassword from './Login/ForgotPassword'
+import ResetPassword from './Login/ResetPassword'
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(null)
@@ -66,6 +68,14 @@ function App() {
                     <Route
                         path="/register"
                         element={!isLoggedIn ? <FirstTimeUp setIsGuest={setIsGuest}/> : <Navigate to="/" replace />}
+                    />
+                    <Route
+                        path="/forgot-password"
+                        element={<ForgotPassword />}
+                    />
+                    <Route
+                        path="/reset-password"
+                        element={<ResetPassword />}
                     />
                 </Routes>
             </BrowserRouter>

@@ -3,8 +3,8 @@ import React from 'react'
 function Confirmation() {
     return (
         <div className="w-full p-6 rounded-lg bg-white shadow-lg">
+            <p className="text-gray-500 mb-4 text-right">Step 4 of 4</p>
             <h1 className="text-2xl font-semibold text-gray-800 mb-2">Confirmation</h1>
-            <p className="text-gray-500 mb-4">Step 4 of 4</p>
             <p className="text-gray-600 mb-4">We are getting to the end. Just a few clicks and your rental is ready!</p>
 
             <label className="flex items-center mb-3">

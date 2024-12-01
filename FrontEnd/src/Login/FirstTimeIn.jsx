@@ -158,7 +158,7 @@ function FirstTimeIn({ setIsLoggedIn, setIsGuest }) {
                                 </div>
 
                                 <div className="text-right">
-                                    <a href="#" className="text-xs text-blue-500">Forgot password?</a>
+                                    <Link to="/forgot-password" className="text-xs text-blue-500">Forgot password?</Link>
                                 </div>
 
                                 <button
