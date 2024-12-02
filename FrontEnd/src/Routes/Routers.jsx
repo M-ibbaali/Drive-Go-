@@ -36,7 +36,7 @@ function Routers({ isLoggedIn, setIsLoggedIn, isGuest }) {
                 <Route
                     path="/administration"
                     element={
-                        userRole === 'Admin' ? (
+                        isLoggedIn && userRole === 'Admin' ? (
                             <AdminDashboard />
                         ) : (
                             <Navigate to="/" replace />
