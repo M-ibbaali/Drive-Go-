@@ -2,7 +2,7 @@ import {useState, useEffect } from 'react'
 import { FaPencilAlt } from "react-icons/fa"
 import { useNavigate } from 'react-router-dom'
 
-function Profile() {
+function Profile({ setData }) {
     const currentDate = new Date()
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
     const formattedDate = currentDate.toLocaleDateString('en-US', options)
@@ -31,6 +31,7 @@ function Profile() {
                     }
             
                     setUserData(data.data)
+                    setData(data.data)
                 } catch (error) {
                     setError(error.message || 'Something went wrong.')
                 }
@@ -81,7 +82,7 @@ function Profile() {
     }
 
     return (
-        <div className="min-h-screen p-8">
+        <>
             {alertMessage && (
                 <div
                     className={`fixed top-5 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-md shadow-lg ${
@@ -242,7 +243,7 @@ function Profile() {
                     </div>
                 </div>
             )}
-        </div>
+        </>
     )
 }
 

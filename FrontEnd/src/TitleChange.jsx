@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
-function TitleChange() {
+function TitleChange({ isLoggedIn }) {
     const location = useLocation()
 
     useEffect(() => {
@@ -31,7 +31,7 @@ function TitleChange() {
                 document.title = 'DriveGo - Recent Cars'
                 break
             case location.pathname === '/profile':
-                document.title = 'DriveGo - Profile'
+                isLoggedIn ? document.title = 'DriveGo - Profile' : document.title = 'DriveGo - Settings'
                 break
             case location.pathname === '/aide':
                 document.title = 'DriveGo - Help'

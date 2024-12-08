@@ -54,7 +54,7 @@ function App() {
     return (
         <>
             <BrowserRouter future={future}>
-                <TitleChange></TitleChange>
+                <TitleChange isLoggedIn={isLoggedIn} ></TitleChange>
                 <ProgressBar></ProgressBar>
                 <Routes>
                     <Route

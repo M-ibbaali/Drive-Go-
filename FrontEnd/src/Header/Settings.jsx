@@ -50,9 +50,11 @@ function Settings({ isLoggedIn, setIsLoggedIn }) {
                         <Link to="/aide">
                             <li className="px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer">Aide</li>
                         </Link>
-                        <Link to="/settings">
-                            <li className="px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer">Settings</li>
-                        </Link>
+                        {!isLoggedIn && (
+                            <Link to="/profile">
+                                <li className="px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer">Settings</li>
+                            </Link>
+                        )}
                         {isLoggedIn && (
                             <>
                                 <li

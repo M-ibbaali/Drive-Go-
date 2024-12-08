@@ -6,7 +6,7 @@ import Home from '../Home/Home'
 import Categories from '../Categories/Categories'
 import PopularCars from '../PopularCars/PopularCars'
 import RecentCars from '../RecentCars/RecentsCar'
-import Profile from '../Profile/Profile'
+import Manager from '../Profile/Manager'
 import Aide from '../Aide/Aide'
 import Settings from '../Settings/Settings'
 import Reservation from '../Reservation/Reservation'
@@ -27,7 +27,7 @@ function Routers({ isLoggedIn, setIsLoggedIn, isGuest }) {
                 <Route path="/categories" element={<Categories />}/>
                 <Route path="/popularCars" element={<PopularCars />}/>
                 <Route path="/recentCars" element={<RecentCars />}/>
-                <Route path="/profile" element={isLoggedIn ? <Profile /> : <Navigate to="/" replace />}/>
+                <Route path="/profile" element={<Manager isLoggedIn={isLoggedIn} />}/>
                 <Route path="/aide" element={<Aide />}/>
                 <Route path="/settings" element={<Settings />}/>
                 <Route path="/reservation/:car" element={<Reservation />}/>

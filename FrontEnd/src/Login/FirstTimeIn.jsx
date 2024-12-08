@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { FaGoogle, FaFacebookF } from 'react-icons/fa'
-import { AiOutlineEye } from 'react-icons/ai'
+import { FaEye, FaEyeSlash } from 'react-icons/fa'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 function FirstTimeIn({ setIsLoggedIn, setIsGuest }) {
@@ -145,12 +145,13 @@ function FirstTimeIn({ setIsLoggedIn, setIsGuest }) {
                                         placeholder="6+ characters"
                                         className={`w-full mt-1 px-4 py-2 border ${error === 'Password are required.' || error ===  'Invalid email or password.' ? 'border-red-500' : 'border-gray-300'} rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500`}
                                     />
-                                    <AiOutlineEye
-                                        className="absolute right-3 top-10 text-gray-400 cursor-pointer"
-                                        onMouseDown={() => setShowPassword(true)}
-                                        onMouseUp={() => setShowPassword(false)}
-                                        onMouseLeave={() => setShowPassword(false)}
-                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="absolute right-3 top-10 text-gray-400"
+                                    >
+                                        {showPassword ? <FaEyeSlash /> : <FaEye />}
+                                    </button>
                                     {/* Error message for password */}
                                     {(error === 'Password are required.') && (
                                         <p className="text-red-500 text-sm mt-2">{error}</p>
