@@ -10,7 +10,7 @@ function Car({index, car, favorites, handleFavoriteToggle}) {
                     {car.name}
                     <FaHeart 
                         className={`cursor-pointer ml-auto ${favorites[index] ? 'text-red-600' : 'text-gray-500'}`} 
-                        onClick={() => handleFavoriteToggle(index)} 
+                        onClick={() => handleFavoriteToggle(index, car.vehicle_id)} 
                     />
                 </h3>
                 <p className="text-gray-500">{car.type}</p>

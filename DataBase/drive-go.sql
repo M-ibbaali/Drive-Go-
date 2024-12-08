@@ -153,6 +153,34 @@ CREATE TABLE PasswordResets (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- 13. ClientMessages Table
+CREATE TABLE ClientMessages (
+    message_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id INT UNSIGNED NOT NULL,
+    subject VARCHAR(255) NOT NULL,
+    message_content TEXT NOT NULL,
+    status ENUM('Unread', 'Read', 'Replied') DEFAULT 'Unread',
+    sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Add the foreign key separately
+ALTER TABLE ClientMessages
+    ADD CONSTRAINT FK_client_message_user FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE;
+
+-- 14. Favorites Table
+CREATE TABLE Favorites (
+    favorite_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id INT UNSIGNED NOT NULL,
+    vehicle_id INT UNSIGNED NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (user_id, vehicle_id)
+);
+
+-- Add foreign key constraints separately
+ALTER TABLE Favorites
+    ADD CONSTRAINT FK_favorites_user FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
+    ADD CONSTRAINT FK_favorites_vehicle FOREIGN KEY (vehicle_id) REFERENCES Vehicles(vehicle_id) ON DELETE CASCADE;
+
 -- Insert
 
 -- HashedPasswords :
@@ -248,3 +276,14 @@ VALUES
 (14, '2024-11-22 08:20:00'), -- MG Hector
 (17, '2024-11-22 09:00:00'), -- Tata Nexon
 (18, '2024-11-22 12:10:00'); -- Tata Tiago EV
+
+-- ClientMessages :
+
+INSERT INTO ClientMessages (user_id, subject, message_content, status)
+VALUES
+(1, 'Account Issues', 'I am having trouble accessing my account, could you please help me reset my password?', 'Unread'),
+(2, 'Payment Problems', 'I encountered an issue with the payment, could you help me resolve it?', 'Unread'),
+(3, 'Vehicle Availability', 'I want to know if the Hyundai Creta is available for rent in the coming days.', 'Unread'),
+(4, 'Reservation Questions', 'I have some questions regarding my upcoming reservation for the Kia Sonet.', 'Unread'),
+(1, 'Suggestions or Feedback', 'I think it would be great if there were more options for electric vehicles in the fleet.', 'Unread'),
+(2, 'Other Inquiries', 'Could you provide me with more details on the Mahindra Scorpio availability in Casablanca?', 'Unread');

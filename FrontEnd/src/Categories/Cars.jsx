@@ -6,13 +6,63 @@ function Cars({cars, error}) {
     const [visibleCount, setVisibleCount] = useState(9)
 
     useEffect(() => {
-        setFavorites(Array(cars.length).fill(false))
+        const fetchFavorites = async () => {
+            const userId = localStorage.getItem('userId')
+            if (!userId) return
+
+            try {
+                const response = await fetch(`http://localhost/drive-go/BackEnd/Favorite/favorite.php?userID=${userId}`, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' },
+                })
+
+                const data = await response.json()
+                if (data.error) {
+                    console.error("Error fetching favorites:", data.error)
+                } else {
+                    const favoriteIds = data.data.map((fav) => fav.vehicle_id)
+                    setFavorites(cars.map((car) => favoriteIds.includes(car.vehicle_id)))
+                }
+            } catch (error) {
+                console.error("Error fetching favorites:", error)
+            }
+        }
+
+        fetchFavorites()
     }, [cars])
 
-    const handleFavoriteToggle = (index) => {
-        setFavorites((prevFavorites) =>
-            prevFavorites.map((favorite, i) => (i === index ? !favorite : favorite))
-        )
+    const handleFavoriteToggle = async (index, vehicleId) => {
+        const userId = localStorage.getItem('userId')
+    
+        if (!userId) {
+            alert("Please log in to manage your favorites.")
+            return
+        }
+    
+        try {
+            const isFavorite = favorites[index]
+            const url = isFavorite
+                ? 'http://localhost/drive-go/BackEnd/Favorite/removeFavorite.php'
+                : 'http://localhost/drive-go/BackEnd/Favorite/addFavorite.php'
+    
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_id: userId, vehicle_id: vehicleId }),
+            })
+    
+            const result = await response.json()
+            if (result.error) {
+                alert(result.error)
+            } else {
+                setFavorites((prevFavorites) =>
+                    prevFavorites.map((favorite, i) => (i === index ? !favorite : favorite))
+                )
+            }
+        } catch (error) {
+            console.error("Error updating favorites:", error)
+            alert("Something went wrong. Please try again.")
+        }
     }
 
     const handleShowMore = () => {
