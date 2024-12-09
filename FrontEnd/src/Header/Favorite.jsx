@@ -40,6 +40,9 @@ function Favorite() {
         }
 
         fetchFavorites()
+        
+        const intervalId = setInterval(fetchFavorites, 100)
+        return () => clearInterval(intervalId)
     }, [user])
 
     const removeFromFavorites = async (vehicleId) => {
@@ -58,10 +61,10 @@ function Favorite() {
                 setAlertMessage({ type: 'success', text: 'Car removed from favorites successfully!' })
             }
 
-            setTimeout(() => setAlertMessage(null), 5000)
+            setTimeout(() => setAlertMessage(null), 2000)
         } catch (err) {
             setAlertMessage({ type: 'error', text: 'Failed to remove car from favorites.' })
-            setTimeout(() => setAlertMessage(null), 5000)
+            setTimeout(() => setAlertMessage(null), 2000)
         }
     }
 
@@ -89,7 +92,7 @@ function Favorite() {
                 <div ref={favoriteRef} className="bg-white w-[30%] absolute top-14 right-44 p-5 border border-gray-200 rounded-lg shadow-lg">
                     {alertMessage && (
                         <div
-                            className={`fixed top-5 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-md shadow-lg ${
+                            className={`fixed top-1 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-md shadow-lg ${
                                 alertMessage.type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
                             }`}
                         >
@@ -98,7 +101,7 @@ function Favorite() {
                     )}
                     <h2 className="text-lg font-semibold">Your Favorite Cars</h2>
                     {error ? (
-                        <div className="text-red-500 text-center">
+                        <div className="text-gray-500 text-center">
                             <p>{error}</p>
                         </div>
                     ) : favorites.length === 0 ? (
@@ -106,7 +109,7 @@ function Favorite() {
                             <p>No favorite cars found.</p>
                         </div>
                     ) : (
-                        <div className="space-y-4 mt-5">
+                        <div className={`space-y-4 mt-5 ${favorites.length > 5 ? 'max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-transparent rounded-lg' : ''}`}>
                             {favorites.map((car) => (
                                 <div key={car.vehicle_id} className="flex justify-between items-center space-x-4 border-b pb-2">
                                     <Link to={`/reservation/${car.vehicle_id}`} className="flex items-center space-x-4">

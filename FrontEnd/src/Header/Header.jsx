@@ -8,14 +8,6 @@ import { Link } from 'react-router-dom'
 import Profile from './Profile'
 
 function Header({ isLoggedIn, setIsLoggedIn, isGuest }) {
-    const notifications = [
-        "New message from Support",
-        "Your reservation has been confirmed",
-        "Profile updated successfully",
-        "Payment received",
-        "Reminder: Rental period ends soon"
-    ]
-
     return (
         <>
             <header className="flex justify-between items-center p-4 bg-white shadow">
@@ -24,18 +16,21 @@ function Header({ isLoggedIn, setIsLoggedIn, isGuest }) {
                 </Link>
                 
                 {/* Search Input with Icon */}
-                <Search></Search>
+                <Search />
 
                 {/* Icons on the right with borders */}
                 <div className="flex items-center gap-4">
                     {/* Favorite Icon */}
-                    <Favorite></Favorite>
+                    <Favorite />
                     
                     {/* Notification Icon with Red Dot */}
-                    <Notification notifications={notifications}></Notification>
+                    <Notification />
                     
                     {/* Settings Icon */}
-                    <Settings isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}></Settings>
+                    <Settings
+                        isLoggedIn={isLoggedIn}
+                        setIsLoggedIn={setIsLoggedIn}
+                    />
 
                     {/* SignUp Icon */}
                     {isLoggedIn ? <Profile /> : isGuest ? <Inscription /> : null}

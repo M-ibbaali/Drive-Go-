@@ -287,3 +287,21 @@ VALUES
 (4, 'Reservation Questions', 'I have some questions regarding my upcoming reservation for the Kia Sonet.', 'Unread'),
 (1, 'Suggestions or Feedback', 'I think it would be great if there were more options for electric vehicles in the fleet.', 'Unread'),
 (2, 'Other Inquiries', 'Could you provide me with more details on the Mahindra Scorpio availability in Casablanca?', 'Unread');
+
+-- Unread Notifications :
+
+INSERT INTO Notifications (user_id, message, status)
+VALUES
+(1, 'You have a new car reservation request on DriveGo.', 'Unread'),
+(1, 'Your DriveGo car rental has been successfully confirmed.', 'Unread'),
+(1, 'Your DriveGo car rental has been extended by 2 hours.', 'Unread'),
+(1, 'DriveGo has updated its terms and conditions. Please review them.', 'Unread'),
+(1, 'You have 10 minutes left on your current DriveGo rental. Consider extending your time.', 'Unread');
+
+-- Read Rotifications :
+
+INSERT INTO Notifications (user_id, message, status)
+VALUES
+(1, 'Your DriveGo account password was successfully updated.', 'Read'),
+(1, 'Your DriveGo car rental ended successfully. Thank you for using DriveGo.', 'Read');
+

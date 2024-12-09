@@ -3,7 +3,7 @@ import SectionCategories from './SectionCategories'
 function Categories() {
     return (
         <>
-            <SectionCategories></SectionCategories>
+            <SectionCategories />
         </>
     )
 }
