@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Confirmation() {
+function Confirmation({ handleReservation }) {
     return (
         <div className="w-full p-6 rounded-lg bg-white shadow-lg">
             <p className="text-gray-500 mb-4 text-right">Step 4 of 4</p>
@@ -14,7 +14,7 @@ function Confirmation() {
                 <input type="checkbox" className="mr-2" /> I agree with the terms and conditions and privacy policy.
             </label>
 
-            <button className="w-full py-2 bg-green-600 text-white rounded-md hover:bg-green-700">Rent Now</button>
+            <button onClick={handleReservation} className="w-full py-2 bg-green-600 text-white rounded-md hover:bg-green-700">Rent Now</button>
             <h3 className="text-lg font-semibold text-gray-700 mt-4">All your data are safe</h3>
             <p className="text-gray-500">We are using the latest encryption technology to keep your data secure!</p>
         </div>

@@ -2,7 +2,7 @@
     $host = 'localhost';
     $username = 'root';
     $password = '';
-    $dbname = 'DriveGo';
+    $dbname = 'BankTest';
 
     try {
         $connexion = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -10,10 +10,10 @@
 
         $stmt = $connexion->query("SHOW VARIABLES LIKE 'port'");
         $portData = $stmt->fetch(PDO::FETCH_ASSOC);
-        
+
         if ($portData && isset($portData['Value'])) {
             $mysqlPort = $portData['Value'];
-            
+
             $connexion = new PDO("mysql:host=$host;port=$mysqlPort;dbname=$dbname", $username, $password);
             $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
