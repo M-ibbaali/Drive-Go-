@@ -1,13 +1,21 @@
-import React from 'react'
+import React from "react";
 
 function Loading() {
-    return (
-        <>
-            <div className="inline-block h-16 w-16 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-blue-500 motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status">
-                <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Loading...</span>
-            </div>
-        </>
-    )
+  return (
+    <>
+      <div
+        className="flex justify-center items-center h-screen" // Centers the spinner in the middle of the viewport
+      >
+        <div
+          className="animate-spin rounded-full border-4 sm:border-4 md:border-6 lg:border-8 border-solid border-current border-r-transparent text-blue-500"
+          style={{ width: "4rem", height: "4rem" }} // Default size
+          role="status"
+        >
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    </>
+  );
 }
 
-export default Loading
+export default Loading;

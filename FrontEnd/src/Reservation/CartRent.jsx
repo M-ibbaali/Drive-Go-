@@ -48,30 +48,33 @@ function CarRentalDashboard() {
 
     return (
         <>
-            <div className="bg-gray-100 min-h-screen">
-                <div className="container mx-auto p-6">
-                    <div className="flex space-x-4">
-                        <Filter
-                            car={carData}
-                            types={types}
-                            capacities={capacities}
-                            priceRange={priceRange}
-                        />
-                        <div className="w-5/6">
-                            <CarDetails
-                                car={carData}
-                                error={error}
-                            />
-                            <Reviews
-                                id={car}
-                            />
-                            <RecentCars/>
-                            <RecommandCar/>
-                        </div>
-                    </div>
-                </div>
+        <div className="bg-gray-100 min-h-screen">
+          <div className="container mx-auto p-4 sm:p-6">
+            <div className="flex flex-col md:flex-row gap-4">
+              {/* Filter Sidebar */}
+              <div className="w-full md:w-1/6">
+                <Filter
+                  car={carData}
+                  types={types}
+                  capacities={capacities}
+                  priceRange={priceRange}
+                />
+              </div>
+      
+              {/* Main Content */}
+              <div className="w-full md:w-5/6">
+                <CarDetails
+                  car={carData}
+                  error={error}
+                />
+                <Reviews id={car} />
+                <RecentCars />
+                <RecommandCar />
+              </div>
             </div>
-        </>
+          </div>
+        </div>
+      </>
     )
 }
 
