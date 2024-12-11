@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Car from "./Car";
+import { motion, AnimatePresence } from "framer-motion";
 
 function Cars({ cars, error }) {
   const [favorites, setFavorites] = useState([]);
@@ -41,9 +42,6 @@ function Cars({ cars, error }) {
     };
 
     fetchFavorites();
-
-    const intervalId = setInterval(fetchFavorites, 100);
-    return () => clearInterval(intervalId);
   }, [cars]);
 
   const handleFavoriteToggle = async (index, vehicleId) => {
@@ -96,51 +94,87 @@ function Cars({ cars, error }) {
   };
 
   return (
-    <>
+    <div className="container mx-auto px-4 py-8">
       {error && (
-        <div
-          className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-          role="alert"
-        >
-          <strong className="font-bold">Error:</strong>
-          <span className="block sm:inline">{error}</span>
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+          <strong className="font-bold">Error: </strong>
+          <span>{error}</span>
         </div>
       )}
 
-      <div className="p-4">
-        {cars.length === 0 ? (
-          <div className="text-center text-gray-500">
-            No cars match your filters.
-          </div>
-        ) : (
-          <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {cars.slice(0, visibleCount).map((car, index) => (
-                <Car
-                  key={index}
-                  index={index}
-                  car={car}
-                  favorites={favorites}
-                  handleFavoriteToggle={handleFavoriteToggle}
-                />
-              ))}
-            </div>
+      {alert.message && (
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          className={`fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg ${
+            alert.type === "error" 
+              ? "bg-red-500 text-white" 
+              : "bg-green-500 text-white"
+          }`}
+        >
+          {alert.message}
+        </motion.div>
+      )}
 
-            <div className="flex items-center justify-center mt-4">
+      {cars.length === 0 ? (
+        <div className="text-center text-gray-500 text-2xl">
+          No cars match your filters.
+        </div>
+      ) : (
+        <>
+          <AnimatePresence>
+            <motion.div 
+              layout
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+            >
+              {cars.slice(0, visibleCount).map((car, index) => (
+                <motion.div
+                  key={car.vehicle_id}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Car
+                    index={index}
+                    car={car}
+                    favorites={favorites}
+                    handleFavoriteToggle={handleFavoriteToggle}
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+
+          <div className="flex items-center justify-center mt-8">
+            {visibleCount < cars.length && (
               <button
                 onClick={handleShowMore}
-                className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded"
+                className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-full transition duration-300 flex items-center"
               >
-                Show more cars
+                Show More Cars
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  className="h-5 w-5 ml-2" 
+                  viewBox="0 0 20 20" 
+                  fill="currentColor"
+                >
+                  <path 
+                    fillRule="evenodd" 
+                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" 
+                    clipRule="evenodd" 
+                  />
+                </svg>
               </button>
-              <p className="ml-4 text-gray-700">
-                {cars.length} car{cars.length > 1 ? "s" : ""}
-              </p>
-            </div>
-          </>
-        )}
-      </div>
-    </>
+            )}
+            <p className="ml-4 text-gray-700">
+              {cars.length} car{cars.length > 1 ? "s" : ""} available
+            </p>
+          </div>
+        </>
+      )}
+    </div>
   );
 }
 

@@ -103,10 +103,8 @@ function CarDetails({ car, error }) {
                 />
               </div>
             </div>
-            {/* Right Section: Details */}
             <div className="w-full md:w-1/2 mt-6 md:mt-0 md:pl-6 space-y-4">
               {" "}
-              {/* Added spacing between details */}
               <h1 className="text-xl sm:text-2xl md:text-3xl font-bold flex items-center justify-between">
                 {carDetails.name}
                 <FaHeart
@@ -118,7 +116,6 @@ function CarDetails({ car, error }) {
               </h1>
               <div className="flex items-center gap-2">
                 {" "}
-                {/* Added gap between stars and reviews */}
                 {[...Array(5)].map((_, index) => (
                   <AiFillStar key={index} className="text-yellow-500 text-xl" />
                 ))}
@@ -127,7 +124,6 @@ function CarDetails({ car, error }) {
               <p className="text-gray-500">{carDetails.description}</p>
               <div className="flex flex-wrap gap-3 mt-4">
                 {" "}
-                {/* Added gap between spans */}
                 <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm">
                   {carDetails.type}
                 </span>
@@ -153,7 +149,6 @@ function CarDetails({ car, error }) {
             </div>
           </div>
 
-          {/* Fullscreen Mode */}
           {fullscreen && (
             <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
               <img

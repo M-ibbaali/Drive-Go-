@@ -87,7 +87,7 @@ function RecentCars() {
                             <img
                                 src={car.first_img}
                                 alt={car.name}
-                                className="w-full h-32 sm:h-48 object-cover rounded"
+                                className="w-full h-32 sm:h-48 object-contain rounded"
                             />
                             <div className="flex mt-2 text-gray-700 text-sm sm:text-base">
                                 <p className="mr-3">

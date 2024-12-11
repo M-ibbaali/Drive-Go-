@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Filter from "./Filter";
-import SearchBar from "../Home/SearchBar";
 import Cars from "./Cars";
+import { FaFilter } from 'react-icons/fa';
 
 function SectionCategories() {
   const [cars, setCars] = useState([]);
@@ -14,6 +14,9 @@ function SectionCategories() {
   const [capacities, setCapacities] = useState([]);
   const [priceRange, setPriceRange] = useState({});
   const [loading, setLoading] = useState(true);
+  
+  // New state for mobile filter visibility
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -88,42 +91,71 @@ function SectionCategories() {
     );
   };
 
+  const toggleFilter = () => {
+    setIsFilterOpen(!isFilterOpen);
+  };
+
   return (
     <>
-      <div className="container mx-auto py-6 px-4">
-        <div className="flex flex-col md:flex-row gap-6">
-          <Filter
-            price={price}
-            setPrice={setPrice}
-            types={types}
-            capacities={capacities}
-            priceRange={priceRange}
-            handleTypeChange={handleTypeChange}
-            handleCapacityChange={handleCapacityChange}
-          />
+      <div className=" mx-auto py-6 px-4">
+        <div className="md:hidden flex justify-end mb-4">
+          <button 
+            onClick={toggleFilter}
+            className="flex items-center bg-blue-500 text-white px-4 py-2 rounded-lg"
+          >
+            <FaFilter className="mr-2" /> 
+            {isFilterOpen ? 'Close' : 'Open'} Filters
+          </button>
+        </div>
+
+        <div className="flex flex-col md:flex-row gap-3 relative">
+          {/* Filter for Desktop */}
+          <div className="hidden md:block">
+            <Filter
+              price={price}
+              setPrice={setPrice}
+              types={types}
+              capacities={capacities}
+              priceRange={priceRange}
+              handleTypeChange={handleTypeChange}
+              handleCapacityChange={handleCapacityChange}
+            />
+          </div>
+
+          {/* Mobile Filter - Overlay */}
+          {isFilterOpen && (
+            <div className="fixed inset-0 z-50 md:hidden">
+              <div 
+                className="absolute inset-0 bg-black opacity-50"
+                onClick={toggleFilter}
+              ></div>
+              <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl p-6 shadow-2xl">
+                <Filter
+                  price={price}
+                  setPrice={setPrice}
+                  types={types}
+                  capacities={capacities}
+                  priceRange={priceRange}
+                  handleTypeChange={handleTypeChange}
+                  handleCapacityChange={handleCapacityChange}
+                  onClose={toggleFilter}
+                />
+              </div>
+            </div>
+          )}
+
           <div className="flex-1 flex flex-col items-center gap-5">
-            <SearchBar />
             {filteredCars ? (
               loading ? (
-                <div
-                  className="flex items-center mt-4 h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-blue-500 motion-reduce:animate-[spin_1.5s_linear_infinite]"
-                  role="status"
-                >
-                  <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-                    Loading...
-                  </span>
+                <div className="flex items-center justify-center mt-4">
+                  <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-blue-500"></div>
                 </div>
               ) : (
                 <Cars cars={filteredCars} error={error} />
               )
             ) : loading ? (
-              <div
-                className="flex items-center mt-4 h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-blue-500 motion-reduce:animate-[spin_1.5s_linear_infinite]"
-                role="status"
-              >
-                <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
-                  Loading...
-                </span>
+              <div className="flex items-center justify-center mt-4">
+                <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-blue-500"></div>
               </div>
             ) : (
               <Cars cars={cars} error={error} />

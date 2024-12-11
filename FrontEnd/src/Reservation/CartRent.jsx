@@ -1,5 +1,4 @@
 import {useState, useEffect} from 'react'
-import Filter from './Filter'
 import CarDetails from './CarDetails'
 import Reviews from './Reviews'
 import RecentCars from './RecentsCar'
@@ -11,9 +10,6 @@ function CarRentalDashboard() {
 
     const [carData, setCarData] = useState([])
     const [error, setError] = useState(null)
-    const [types, setTypes] = useState([])
-    const [capacities, setCapacities] = useState([])
-    const [priceRange, setPriceRange] = useState({})
 
     useEffect(() => {
         const fetchCarData = async () => {
@@ -32,7 +28,6 @@ function CarRentalDashboard() {
 
                 setCarData(data.data)
                 setTypes(data.types)
-                setCapacities(data.capacities)
                 setPriceRange({
                     ...data.priceRange,
                     min_price: parseFloat(data.priceRange.min_price),
@@ -48,21 +43,12 @@ function CarRentalDashboard() {
 
     return (
         <>
-        <div className="bg-gray-100 min-h-screen">
-          <div className="container mx-auto p-4 sm:p-6">
+        <div className="bg-gray-100 min-h-screen ">
+          <div className=" mx-auto p-4 sm:p-6">
             <div className="flex flex-col md:flex-row gap-4">
-              {/* Filter Sidebar */}
-              <div className="w-full md:w-1/6">
-                <Filter
-                  car={carData}
-                  types={types}
-                  capacities={capacities}
-                  priceRange={priceRange}
-                />
-              </div>
+             
       
-              {/* Main Content */}
-              <div className="w-full md:w-5/6">
+              <div className=" w-screen ">
                 <CarDetails
                   car={carData}
                   error={error}
