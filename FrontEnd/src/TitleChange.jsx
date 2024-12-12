@@ -36,6 +36,9 @@ function TitleChange({ isLoggedIn }) {
             case location.pathname === '/aide':
                 document.title = 'DriveGo - Help'
                 break
+            case location.pathname === '/aboutus':
+                document.title = 'DriveGo - AboutUs'
+                break
             case location.pathname === '/settings':
                 document.title = 'DriveGo - Settings'
                 break

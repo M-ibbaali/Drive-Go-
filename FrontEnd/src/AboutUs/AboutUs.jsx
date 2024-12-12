@@ -1,17 +1,11 @@
 import React from 'react';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
-const AboutPage = () => {
+const AboutUs = () => {
   return (
     <>
     <div className="bg-gray-100 text-gray-800">
-      {/* Header */}
-      <header className="bg-white py-8 shadow">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-2xl font-bold">About Drive Go</h1>
-        </div>
-      </header>
-
-      {/* How it Works */}
       <section className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold mb-8">How it Works</h2>
@@ -109,4 +103,4 @@ const AboutPage = () => {
   );
 };
 
-export default AboutPage;
+export default AboutUs;

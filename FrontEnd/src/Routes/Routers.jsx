@@ -13,11 +13,12 @@ import Reservation from '../Reservation/Reservation'
 import Payment from '../Payment/Payment'
 import AdminDashboard from '../Admin/AdminDashboard'
 import NotFound from '../NotFound/NotFound'
+import AboutUs from '../AboutUs/AboutUs'
 
 function Routers({ isLoggedIn, setIsLoggedIn, isGuest }) {
     const userRole = localStorage.getItem('userRole')
     const location = useLocation()
-    const isNotFoundPage = !['/', '/categories', '/popularCars', '/recentCars', '/profile', '/aide', '/settings', '/administration'].includes(location.pathname) && !location.pathname.startsWith('/reservation/') && !location.pathname.startsWith('/payment/')
+    const isNotFoundPage = !['/', '/categories', '/popularCars', '/recentCars', '/profile', '/aboutus', '/aide', '/settings', '/administration'].includes(location.pathname) && !location.pathname.startsWith('/reservation/') && !location.pathname.startsWith('/payment/')
 
     return (
         <>
@@ -29,6 +30,7 @@ function Routers({ isLoggedIn, setIsLoggedIn, isGuest }) {
                 <Route path="/recentCars" element={<RecentCars />}/>
                 <Route path="/profile" element={<Manager isLoggedIn={isLoggedIn} />}/>
                 <Route path="/aide" element={<Aide />}/>
+                <Route path='/aboutus' element={<AboutUs />}/>
                 <Route path="/settings" element={<Settings />}/>
                 <Route path="/reservation/:car" element={<Reservation />}/>
                 <Route path="/payment/:car" element={<Payment />}/>
