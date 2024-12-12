@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import React from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import car1 from "../../public/car2.webp";
 import car2 from "../../public/car3.webp";
 
@@ -28,8 +28,7 @@ function ContentHome() {
 
   return (
     <div className="flex justify-center items-center my-6 px-4 sm:px-6 lg:px-8">
-      <div className="flex flex-col lg:flex-row w-full max-w-7xl gap-5">
-        {/* First Card */}
+      <div className="flex flex-col lg:flex-row w-full max-w-7xl gap-5 ">
         <motion.div
           className="bg-blue-600 flex flex-col lg:w-1/2 p-6 sm:p-8 rounded-lg"
           variants={cardVariants}
@@ -37,17 +36,21 @@ function ContentHome() {
           animate="visible"
         >
           <div className="flex flex-col-reverse lg:flex-row justify-between items-center">
-            <motion.div 
-              variants={contentVariants} 
+            <motion.div
+              variants={contentVariants}
               className="text-center lg:text-left w-full lg:w-1/2 mb-4 lg:mb-0"
             >
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-4 text-white">
                 The Best Platform for Car Rental
               </h2>
               <p className="text-base sm:text-lg text-white mb-4">
-                Ease of doing a car rental safely and reliably. Of course at a low price.
+                Ease of doing a car rental safely and reliably. Of course at a
+                low price.
               </p>
-              <motion.div variants={buttonVariants} className="flex justify-center lg:justify-start">
+              <motion.div
+                variants={buttonVariants}
+                className="flex justify-center lg:justify-start"
+              >
                 <Link to="reservation">
                   <button className="mt-4 px-6 sm:px-8 py-2 sm:py-3 bg-blue-500 hover:bg-blue-400 text-white rounded-full transition-colors duration-300">
                     Rental Car
@@ -66,7 +69,6 @@ function ContentHome() {
           </div>
         </motion.div>
 
-        {/* Second Card */}
         <motion.div
           className="bg-blue-600 flex flex-col lg:w-1/2 p-6 sm:p-8 rounded-lg"
           variants={cardVariants}
@@ -74,17 +76,21 @@ function ContentHome() {
           animate="visible"
         >
           <div className="flex flex-col-reverse lg:flex-row justify-between items-center">
-            <motion.div 
-              variants={contentVariants} 
+            <motion.div
+              variants={contentVariants}
               className="text-center lg:text-left w-full lg:w-1/2 mb-4 lg:mb-0"
             >
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-4 text-white">
                 Easy way to rent a car at a low price
               </h2>
               <p className="text-base sm:text-lg text-white mb-4">
-                Providing cheap car rental services and safe and comfortable facilities.
+                Providing cheap car rental services and safe and comfortable
+                facilities.
               </p>
-              <motion.div variants={buttonVariants} className="flex justify-center lg:justify-start">
+              <motion.div
+                variants={buttonVariants}
+                className="flex justify-center lg:justify-start"
+              >
                 <Link to="reservation">
                   <button className="mt-4 px-6 sm:px-8 py-2 sm:py-3 bg-blue-400 hover:bg-blue-300 text-white rounded-full transition-colors duration-300">
                     Rental Car

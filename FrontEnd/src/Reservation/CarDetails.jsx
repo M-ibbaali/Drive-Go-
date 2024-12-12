@@ -3,6 +3,8 @@ import { FaHeart, FaTimes } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
+
+
 function CarDetails({ car, error }) {
   const carDetails = car && car.length > 0 ? car[0] : null;
   const [loading, setLoading] = useState(true);

@@ -74,7 +74,6 @@ function Notification() {
                                     onClick={() => handleNotificationClick(notification)}
                                     className={`px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer ${notification.status === 'Unread' ? 'font-bold' : ''}`}
                                 >
-                                    {/* {notification.message} */}
                                     {notification.message.slice(0, 20)}{notification.message.length > 10 ? '...' : ''}
                                     {notification.status === 'Unread' && (
                                         <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
