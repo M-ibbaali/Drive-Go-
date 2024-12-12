@@ -1,13 +1,13 @@
 import React from 'react'
-import { FaUserCircle} from 'react-icons/fa'
+import { FaUser} from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 function Profile() {
 
     return (
         <>
-            <Link to="/profile">
-                <FaUserCircle className="w-10 h-10 text-gray-700 cursor-pointer hover:text-black" />
+            <Link to="/profile" className="p-2 border rounded-full">
+                <FaUser className="w-4 h-4 text-gray-700 cursor-pointer hover:text-black" />
             </Link>
         </>
     )

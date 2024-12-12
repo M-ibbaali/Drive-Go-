@@ -38,14 +38,14 @@ function RecommandCar() {
     }
 
     return (
-        <div className="p-4 max-w-screen-xl mx-auto">
-            <h2 className="text-xl font-bold mb-4">Recommended Cars</h2>
+        <div className="p-4">
+            <h2 className="text-xl font-bold mb-4 flex items-center">Recommended Cars</h2>
             {error ? (
-                <div className="text-red-500 text-center">
+                <div className="text-gray-500 text-center">
                     <p>Error: {error}</p>
                 </div>
             ) : (
-                <div className={`${loading ? 'flex flex-col items-center' : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8'}`}>
+                <div className={`${loading ? 'flex flex-col items-center' : 'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'}`}>
                     {loading ? (
                         <div
                             className="flex items-center mt-4 h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] text-blue-500 motion-reduce:animate-[spin_1.5s_linear_infinite]"

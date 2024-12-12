@@ -39,8 +39,20 @@ function TitleChange({ isLoggedIn }) {
             case location.pathname === '/aboutus':
                 document.title = 'DriveGo - AboutUs'
                 break
-            case location.pathname === '/settings':
-                document.title = 'DriveGo - Settings'
+            case location.pathname === '/terms':
+                document.title = 'DriveGo - Terms & Conditions'
+                break
+            case location.pathname === '/privacy':
+                document.title = 'DriveGo - Privacy & Policy'
+                break
+            case location.pathname === '/podcast':
+                document.title = 'DriveGo - Podcast'
+                break
+            case location.pathname === '/events':
+                document.title = 'DriveGo - Events'
+                break
+            case location.pathname === '/blogs':
+                document.title = 'DriveGo - Blogs'
                 break
             case location.pathname === '/administration':
                 document.title = 'DriveGo - Admin Dashboard'

@@ -37,7 +37,9 @@
     "react-router-dom": "^7.0.2",
     "react-spinners": "^0.14.1",
     "recharts": "^2.13.3",
-    "tailwind-scrollbar": "^3.1.0"
+    "tailwind-scrollbar": "^3.1.0",
+    "tw-elements": "^2.0.0",
+    "tw-elements-react": "^1.0.0-alpha-end"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",

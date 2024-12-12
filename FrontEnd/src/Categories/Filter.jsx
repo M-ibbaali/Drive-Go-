@@ -1,16 +1,7 @@
 import React from 'react';
 import { FaCar, FaUsers, FaMoneyBillWave, FaTimes } from 'react-icons/fa';
 
-function Filter({ 
-    price, 
-    setPrice, 
-    types, 
-    capacities, 
-    priceRange, 
-    handleTypeChange, 
-    handleCapacityChange,
-    onClose
-}) {
+function Filter({ price, setPrice, types, capacities, priceRange, handleTypeChange, handleCapacityChange, onClose }) {
     return (
         <div className="w-full bg-white rounded-xl p-6">
             {/* Mobile Close Button */}
@@ -85,9 +76,9 @@ function Filter({
                         className="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer"
                     />
                     <div className="flex justify-between text-sm text-gray-600 mt-2">
-                        <span>{priceRange.min_price} MAD</span>
-                        <span className="font-bold text-blue-600">{price} MAD</span>
-                        <span>{priceRange.max_price} MAD</span>
+                        <span>{priceRange.min_price}</span>
+                        <span className="font-bold text-blue-600">{price}</span>
+                        <span>{priceRange.max_price}</span>
                     </div>
                 </div>
             </div>

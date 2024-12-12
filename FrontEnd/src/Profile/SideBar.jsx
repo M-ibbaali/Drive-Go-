@@ -81,7 +81,7 @@ function SideBar({ data, activeSection, setActiveSection, renderContent, isLogge
             </div>
     
             {/* Content Area */}
-            <div className="flex-1 p-4 md:p-8 bg-gray-50 min-h-screen rounded-r-xl">
+            <div className="flex-1 p-4 md:p-8 min-h-screen rounded-r-xl">
                 {renderContent()}
             </div>
         </div>

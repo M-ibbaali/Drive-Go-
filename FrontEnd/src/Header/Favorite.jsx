@@ -89,7 +89,7 @@ function Favorite() {
             </div>
 
             {isVisible && (
-                <div ref={favoriteRef} className="bg-white w-[30%] absolute top-14 right-44 p-5 border border-gray-200 rounded-lg shadow-lg">
+                <div ref={favoriteRef} className="bg-white w-[30%] absolute top-14 right-44 p-5 border border-gray-200 rounded-lg shadow-lg z-30">
                     {alertMessage && (
                         <div
                             className={`fixed top-1 left-1/2 transform -translate-x-1/2 px-4 py-2 rounded-md shadow-lg ${
