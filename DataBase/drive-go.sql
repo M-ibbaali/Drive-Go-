@@ -15,6 +15,8 @@ CREATE TABLE Users (
     email VARCHAR(100) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
     role ENUM('Client', 'Admin') NOT NULL,
+    verification_token VARCHAR(255) DEFAULT NULL,
+    email_verified TINYINT(1) DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CHECK (cin REGEXP '^[A-Z]{1,2}[0-9]{6}$')
@@ -78,7 +80,7 @@ CREATE TABLE Payments (
     payment_id INT AUTO_INCREMENT PRIMARY KEY,
     reservation_id INT UNSIGNED NOT NULL,
     amount DECIMAL(10, 2) NOT NULL,
-    payment_method ENUM('Credit Card', 'PayPal', 'Stripe') NOT NULL,
+    payment_method ENUM('Credit Card', 'PayPal') NOT NULL,
     status ENUM('Pending', 'Completed', 'Failed') DEFAULT 'Pending',
     payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (reservation_id) REFERENCES Reservations(reservation_id) ON DELETE CASCADE
@@ -298,10 +300,61 @@ VALUES
 (1, 'DriveGo has updated its terms and conditions. Please review them.', 'Unread'),
 (1, 'You have 10 minutes left on your current DriveGo rental. Consider extending your time.', 'Unread');
 
--- Read Rotifications :
+-- Read Notifications :
 
 INSERT INTO Notifications (user_id, message, status)
 VALUES
 (1, 'Your DriveGo account password was successfully updated.', 'Read'),
 (1, 'Your DriveGo car rental ended successfully. Thank you for using DriveGo.', 'Read');
 
+-- Test Reservation :
+
+-- 1. Insert into reservations table
+INSERT INTO Reservations (user_id, vehicle_id, start_date, end_date, status, total_price)
+VALUES
+(1, 1, '2024-12-15', '2024-12-20', 'Confirmed', 2500.00),
+(2, 2, '2024-12-18', '2024-12-25', 'Pending', 8400.00),
+(3, 3, '2024-12-22', '2024-12-26', 'Cancelled', 10000.00),
+(4, 4, '2024-12-10', '2024-12-14', 'Completed', 4800.00),
+(5, 5, '2024-12-15', '2024-12-16', 'Confirmed', 2500.00),
+(1, 6, '2024-12-15', '2024-12-16', 'Pending', 600.00),
+(2, 7, '2024-12-22', '2024-12-28', 'Cancelled', 10500.00),
+(3, 8, '2024-12-20', '2024-12-23', 'Completed', 6000.00),
+(4, 9, '2024-12-19', '2024-12-23', 'Confirmed', 4000.00),
+(5, 10, '2024-12-24', '2024-12-26', 'Pending', 600.00);
+
+-- 2. Update the availability_status in the vehicles table
+UPDATE Vehicles
+SET availability_status = CASE
+    WHEN vehicle_id IN (SELECT vehicle_id FROM Reservations WHERE status = 'Confirmed') THEN false
+    WHEN vehicle_id IN (SELECT vehicle_id FROM Reservations WHERE status = 'Cancelled') THEN true
+    ELSE availability_status
+END;
+
+-- 3. Insert into payments table with payment method
+INSERT INTO Payments (reservation_id, amount, payment_method, status)
+VALUES
+(1, 2500.00, 'Credit Card', 'Completed'),
+(2, 8400.00, 'PayPal', 'Pending'),
+(3, 10000.00, 'Credit Card', 'Failed'),
+(4, 4800.00, 'PayPal', 'Completed'),
+(5, 2500.00, 'Credit Card', 'Completed'),
+(6, 600.00, 'PayPal', 'Pending'),
+(7, 10500.00, 'Credit Card', 'Failed'),
+(8, 6000.00, 'Credit Card', 'Completed'),
+(9, 4000.00, 'PayPal', 'Completed'),
+(10, 600.00, 'Credit Card', 'Pending');
+
+-- 4. Insert into historique table
+INSERT INTO Historique (user_id, action_type, related_id, details)
+VALUES
+(1, 'Reservation Created', 1, 'User created a reservation for BMW 3 Series Gran Limousine.'),
+(2, 'Reservation Created', 2, 'User created a reservation for BMW M340i.'),
+(3, 'Reservation Cancelled', 3, 'User cancelled the reservation for Hyundai Creta.'),
+(4, 'Payment Made', 4, 'Payment of 4800.00 for reservation completed.'),
+(5, 'Reservation Created', 5, 'User created a reservation for Kia Carnival.'),
+(1, 'Vehicle Status Updated', 6, 'Availability status updated for Hyundai Aura.'),
+(2, 'Reservation Cancelled', 7, 'User cancelled the reservation for Kia Sonet.'),
+(3, 'Reservation Created', 8, 'User created a reservation for Land Rover Range Rover.'),
+(4, 'Payment Made', 9, 'Payment of 4000.00 for reservation completed.'),
+(5, 'Reservation Created', 10, 'User created a reservation for Tata Tiago EV.');

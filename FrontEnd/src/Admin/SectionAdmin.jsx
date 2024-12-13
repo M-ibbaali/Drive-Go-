@@ -13,7 +13,7 @@ function SectionAdmin() {
         <>
             <section className="flex p-0.5">
                 <SideBar activeItem={activeItem} onItemClick={handleItemClick}></SideBar>
-                <div className="w-4/5 p-8 space-y-6">
+                <div className="w-5/6 p-8 space-y-6">
                     <Content activeItem={activeItem}></Content>
                 </div>
             </section>

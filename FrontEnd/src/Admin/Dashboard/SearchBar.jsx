@@ -1,12 +1,6 @@
-import { useState } from 'react'
+import React from 'react'
 
-function SearchBar() {
-    const [pickDrop, setPickDrop] = useState('pick')
-
-    const handleRadioChange = (event) => {
-        setPickDrop(event.target.id)
-    }
-
+function SearchBar({ location, pickUp, DropOff, cities }) {
     return (
         <div className="bg-white p-4 rounded-lg">
             <div className="flex justify-around items-center mb-4">
@@ -15,31 +9,36 @@ function SearchBar() {
                     <div className="flex items-center gap-2 mb-3">
                         <input
                             type="radio"
-                            name="pickDrop"
+                            name="pickUp"
                             id="pick"
-                            checked={pickDrop === 'pick'}
-                            onChange={handleRadioChange}
+                            checked
+                            readOnly
                             className="cursor-pointer"
                         />
                         <label htmlFor="pick" className="block text-sm font-semibold cursor-pointer">Pick-Up</label>
                     </div>
-                    <select className="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3">
-                        <option>Select your city</option>
-                        <option>City 1</option>
-                        <option>City 2</option>
-                        <option>City 3</option>
+                    <select
+                        className="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3"
+                        value={location}
+                        disabled
+                    >
+                        <option value="">Select your city</option>
+                        {cities.map((city, index) => (
+                            <option
+                                key={index}
+                                value={city.location}
+                            >
+                                {city.location}
+                            </option>
+                        ))}
                     </select>
                     <label htmlFor="datePick" className="block text-sm font-semibold mb-1">Date</label>
                     <input
                         type="date"
                         id="datePick"
+                        value={pickUp || ''}
+                        readOnly
                         className="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3"
-                    />
-                    <label htmlFor="timePick" className="block text-sm font-semibold mb-1">Time</label>
-                    <input
-                        type="time"
-                        id="timePick"
-                        className="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                 </div>
 
@@ -48,31 +47,36 @@ function SearchBar() {
                     <div className="flex items-center gap-2 mb-3">
                         <input
                             type="radio"
-                            name="pickDrop"
+                            name="DropOff"
                             id="drop"
-                            checked={pickDrop === 'drop'}
-                            onChange={handleRadioChange}
+                            checked
+                            readOnly
                             className="cursor-pointer"
                         />
                         <label htmlFor="drop" className="block text-sm font-semibold cursor-pointer">Drop-Off</label>
                     </div>
-                    <select className="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3">
-                        <option>Select your city</option>
-                        <option>City 1</option>
-                        <option>City 2</option>
-                        <option>City 3</option>
+                    <select
+                        className="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3"
+                        value={location}
+                        disabled
+                    >
+                        <option value="">Select your city</option>
+                        {cities.map((city, index) => (
+                            <option
+                                key={index}
+                                value={city.location}
+                            >
+                                {city.location}
+                            </option>
+                        ))}
                     </select>
                     <label htmlFor="dateDrop" className="block text-sm font-semibold mb-1">Date</label>
                     <input
                         type="date"
                         id="dateDrop"
+                        value={DropOff || ''}
+                        readOnly
                         className="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3"
-                    />
-                    <label htmlFor="timeDrop" className="block text-sm font-semibold mb-1">Time</label>
-                    <input
-                        type="time"
-                        id="timeDrop"
-                        className="border rounded w-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                 </div>
             </div>

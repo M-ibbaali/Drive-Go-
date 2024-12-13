@@ -11,7 +11,7 @@ function SideBar({ activeItem, onItemClick }) {
 
     return (
         <>
-            <div className="w-1/5 bg-white p-4 shadow-lg rounded-lg flex flex-col">
+            <div className="w-1/6 bg-white p-4 shadow-lg rounded-lg flex flex-col">
                 <div className="space-y-5">
                     <p className="text-gray-500 text-sm mb-2">MAIN MENU</p>
                     <SidebarItem
@@ -34,9 +34,9 @@ function SideBar({ activeItem, onItemClick }) {
                     />
                     <SidebarItem
                         icon={<FaWallet />}
-                        label="Reimburse"
-                        active={activeItem === 'Reimburse'}
-                        onClick={() => onItemClick('Reimburse')}
+                        label="Reservations"
+                        active={activeItem === 'Reservations'}
+                        onClick={() => onItemClick('Reservations')}
                     />
                     <SidebarItem
                         icon={<FaInbox />}
@@ -54,18 +54,6 @@ function SideBar({ activeItem, onItemClick }) {
 
                 <div className="mt-12 space-y-2">
                     <p className="text-gray-500 text-sm mb-2">PREFERENCES</p>
-                    <SidebarItem
-                        icon={<FaCog />}
-                        label="Settings"
-                        active={activeItem === 'Settings'}
-                        onClick={() => onItemClick('Settings')}
-                    />
-                    <SidebarItem
-                        icon={<FaQuestionCircle />}
-                        label="Help & Center"
-                        active={activeItem === 'Help & Center'}
-                        onClick={() => onItemClick('Help & Center')}
-                    />
                     <div
                         onClick={toggleTheme}
                         className="flex items-center p-2 rounded-lg text-gray-700 cursor-pointer hover:bg-blue-200"

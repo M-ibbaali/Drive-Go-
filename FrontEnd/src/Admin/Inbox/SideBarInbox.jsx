@@ -1,28 +1,16 @@
 import React from "react"
+import { FaInbox, FaPaperPlane, FaThumbtack, FaTrash } from 'react-icons/fa'
 
-function Sidebar() {
+function Sidebar({ count, important, bin }) {
     const emailOptions = [
-        { label: "Inbox", count: 1253 },
-        { label: "Starred", count: 245 },
-        { label: "Sent", count: 24532 },
-        { label: "Draft", count: 9 },
-        { label: "Spam", count: 14 },
-        { label: "Important", count: 18 },
-        { label: "Bin", count: 9 },
-    ]
-
-    const labels = [
-        { label: "Primary", color: "bg-blue-500" },
-        { label: "Social", color: "bg-teal-500" },
-        { label: "Work", color: "bg-orange-500" },
-        { label: "Friends", color: "bg-pink-500" },
+        { label: `Inbox`, count: count, icon: <FaInbox className="text-gray-500 text-sm" /> },
+        { label: "Sent", count: 0, icon: <FaPaperPlane className="text-gray-500 text-sm" /> },
+        { label: "Important", count: important, icon: <FaThumbtack className="text-gray-500 text-sm" /> },
+        { label: "Bin", count: bin, icon: <FaTrash className="text-gray-500 text-sm" /> },
     ]
 
     return (
-        <div className="w-64 p-4 bg-white shadow-md">
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-md w-full mb-6">
-                + Compose
-            </button>
+        <div className="w-1/6 p-4 bg-white shadow-md rounded-lg">
             <div className="mb-6">
                 <h2 className="text-lg font-bold mb-2">My Email</h2>
                 {emailOptions.map((option) => (
@@ -30,25 +18,13 @@ function Sidebar() {
                     key={option.label}
                     className="flex justify-between items-center text-gray-700 hover:bg-gray-200 p-2 rounded-md cursor-pointer"
                 >
-                    <span>{option.label}</span>
+                    <div className="flex items-center space-x-2">
+                        {option.icon}
+                        <span>{option.label}</span>
+                    </div>
                     <span className="text-sm text-gray-500">{option.count}</span>
                 </div>
                 ))}
-            </div>
-            <div>
-                <h2 className="text-lg font-bold mb-2">Label</h2>
-                {labels.map((label) => (
-                <div
-                    key={label.label}
-                    className="flex items-center text-gray-700 hover:bg-gray-200 p-2 rounded-md cursor-pointer"
-                >
-                    <span className={`w-3 h-3 rounded-full ${label.color} mr-2`} />
-                    {label.label}
-                </div>
-                ))}
-                <button className="text-blue-500 mt-4 hover:underline">
-                + Create New Label
-                </button>
             </div>
         </div>
     )

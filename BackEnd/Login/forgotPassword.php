@@ -56,12 +56,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'drive-go@gmail.com';
-        $mail->Password = 'your-email-password';
+        $mail->Username = 'drivego.team@gmail.com';
+        $mail->Password = 'nRH2@n@H9w2VNJS';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
-        $mail->setFrom('drive-go@gmail.com', 'DriveGo');
+        $mail->setFrom('drivego.team@gmail.com', 'DriveGo Team');
         $mail->addAddress($email);
 
         $mail->Subject = $subject;

@@ -1,25 +1,19 @@
-import React from "react"
+import React from 'react'
 
-function Header() {
+function Header({ setSearchTerm }) {
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value)
+    }
+
     return (
-        <div className="flex items-center justify-between p-4 bg-white shadow-md">
+        <div className="flex items-center justify-between p-4 bg-white shadow-md rounded-t-lg border-b-4">
             <h1 className="text-xl font-bold">Inbox</h1>
             <input
                 type="text"
                 placeholder="Search mail"
-                className="flex-grow mx-4 px-4 py-2 border rounded-md"
+                onChange={handleSearchChange}
+                className="flex-grow mx-4 px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
             />
-            <div className="flex space-x-4">
-                <button className="p-2 rounded-full hover:bg-gray-200">
-                    <i className="fas fa-sync-alt" />
-                </button>
-                <button className="p-2 rounded-full hover:bg-gray-200">
-                    <i className="fas fa-trash" />
-                </button>
-                <button className="p-2 rounded-full hover:bg-gray-200">
-                    <i className="fas fa-ellipsis-v" />
-                </button>
-            </div>
         </div>
     )
 }

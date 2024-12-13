@@ -2,7 +2,7 @@ import React from 'react'
 import Dashboard from './Dashboard/Dashboard'
 import CarRental from './Cars/CarRental'
 import Insight from './Insight/Insight'
-import Reimburse from './Reimburse/Reimburse'
+import Reservations from './Reservations/Reservations'
 import Inbox from './Inbox/Inbox'
 import CalendarPage from './Calendar/CalendarPage'
 
@@ -15,16 +15,12 @@ function Content({ activeItem }) {
                 return <CarRental></CarRental>
             case 'Insight':
                 return <Insight></Insight>
-            case 'Reimburse':
-                return <Reimburse></Reimburse>
+            case 'Reservations':
+                return <Reservations></Reservations>
             case 'Inbox':
                 return <Inbox></Inbox>
             case 'Calendar':
                 return <CalendarPage></CalendarPage>
-            case 'Settings':
-                return <div>Settings Content</div>
-            case 'Help & Center':
-                return <div>Help & Center Content</div>
             case 'Log Out':
                 return <div>Log Out Content</div>
             default:

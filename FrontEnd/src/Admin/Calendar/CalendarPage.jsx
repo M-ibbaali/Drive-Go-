@@ -74,18 +74,18 @@ function CalendarPage() {
                 <div className="flex justify-between items-center mb-6">
                 <button
                     onClick={() => changeMonth(-1)}
-                    className="px-4 py-2 border rounded-lg"
+                    className="px-4 py-2 border rounded-lg hover:bg-gray-200"
                 >
-                    &lt Previous
+                    &lt; Previous
                 </button>
                 <h1 className="text-2xl font-bold">
                     {monthNames[month]} {year}
                 </h1>
                 <button
                     onClick={() => changeMonth(1)}
-                    className="px-4 py-2 border rounded-lg"
+                    className="px-4 py-2 border rounded-lg hover:bg-gray-200"
                 >
-                    Next &gt
+                    Next &gt;
                 </button>
                 </div>
 

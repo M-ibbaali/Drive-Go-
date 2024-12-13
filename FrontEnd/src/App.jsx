@@ -67,7 +67,7 @@ function App() {
                     />
                     <Route
                         path="/register"
-                        element={!isLoggedIn ? <FirstTimeUp setIsGuest={setIsGuest}/> : <Navigate to="/" replace />}
+                        element={!isLoggedIn ? <FirstTimeUp /> : <Navigate to="/" replace />}
                     />
                     <Route
                         path="/forgot-password"
