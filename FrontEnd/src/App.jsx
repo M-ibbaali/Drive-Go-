@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Routers from './Routes/Routers'
 import FirstTimeIn from './Login/FirstTimeIn'
 import FirstTimeUp from './Login/FirstTimeUp'
@@ -53,7 +53,8 @@ function App() {
 
     return (
         <>
-            <BrowserRouter future={future}>
+            {/* <BrowserRouter basename="Drive-Go" future={future}> */}
+            <HashRouter>
                 <TitleChange isLoggedIn={isLoggedIn} ></TitleChange>
                 <ProgressBar></ProgressBar>
                 <Routes>
@@ -78,7 +79,8 @@ function App() {
                         element={<ResetPassword />}
                     />
                 </Routes>
-            </BrowserRouter>
+            </HashRouter>
+            {/* </BrowserRouter> */}
         </>
     )
 }
