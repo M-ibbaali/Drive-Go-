@@ -119,3 +119,5 @@ Services de location de véhicules.
 - **Sprint 4 (20/11 - 26/11) :** Interface de gestion des véhicules.
 - **Sprint 5 (26/11 - 04/12) :** Intégration de paiement sécurisé.
 - **Sprint 6 (04/12 - 10/12) :** Notifications par e-mail et SMS.
+- **Sprint 7 (26/11 - 04/12) :** Tableau de bord d'administration.
+- **Sprint 8 (10/12 - 15/12) :** Historique des réservations et des paiements.
