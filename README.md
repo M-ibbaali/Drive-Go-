@@ -1,121 +1,121 @@
-# **DriveGo - Car Rental Platform**
+# **DriveGo - Plateforme de location de voitures**
 
-DriveGo is an innovative car rental platform designed to simplify vehicle reservations with a user-friendly interface, secure payment methods, and robust management tools.
+DriveGo est une plateforme de location de voitures innovante conçue pour simplifier les réservations de véhicules avec une interface conviviale, des méthodes de paiement sécurisées et des outils de gestion robustes.
 
 ---
 
-## **Table of Contents:**
+## **Table des matières :**
 
-1. [Team Information](#team-information)
-2. [Project Overview](#project-overview)
-3. [Features](#features)
-4. [Technologies Used](#technologies-used)
-5. [Project Budget](#project-budget)
+1. [Informations sur l'équipe](#team-information)
+2. [Présentation du projet](#project-overview)
+3. [Fonctionnalités](#features)
+4. [Technologies utilisées](#technologies-used)
+5. [Budget du projet](#project-budget)
 6. [User Stories](#user-stories)
-7. [Risks and Mitigation](#risks-and-mitigation)
-8. [Sprint Details](#sprint-details)
+7. [Risques et atténuation](#risks-and-mitigation)
+8. [Détails du sprint](#sprint-details)
 
 ---
 
-## **Team Information:**
+## **Informations sur l'équipe :**
 
-### **Development Team:**
+### **Équipe de développement :**
 
-- **Mohamed Karim Kribi** (Project Manager)
+- **Mohamed Karim Kribi** (chef de projet)
 - **Mohamed Ibaali**
 - **Bouzouggar Abdelhak**
 - **Ettahiri Abdessamad**
 
-### **Agency Responsible:** DriveGo  
-### **Location:** Morocco
+### **Agence responsable :** DriveGo
+### **Localisation :** Maroc
 
 ---
 
-## **Project Overview:**
+## **Présentation du projet :**
 
-### **Objective:**  
-Create a secure, scalable, and user-friendly platform for car rentals available in French and Arabic.
+### **Objectif :**
+Créer une plateforme sécurisée, évolutive et conviviale pour la location de voitures disponible en français et en arabe.
 
-### **Domain:**  
-Vehicle rental services.
+### **Domaine :**
+Services de location de véhicules.
 
-### **Budget:**  
-66,000 MAD
+### **Budget :**
+66 000 MAD
 
 ---
 
-## **Features:**
+## **Fonctionnalités :**
 
-### **User Management**
-- Secure registration and login.
-- User profile management.
+### **Gestion des utilisateurs**
+- Inscription et connexion sécurisées.
+- Gestion des profils d'utilisateurs.
 
-### **Car Search and Reservation**
-- Advanced search and filtering options.
-- Real-time car availability updates.
+### **Recherche et réservation de voitures**
+- Options avancées de recherche et de filtrage.
+- Mises à jour de la disponibilité des voitures en temps réel.
 
-### **Payment System**
-- Secure payments using PayPal or Stripe.
+### **Système de paiement**
+- Paiements sécurisés via PayPal ou Stripe.
 
-### **Vehicle and Rental Management**
-- Add, edit, or remove vehicle listings.
+### **Gestion des véhicules et des locations**
+- Ajouter, modifier ou supprimer des annonces de véhicules.
 
 ### **Notifications**
-- Email and SMS notifications for bookings and reminders.
+- Notifications par e-mail et SMS pour les réservations et les rappels.
 
-### **Admin Dashboard**
-- Manage users, vehicles, and transactions.
-- View usage statistics with graphical representations.
+### **Tableau de bord d'administration**
+- Gérer les utilisateurs, les véhicules et les transactions.
+- Afficher les statistiques d'utilisation avec des représentations graphiques.
 
-### **History**
-- View past reservations and payments.
-
----
-
-## **Technologies Used:**
-
-- **Frontend:** React
-- **Backend:** PHP
-- **Database:** MySQL
-- **Notifications:** Email/SMS API integration
+### **Historique**
+- Afficher les réservations et paiements passés.
 
 ---
 
-## **Project Budget:**
+## **Technologies utilisées :**
 
-- **Development Costs:** 40,000 MAD
-- **Hosting and Domain:** 6,000 MAD
-- **Maintenance:** 10,000 MAD
-- **Marketing:** 10,000 MAD
-
----
-
-## **User Stories:**
-
-- As a user, I want to securely sign up and log in to protect my personal information.
-- As a user, I want to search and filter cars to find options that suit my needs.
-- As a vehicle owner, I want to manage my fleet to maximize rental opportunities.
-- As an admin, I want to oversee the platform’s operations to ensure security and efficiency.
-- As a user, I want notifications to remind me of important booking details.
+- **Frontend :** React
+- **Backend :** PHP
+- **Base de données :** MySQL
+- **Notifications :** Intégration API e-mail/SMS
 
 ---
 
-## **Risks and Mitigation:**
+## **Budget du projet :**
 
-| **Risk**                | **Probability** | **Impact**     | **Mitigation**                                          |
+- **Coûts de développement :** 40 000 MAD
+- **Hébergement et domaine :** 6 000 MAD
+- **Maintenance :** 10 000 MAD
+- **Marketing :** 10 000 MAD
+
+---
+
+## **Témoignages d'utilisateurs :**
+
+- En tant qu'utilisateur, je souhaite m'inscrire et me connecter en toute sécurité pour protéger mes informations personnelles.
+- En tant qu'utilisateur, je souhaite rechercher et filtrer les voitures pour trouver les options qui correspondent à mes besoins.
+- En tant que propriétaire de véhicule, je souhaite gérer ma flotte pour maximiser les opportunités de location.
+- En tant qu'administrateur, je souhaite superviser les opérations de la plateforme pour garantir la sécurité et l'efficacité.
+- En tant qu'utilisateur, je souhaite que des notifications me rappellent les détails importants de la réservation.
+
+---
+
+## **Risques et atténuation :**
+
+| **Risque** | **Probabilité** | **Impact** | **Atténuation** |
 |-------------------------|-----------------|----------------|---------------------------------------------------------|
-| **Server Downtime**      | Medium (30%)    | High           | Use redundant hosting and automatic backups.           |
-| **Security Breach**      | Low (20%)       | Very High      | SSL encryption and regular security audits.            |
-| **Payment System Failure**| Low (10%)       | High           | Use multiple payment gateways for redundancy.           |
-| **Traffic Overload**     | Medium (40%)    | Medium         | Scalable infrastructure and real-time monitoring.       |
+| **Indisponibilité du serveur** | Moyenne (30 %) | Élevée | Utiliser un hébergement redondant et des sauvegardes automatiques. |
+| **Faille de sécurité** | Faible (20 %) | Très élevée | Cryptage SSL et audits de sécurité réguliers. |
+| **Défaillance du système de paiement** | Faible (10 %) | Élevée | Utiliser plusieurs passerelles de paiement pour la redondance. |
+| **Surcharge de trafic** | Moyenne (40 %) | Moyenne | Infrastructure évolutive et surveillance en temps réel. |
 
 ---
 
-## **Sprint Details:**
+## **Détails du Sprint :**
 
-- **Sprint 1 (01/11 - 09/11):** User registration and login system.
-- **Sprint 2 (09/11 - 14/11):** User profile management.
-- **Sprint 3 (14/11 - 20/11):** Car search and filtering.
-- **Sprint 4 (20/11 - 26/11):** Vehicle management interface.
-- **Sprint 5 (26/11 - 04/12):** Secure payment integration.
-- **Sprint 6 (04/12 - 10/12):** Email and SMS notifications.
+- **Sprint 1 (01/11 - 09/11) :** Système d'enregistrement et de connexion des utilisateurs.
+- **Sprint 2 (09/11 - 14/11) :** Gestion des profils utilisateurs.
+- **Sprint 3 (14/11 - 20/11) :** Recherche et filtrage de véhicules.
+- **Sprint 4 (20/11 - 26/11) :** Interface de gestion des véhicules.
+- **Sprint 5 (26/11 - 04/12) :** Intégration de paiement sécurisé.
+- **Sprint 6 (04/12 - 10/12) :** Notifications par e-mail et SMS.
