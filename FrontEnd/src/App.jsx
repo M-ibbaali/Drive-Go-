@@ -14,6 +14,13 @@ function App() {
     const [isGuest, setIsGuest] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
 
+    const theme = localStorage.getItem('theme')
+    
+    useEffect(() => {
+        document.documentElement.className = theme === 'Dark' ? 'dark' : ''
+        document.body.classList.add(theme === 'Dark' ? 'bg-gray-800' : 'bg-gray-100')
+    }, [theme])
+
     useEffect(() => {
         const currentDate = new Date().toLocaleDateString()
         const storedDate = localStorage.getItem('lastVisitDate')
