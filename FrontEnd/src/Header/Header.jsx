@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Search from './Search'
 import Favorite from './Favorite'
 import Notification from './Notification'
@@ -10,6 +10,11 @@ import { FaBars, FaTimes } from 'react-icons/fa'
 
 function Header({ isLoggedIn, setIsLoggedIn, isGuest }) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+    const theme = localStorage.getItem('theme')
+
+    useEffect(() => {
+        document.documentElement.className = theme === 'Dark' ? 'dark' : ''
+    }, [theme])
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -25,7 +30,7 @@ function Header({ isLoggedIn, setIsLoggedIn, isGuest }) {
     )
 
     return (
-        <header className="fixed top-0 w-full z-50 bg-white shadow-md mb-6">
+        <header className={`fixed top-0 w-full z-50 shadow-md mb-6 ${theme === 'Dark' ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}`}>
             <div className="container mx-auto px-4 py-3 flex justify-between items-center">
                 {/* Logo */}
                 <Link to="/" className="text-3xl font-semibold text-blue-600">
@@ -40,9 +45,9 @@ function Header({ isLoggedIn, setIsLoggedIn, isGuest }) {
                 {/* Mobile Menu Toggle */}
                 <div className="md:hidden" onClick={toggleMobileMenu}>
                     {isMobileMenuOpen ? (
-                        <FaTimes className="w-6 h-6 text-gray-700" />
+                        <FaTimes className={`w-6 h-6 ${theme === 'Dark' ? 'text-gray-300' : 'text-gray-700'}  cursor-pointer`} />
                     ) : (
-                        <FaBars className="w-6 h-6 text-gray-700" />
+                        <FaBars className={`w-6 h-6 ${theme === 'Dark' ? 'text-gray-300' : 'text-gray-700'}  cursor-pointer`} />
                     )}
                 </div>
 
@@ -72,12 +77,12 @@ function Header({ isLoggedIn, setIsLoggedIn, isGuest }) {
 
             {/* Mobile Menu Overlay */}
             {isMobileMenuOpen && (
-                <div className="fixed inset-y-0 right-0 w-64 bg-white z-50 shadow-lg transform transition-transform duration-300 ease-in-out">
+                <div className={`fixed inset-y-0 right-0 w-64 z-50 shadow-lg transform transition-transform duration-300 ease-in-out ${theme === 'Dark' ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}`}>
                     <div className="p-6 h-full flex flex-col">
                         {/* Close Button */}
                         <div className="flex justify-end mb-4">
                             <FaTimes
-                                className="w-6 h-6 text-gray-700 cursor-pointer"
+                                className={`w-6 h-6 ${theme === 'Dark' ? 'text-gray-300' : 'text-gray-700'}  cursor-pointer`}
                                 onClick={toggleMobileMenu}
                             />
                         </div>
@@ -98,8 +103,13 @@ function Header({ isLoggedIn, setIsLoggedIn, isGuest }) {
                             <Notification className="w-6 h-6" />
                             <span className="text-xs mt-1">Notifications</span>
                         </IconWrapper>
+                        
+                        <IconWrapper>
+                            <Settings isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+                            <span className="text-xs mt-1">Setthings</span>
+                        </IconWrapper>
 
-                        <Settings isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+                        {/* <Settings isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> */}
 
                         {isLoggedIn ? (
                             <IconWrapper>

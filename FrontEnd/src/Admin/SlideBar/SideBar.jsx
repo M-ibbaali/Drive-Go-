@@ -1,12 +1,16 @@
-import {useState} from 'react'
+import { useState, useEffect} from 'react'
 import SidebarItem from './SideBarItem'
-import { FaCog, FaSignOutAlt, FaCarSide, FaChartLine, FaInbox, FaRegCalendarAlt, FaSun, FaMoon, FaWallet, FaQuestionCircle } from 'react-icons/fa'
+import { FaSignOutAlt, FaCarSide, FaChartLine, FaInbox, FaRegCalendarAlt, FaSun, FaMoon, FaWallet } from 'react-icons/fa'
 
 function SideBar({ activeItem, onItemClick }) {
-    const [isDarkMode, setIsDarkMode] = useState(false)
+    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'Light')
+
+    useEffect(() => {
+        localStorage.setItem('theme', theme)
+    }, [theme])
 
     const toggleTheme = () => {
-        setIsDarkMode(!isDarkMode)
+        setTheme(theme === 'Light' ? 'Dark' : 'Light')
     }
 
     return (
@@ -58,12 +62,12 @@ function SideBar({ activeItem, onItemClick }) {
                         onClick={toggleTheme}
                         className="flex items-center p-2 rounded-lg text-gray-700 cursor-pointer hover:bg-blue-200"
                     >
-                        {isDarkMode ? (
+                        {theme === 'Light' ? (
                             <FaSun className="text-yellow-500 mr-2 text-lg" />
                         ) : (
                             <FaMoon className="text-gray-700 mr-2 text-lg" />
                         )}
-                        <span>{isDarkMode ? 'Light Mode' : 'Dark Mode'}</span>
+                        <span>{theme === 'Light' ? 'Light Mode' : 'Dark Mode'}</span>
                     </div>
                 </div>
 

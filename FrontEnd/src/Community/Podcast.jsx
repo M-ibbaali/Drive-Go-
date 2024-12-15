@@ -4,16 +4,16 @@ function Podcast() {
     const podcasts = [
         {
           id: 1,
-          title: 'The Future of Car Rentals',
-          description: 'In this episode, we discuss the future of car rentals and how technology is transforming the industry.',
-          audioUrl: 'https://example.com/podcast1.mp3',
+          title: 'The Future of Car Rentals with DriveGo',
+          description: 'In this episode, we explore how DriveGo is revolutionizing the car rental industry with cutting-edge technology and a seamless user experience. We dive into the innovative features that set DriveGo apart, from AI-driven vehicle recommendations to a fully digital booking system. Tune in to hear how DriveGo is enhancing convenience for customers while transforming the traditional car rental process.',
+          audioUrl: '/Podcusts/DriveGo-Future.wav',
           date: 'December 1, 2024',
         },
         {
           id: 2,
-          title: 'Eco-Friendly Vehicles in 2024',
-          description: 'Join us as we explore the growing trend of eco-friendly vehicles and their impact on the rental market.',
-          audioUrl: 'https://example.com/podcast2.mp3',
+          title: 'Eco-Friendly Cars at DriveGo in 2024',
+          description: 'Join us in this episode as we dive deep into DriveGo\'s growing commitment to sustainability and eco-friendly travel options. We\'ll explore how DriveGo is integrating more electric and hybrid vehicles into our fleet in 2024, offering customers environmentally conscious choices without compromising on convenience or performance. Learn about the technologies driving these changes and the long-term impact on reducing emissions. Tune in to discover how DriveGo is leading the way toward a greener future in car rentals.',
+          audioUrl: '/Podcusts/DriveGo-Eco-Friendly.mp3',
           date: 'November 25, 2024',
         },
     ]

@@ -7,6 +7,14 @@ function RecommandCar() {
     const [favorites, setFavorites] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const [alert, setAlert] = useState({ message: "", type: "" })
+
+    useEffect(() => {
+        if (alert.message) {
+            const timer = setTimeout(() => setAlert({ message: "", type: "" }), 2000)
+            return () => clearTimeout(timer)
+        }
+    }, [alert])
 
     useEffect(() => {
         const fetchRecommandCars = async () => {
@@ -31,15 +39,88 @@ function RecommandCar() {
         fetchRecommandCars()
     }, [])
 
-    const handleFavoriteToggle = (index) => {
-        const newFavorites = [...favorites]
-        newFavorites[index] = !newFavorites[index]
-        setFavorites(newFavorites)
+    useEffect(() => {
+        const fetchFavorites = async () => {
+            const userId = localStorage.getItem("userId")
+            if (!userId) return
+
+            try {
+                const response = await fetch(`http://localhost/drive-go/BackEnd/Favorite/favorite.php?userID=${userId}`, {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                })
+
+                const data = await response.json()
+                if (!data.error) {
+                    const favoriteIds = data.data.map((fav) => fav.vehicle_id)
+                    setFavorites(cars.map((car) => favoriteIds.includes(car.vehicle_id)))
+                }
+            } catch (error) {
+                setAlert({
+                    message: "Something went wrong while fetching favorites.",
+                    type: "error",
+                })
+            }
+        }
+
+        fetchFavorites()
+    }, [cars])
+
+    const handleFavoriteToggle = async (index, vehicleId) => {
+        const userId = localStorage.getItem("userId")
+
+        if (!userId) {
+            setAlert({
+                message: "Please log in to manage your favorites.",
+                type: "error",
+            })
+            return
+        }
+
+        try {
+            const isFavorite = favorites[index]
+            const url = isFavorite
+                ? "http://localhost/drive-go/BackEnd/Favorite/removeFavorite.php"
+                : "http://localhost/drive-go/BackEnd/Favorite/addFavorite.php"
+
+            const response = await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ user_id: userId, vehicle_id: vehicleId }),
+            })
+
+            const result = await response.json()
+            if (result.error) {
+                setAlert({ message: result.error, type: "error" })
+            } else {
+                setFavorites((prevFavorites) =>
+                    prevFavorites.map((favorite, i) => (i === index ? !favorite : favorite))
+                )
+                setAlert({
+                    message: "Favorites updated successfully.",
+                    type: "success",
+                })
+            }
+        } catch (error) {
+            setAlert({
+                message: "Something went wrong. Please try again.",
+                type: "error",
+            })
+        }
     }
 
     return (
         <div className="p-4">
             <h2 className="text-xl font-bold mb-4 flex items-center">Recommended Cars</h2>
+            {alert.message && (
+                <div
+                    className={`fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg ${
+                        alert.type === "error" ? "bg-red-500 text-white" : "bg-green-500 text-white"
+                    }`}
+                >
+                    {alert.message}
+                </div>
+            )}
             {error ? (
                 <div className="text-gray-500 text-center">
                     <p>Error: {error}</p>
@@ -60,7 +141,7 @@ function RecommandCar() {
                                     {car.name}
                                     <FaHeart
                                         className={`cursor-pointer ml-auto ${favorites[index] ? 'text-red-600' : 'text-gray-500'}`}
-                                        onClick={() => handleFavoriteToggle(index)}
+                                        onClick={() => handleFavoriteToggle(index, car.vehicle_id)}
                                     />
                                 </h3>
                                 <p className="text-gray-500">{car.type}</p>

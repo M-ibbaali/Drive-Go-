@@ -38,23 +38,7 @@ function CarRental() {
     }
 
     const [showForm, setShowForm] = useState(false)
-    const [formData, setFormData] = useState({
-        owner_id: '',
-        name: '',
-        brand_id: '',
-        type: '',
-        price: '',
-        last_price: '',
-        first_img: '',
-        second_img: '',
-        third_img: '',
-        type_gas: '',
-        gas_capacity: '',
-        gear: '',
-        passengers: '',
-        location: '',
-        description: '',
-    })
+    const [formData, setFormData] = useState({owner_id: '', name: '', brand_id: '', type: '', price: '', last_price: '', first_img: '', second_img: '', third_img: '', type_gas: '', gas_capacity: '', gear: '', passengers: '', location: '', description: '',})
 
     const [alert, setAlert] = useState({ type: '', message: '' })
 
@@ -80,6 +64,32 @@ function CarRental() {
 
         fetchVehicles()
     }, [])
+
+    const handleDeleteCar = async (vehicleId) => {
+        try {
+            const response = await fetch('http://localhost/drive-go/BackEnd/Admin/Cars/removeCar.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    user_id: user,
+                    vehicle_id: vehicleId,
+                }),
+            })
+
+            const data = await response.json()
+
+            if (data.success) {
+                setCars((prevCars) => prevCars.filter((car) => car.vehicle_id !== vehicleId))
+                alert('Car deleted successfully')
+            } else {
+                alert(data.error || 'Failed to delete car')
+            }
+        } catch (err) {
+            alert(`Error: ${err.message}`)
+        }
+    }
     
     const handleInputChange = (e) => {
         const { name, value } = e.target
@@ -119,23 +129,7 @@ function CarRental() {
             if (data.success) {
                 setCars((prevCars) => [...prevCars, data.newCar])
                 setShowForm(false)
-                setFormData({
-                    owner_id: user,
-                    name: '',
-                    brand_id: '',
-                    type: '',
-                    price: '',
-                    last_price: '',
-                    first_img: '',
-                    second_img: '',
-                    third_img: '',
-                    type_gas: '',
-                    gas_capacity: '',
-                    gear: '',
-                    passengers: '',
-                    location: '',
-                    description: '',
-                })
+                setFormData({owner_id: user, name: '', brand_id: '', type: '', price: '', last_price: '', first_img: '', second_img: '', third_img: '', type_gas: '', gas_capacity: '', gear: '', passengers: '', location: '', description: '',})
                 setAlert({ type: 'success', message: 'Car added successfully!' })
                 setTimeout(() => {
                     setAlert({ type: '', message: '' })
@@ -374,7 +368,7 @@ function CarRental() {
                                                                 <FiEdit />
                                                             </button>
                                                             <button className="p-2 bg-red-500 text-white rounded-md hover:bg-red-600">
-                                                                <FiTrash />
+                                                                <FiTrash onClick={() => handleDeleteCar(car.vehicle_id)} />
                                                             </button>
                                                         </div>
                                                     </td>

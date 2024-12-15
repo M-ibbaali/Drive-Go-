@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 import Reviews from './Reviews'
 import RecentCars from './RecentsCar'
 import RecommandCar from '../Home/RecommandCar'
+import { motion, AnimatePresence } from 'framer-motion'
 
 function CarRentalDashboard() {
     const { car } = useParams()
@@ -14,6 +15,7 @@ function CarRentalDashboard() {
     const [favorites, setFavorites] = useState(false)
     const [currentImageIndex, setCurrentImageIndex] = useState(0)
     const [fullscreen, setFullscreen] = useState(false)
+    const [alert, setAlert] = useState({ message: "", type: "" })
     
     // Additional state for fetching more data
     const [types, setTypes] = useState([])
@@ -62,6 +64,70 @@ function CarRentalDashboard() {
     }, [carData])
 
     useEffect(() => {
+        if (alert.message) {
+            const timer = setTimeout(() => setAlert({ message: "", type: "" }), 2000)
+            return () => clearTimeout(timer)
+        }
+    }, [alert])
+
+    useEffect(() => {
+        const fetchFavorites = async () => {
+            const userId = localStorage.getItem("userId")
+            if (!userId) return
+
+            try {
+                const response = await fetch(`http://localhost/drive-go/BackEnd/Favorite/checkFavorite.php`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ user_id: userId, vehicle_id: car }),
+                })
+
+                const result = await response.json()
+                if (result.error) {
+                    setFavorites(false)
+                } else {
+                    setFavorites(result.isFavorite)
+                }
+            } catch (error) {
+                console.error("Error fetching favorite status:", error)
+            }
+        }
+
+        fetchFavorites()
+    }, [car])
+
+    const handleFavoriteToggle = async () => {
+        const userId = localStorage.getItem("userId")
+
+        if (!userId) {
+            setAlert({ message: "Please log in to manage your favorites.", type: "error" })
+            return
+        }
+
+        try {
+            const url = favorites
+                ? "http://localhost/drive-go/BackEnd/Favorite/removeFavorite.php"
+                : "http://localhost/drive-go/BackEnd/Favorite/addFavorite.php"
+
+            const response = await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ user_id: userId, vehicle_id: car }),
+            })
+
+            const result = await response.json()
+            if (result.error) {
+                setAlert({ message: result.error, type: "error" })
+            } else {
+                setFavorites(!favorites)
+                setAlert({ message: "Favorites updated successfully.", type: "success" })
+            }
+        } catch (error) {
+            setAlert({ message: "Something went wrong. Please try again.", type: "error" })
+        }
+    }
+
+    useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.key === "Escape" && fullscreen) {
                 setFullscreen(false)
@@ -76,10 +142,6 @@ function CarRentalDashboard() {
             window.removeEventListener("keydown", handleKeyDown)
         }
     }, [fullscreen])
-
-    const handleFavoriteToggle = () => {
-        setFavorites(!favorites)
-    }
 
     const nextImage = () => {
         if (carData) {
@@ -121,6 +183,22 @@ function CarRentalDashboard() {
 
     return (
         <div className="bg-gray-50 min-h-screen  px-4 sm:px-6 lg:px-2">
+            <AnimatePresence>
+                {alert.message && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -50 }}
+                        className={`fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg ${
+                            alert.type === "error" 
+                                ? "bg-red-500 text-white" 
+                                : "bg-green-500 text-white"
+                        }`}
+                    >
+                        {alert.message}
+                    </motion.div>
+                )}
+            </AnimatePresence>
             <div className="max-w-7xl mx-auto" >
                 <div className="space-y-8 "   >
                     {/* Car Details Section */}
@@ -129,22 +207,22 @@ function CarRentalDashboard() {
                         <div className="lg:w-1/2" >
                             <div className="relative">
                                 <img 
-                                src={images[currentImageIndex]} 
-                                alt={carData.name} 
-                                className="w-full h-64 object-cover cursor-pointer"
-                                onClick={toggleFullscreen}
+                                    src={images[currentImageIndex]} 
+                                    alt={carData.name} 
+                                    className="w-full h-64 object-cover cursor-pointer"
+                                    onClick={toggleFullscreen}
                                 />
                                 <button 
-                                onClick={prevImage} 
-                                className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full"
+                                    onClick={prevImage} 
+                                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full"
                                 >
-                                <FaChevronLeft />
+                                    <FaChevronLeft />
                                 </button>
                                 <button 
-                                onClick={nextImage} 
-                                className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full"
+                                    onClick={nextImage} 
+                                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full"
                                 >
-                                <FaChevronRight />
+                                    <FaChevronRight />
                                 </button>
                             </div>
                             <div className="flex justify-center py-2">
