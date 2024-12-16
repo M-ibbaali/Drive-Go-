@@ -28,12 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    if (!emailExists($email)) {
-        http_response_code(400);
-        echo json_encode(['message' => 'Email domain does not exist.']);
-        exit;
-    }
-
     if (strlen($password) < 6) {
         http_response_code(400);
         echo json_encode(['message' => 'Password must be at least 6 characters long.']);
@@ -69,16 +63,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(":token", $token);
         $stmt->execute();
 
-        $subject = "Please Verify Your Email Address";
-        $message = "Hello $name,\n\nPlease click the following link to verify your email address:\n$verificationLink";
-        $headers = "From: drivego.team@gmail.com";
-
-        // if (mail($email, $subject, $message, $headers)) {
-        //     echo json_encode(['message' => 'Registration successful. Please check your email to verify your account.']);
-        // } else {
-        //     http_response_code(500);
-        //     echo json_encode(['message' => 'Failed to send verification email.']);
-        // }
         echo json_encode(['message' => 'You’re officially part of the DriveGo family! Ready to hit the road?']);
     } catch (PDOException $e) {
         error_log("Database Error: " . $e->getMessage());

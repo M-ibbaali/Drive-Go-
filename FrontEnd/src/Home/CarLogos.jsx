@@ -28,7 +28,7 @@ function CarLogos() {
     }, [])
 
     return (
-        <div className="flex bg-tertiary justify-around my-4 overflow-hidden">
+        <div className="flex justify-around my-4 overflow-hidden">
             {error ? (
                 <div className="text-gray-500 text-center">
                     <p>Error: {error}</p>
