@@ -70,7 +70,7 @@ function RecentCars() {
                     cars.slice(0, 4).map((car, index) => (
                         <div
                             key={index}
-                            className="bg-primary p-4 rounded shadow-md"
+                            className="bg-primary p-4 rounded-xl shadow-md"
                         >
                             <h3 className="text-base sm:text-lg font-semibold flex items-center">
                                 {car.name}
@@ -112,7 +112,7 @@ function RecentCars() {
                                 </p>
                                 <Link
                                     to={`/reservation/${car.vehicle_id}`}
-                                    className="px-2 sm:px-4 py-1 sm:py-2 bg-blue-500 hover:bg-blue-700 text-white rounded text-sm"
+                                    className="px-2 sm:px-4 py-1 sm:py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-full text-sm"
                                 >
                                     Rent Now
                                 </Link>

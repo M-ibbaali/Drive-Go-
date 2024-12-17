@@ -7,7 +7,7 @@ include ('../Connection/connect.php');
 try {
     $connexion->exec("USE drivego");
 
-    $query = "SELECT * FROM RecentCars rc JOIN Vehicles v ON rc.vehicle_id = v.vehicle_id";
+    $query = "SELECT * FROM RecentCars rc JOIN Vehicles v ON rc.vehicle_id = v.vehicle_id WHERE V.availability_status = TRUE";
     $stmt = $connexion->prepare($query);
     $stmt->execute();
     $recentCars = $stmt->fetchAll(PDO::FETCH_ASSOC);

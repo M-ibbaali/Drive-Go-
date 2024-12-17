@@ -1,10 +1,10 @@
 import React from 'react'
 import SectionAdmin from './SectionAdmin'
 
-function AdminDashboard() {
+function AdminDashboard({ setIsLoggedIn }) {
     return (
         <>
-            <SectionAdmin></SectionAdmin>
+            <SectionAdmin setIsLoggedIn={setIsLoggedIn}></SectionAdmin>
         </>
     )
 }

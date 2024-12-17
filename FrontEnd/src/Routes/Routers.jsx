@@ -48,7 +48,7 @@ function Routers({ isLoggedIn, setIsLoggedIn, isGuest }) {
                         path="/administration"
                         element={
                             isLoggedIn && userRole === 'Admin' ? (
-                                <AdminDashboard />
+                                <AdminDashboard setIsLoggedIn={setIsLoggedIn} />
                             ) : (
                                 <Navigate to="/" replace />
                             )

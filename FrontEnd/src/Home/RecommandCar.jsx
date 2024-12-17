@@ -136,7 +136,7 @@ function RecommandCar() {
                         </div>
                     ) : (
                         cars.slice(0, 4).map((car, index) => (
-                            <div key={index} className="bg-primary p-4 rounded shadow-md">
+                            <div key={index} className="bg-primary p-4 rounded-xl shadow-md">
                                 <h3 className="text-lg font-semibold flex items-center">
                                     {car.name}
                                     <FaHeart
@@ -160,7 +160,7 @@ function RecommandCar() {
                                         {car.price} /<span className="text-gray-300 font-semibold">day</span>
                                     </p>
                                     <Link to={`/reservation/${car.vehicle_id}`}>
-                                        <button className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded">Rent Now</button>
+                                        <button className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-full">Rent Now</button>
                                     </Link>
                                 </div>
                                 <p className="text-gray-300 font-semibold line-through">{car.last_price}</p>
@@ -172,7 +172,7 @@ function RecommandCar() {
             <div className="flex items-center mt-4">
                 <Link
                     to="/categories"
-                    className="mx-auto px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded text-center"
+                    className="mx-auto px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-full text-center"
                 >
                     Show more cars
                 </Link>

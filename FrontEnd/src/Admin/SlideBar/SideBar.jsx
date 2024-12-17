@@ -1,9 +1,11 @@
 import { useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
 import SidebarItem from './SideBarItem'
 import { FaSignOutAlt, FaCarSide, FaChartLine, FaInbox, FaRegCalendarAlt, FaSun, FaMoon, FaWallet } from 'react-icons/fa'
 
-function SideBar({ activeItem, onItemClick }) {
+function SideBar({ activeItem, onItemClick, setIsLoggedIn }) {
     const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'Light')
+    const navigate = useNavigate()
 
     useEffect(() => {
         localStorage.setItem('theme', theme)
@@ -11,6 +13,13 @@ function SideBar({ activeItem, onItemClick }) {
 
     const toggleTheme = () => {
         setTheme(theme === 'Light' ? 'Dark' : 'Light')
+    }
+
+    const handleLogout = () => {
+        localStorage.removeItem("isLoggedIn")
+        localStorage.removeItem("userId")
+        setIsLoggedIn(false)
+        navigate("/login")
     }
 
     return (
@@ -75,6 +84,7 @@ function SideBar({ activeItem, onItemClick }) {
                     <SidebarItem
                         icon={<FaSignOutAlt />}
                         label="Log Out"
+                        onClick={() => handleLogout()}
                     />
                 </div>
             </div>

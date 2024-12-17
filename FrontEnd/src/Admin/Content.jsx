@@ -21,8 +21,6 @@ function Content({ activeItem }) {
                 return <Inbox></Inbox>
             case 'Calendar':
                 return <CalendarPage></CalendarPage>
-            case 'Log Out':
-                return <div>Log Out Content</div>
             default:
                 return <div>Select an option from the menu</div>
         }

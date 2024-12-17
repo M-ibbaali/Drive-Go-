@@ -279,7 +279,7 @@ function CarRentalDashboard() {
                                     <p className="text-gray-500 line-through">${parseFloat(carData.price) + 50}/day</p>
                                 </div>
                                 <Link to={`/payment/${carData.vehicle_id}`}>
-                                    <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                                    <button className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition">
                                         Rent Now
                                     </button>
                                 </Link>

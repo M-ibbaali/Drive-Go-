@@ -66,7 +66,7 @@ function RecentCars() {
                     </>
                     ) : (
                     cars.map((car, index) => (
-                        <div key={index} className="bg-primary p-4 rounded">
+                        <div key={index} className="bg-primary p-4 rounded-xl">
                         <h3 className="text-lg font-semibold flex items-center">
                             {car.name}
                             <FaHeart
@@ -103,7 +103,7 @@ function RecentCars() {
                             </p>
                             <Link
                             to={`/reservation/${car.vehicle_id}`}
-                            className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded"
+                            className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-full"
                             >
                             Rent Now
                             </Link>

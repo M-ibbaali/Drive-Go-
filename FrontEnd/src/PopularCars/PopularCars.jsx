@@ -159,7 +159,7 @@ function PopularCars() {
                     </div>
                 ) : (
                     cars.map((car, index) => (
-                        <div key={index} className="bg-primary p-4 sm:p-3 rounded">
+                        <div key={index} className="bg-primary p-4 sm:p-3 rounded-xl">
                             <h3 className="text-lg font-semibold flex items-center">
                                 {car.name}
                                 <FaHeart
@@ -196,7 +196,7 @@ function PopularCars() {
                                     {car.price} /<span className="text-gray-300 font-semibold">day</span>
                                 </p>
                                 <Link to={`/reservation/${car.vehicle_id}`}>
-                                    <button className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded">
+                                    <button className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-full">
                                         Rent Now
                                     </button>
                                 </Link>

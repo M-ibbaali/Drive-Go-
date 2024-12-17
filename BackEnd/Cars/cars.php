@@ -8,7 +8,7 @@ try {
     $connexion->exec("USE drivego");
 
     // Get all vehicles
-    $query = "SELECT * FROM Vehicles";
+    $query = "SELECT * FROM Vehicles WHERE availability_status = TRUE";
     $stmt = $connexion->prepare($query);
     $stmt->execute();
     $vehicles = $stmt->fetchAll(PDO::FETCH_ASSOC);
