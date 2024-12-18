@@ -10,22 +10,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 include ('../Connection/connect.php');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['notificationId'])) {
-    $notificationId = $_POST['notificationId'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $input = json_decode(file_get_contents('php://input'), true);
 
-    try {
-        $query = $connexion->prepare("UPDATE Notifications SET status = 'Read' WHERE notification_id = :notificationId");
-        $query->bindParam(':notificationId', $notificationId, PDO::PARAM_INT);
-        $query->execute();
-
-        if ($query->rowCount() > 0) {
-            echo json_encode(["success" => "Notification marked as read"]);
-        } else {
-            echo json_encode(["error" => "Notification not found or already marked as read"]);
+    if (isset($input['notificationId'])) {
+        $notificationId = $input['notificationId'];
+        try {
+            $query = $connexion->prepare("UPDATE Notifications SET status = 'Read' WHERE notification_id = :notificationId");
+            $query->bindParam(':notificationId', $notificationId, PDO::PARAM_INT);
+            $query->execute();
+    
+            if ($query->rowCount() > 0) {
+                echo json_encode(["success" => "Notification marked as read"]);
+            } else {
+                echo json_encode(["error" => "Notification not found or already marked as read"]);
+            }
+        } catch (Exception $e) {
+            echo json_encode(["error" => "Database error: " . $e->getMessage()]);
         }
-    } catch (Exception $e) {
-        echo json_encode(["error" => "Database error: " . $e->getMessage()]);
     }
+
 } else {
     echo json_encode(["error" => "Notification ID is required"]);
 }

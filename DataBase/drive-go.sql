@@ -12,7 +12,9 @@ CREATE TABLE Users (
     address VARCHAR(255),
     cin VARCHAR(8) UNIQUE,
     phone_number VARCHAR(20) UNIQUE,
+    second_phone_number VARCHAR(20) UNIQUE DEFAULT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
+    second_email VARCHAR(100) UNIQUE DEFAULT NULL,
     password_hash VARCHAR(255) NOT NULL,
     role ENUM('Client', 'Admin') NOT NULL,
     verification_token VARCHAR(255) DEFAULT NULL,
@@ -187,14 +189,14 @@ ALTER TABLE Favorites
 
 -- HashedPasswords :
 
-INSERT INTO Users (full_name, nick_name, gender, address, cin, phone_number, email, password_hash, role)
+INSERT INTO Users (full_name, nick_name, gender, address, cin, phone_number, second_phone_number, email, second_email, password_hash, role)
 VALUES 
-('Bouzouggar Abdelhak', 'Bouzouggar', 'Male', '10 Rue Al-Madina, Casablanca, Morocco', 'AB123456', '0123456789', 'abdelhak.bouzougar321@gmail.com', '$2y$10$2Oi7ey5QSw9zjYMiGR2SF.bezA309oBKTL785zO/.A5dUfL15k6F2', 'Admin'),
-('Ettahiri Abdessamad', 'Ettahiri', 'Male', '25 Avenue Hassan II, Rabat, Morocco', 'CD654321', '0987654321', 'abdessamad@example.com', '$2y$10$k90r/3O/PigtT4UIHDuOfOW5n1vEtD5J7LkmWG4IbIZSgDNKgJLrW', 'Admin'),
-('Mohamed Karim Kribi', 'Kribi', 'Male', '12 Boulevard Mohammed V, Marrakech, Morocco', 'EF987654', '0654321987', 'karim.kribi@example.com', '$2y$10$hX3G9h5YAkMDTHY0RHZHQOuHJaoLT1DhNjPJ52.iz4wcHkqrmRx9y', 'Admin'),
-('Mohamed Ibaali', 'Ibaali', 'Male', '30 Rue Fes, Tangier, Morocco', 'GH123987', '0601234567', 'ibaali@example.com', '$2y$10$SLBE1jAJRPqtMWQJS40lOODvuQDmae64EN/VcVZoGWSweDVxxJLdu', 'Admin'),
+('Bouzouggar Abdelhak', 'Bouzouggar', 'Male', '10 Rue Al-Madina, Casablanca, Morocco', 'AB123456', '0123456789', '0987654321', 'abdelhak.bouzougar321@gmail.com', 'abdelhak.secondary@email.com', '$2y$10$2Oi7ey5QSw9zjYMiGR2SF.bezA309oBKTL785zO/.A5dUfL15k6F2', 'Admin'),
+('Ettahiri Abdessamad', 'Ettahiri', 'Male', '25 Avenue Hassan II, Rabat, Morocco', 'CD654321', '0987654321', NULL, 'abdessamad@example.com', NULL, '$2y$10$k90r/3O/PigtT4UIHDuOfOW5n1vEtD5J7LkmWG4IbIZSgDNKgJLrW', 'Admin'),
+('Mohamed Karim Kribi', 'Kribi', 'Male', '12 Boulevard Mohammed V, Marrakech, Morocco', 'EF987654', '0654321987', NULL, 'karim.kribi@example.com', NULL, '$2y$10$hX3G9h5YAkMDTHY0RHZHQOuHJaoLT1DhNjPJ52.iz4wcHkqrmRx9y', 'Admin'),
+('Mohamed Ibaali', 'Ibaali', 'Male', '30 Rue Fes, Tangier, Morocco', 'GH123987', '0601234567', NULL, 'ibaali@example.com', NULL, '$2y$10$SLBE1jAJRPqtMWQJS40lOODvuQDmae64EN/VcVZoGWSweDVxxJLdu', 'Admin'),
 
-('Guest', 'Guest', 'Male', '30 Rue Fes, Guest, Morocco', 'G120007', '0609244961', 'guest@example.com', '$2y$10$GmQ7n2OWXzcv1KT2.HrdCui47WTeVre.sY/jTP5fmhXEB4qHh2NGe', 'Client');
+('Guest', 'Guest', 'Male', '30 Rue Fes, Guest, Morocco', 'G120007', '0609244961', NULL, 'guest@example.com', NULL, '$2y$10$GmQ7n2OWXzcv1KT2.HrdCui47WTeVre.sY/jTP5fmhXEB4qHh2NGe', 'Client');
 
 -- Passwords :
 

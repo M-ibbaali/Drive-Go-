@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { FaBell} from 'react-icons/fa'
+import { FaBell, FaTimes } from 'react-icons/fa'
 
 function Notification() {
     const user = localStorage.getItem('userId')
@@ -69,7 +69,7 @@ function Notification() {
             <div onClick={toggleMenu} className="relative p-2 border rounded-full cursor-pointer">
                 <FaBell className={`w-4 h-4 sm:w-5 sm:h-5 ${theme === 'Dark' ? 'text-gray-200' : 'text-gray-700'} cursor-pointer hover:text-blue-500`} />
                 {notifications.length > 0 && (
-                    <span className="absolute top-0 -right-1 inline-block w-4 h-4 sm:w-5 sm:h-5 bg-red-500 rounded-full text-xs text-white text-center">
+                    <span className="absolute top-0 -right-1 inline-block w-4 h-4 sm:w-4 sm:h-4 bg-red-500 rounded-full text-xs text-white text-center">
                         {notifications.length}
                     </span>
                 )}
@@ -85,9 +85,6 @@ function Notification() {
                                     className={`px-4 py-2 text-sm sm:text-base cursor-pointer ${notification.status === 'Unread' ? 'font-bold' : ''} ${theme === 'Dark' ? 'hover:bg-gray-700' : 'hover:bg-gray-100'}`}
                                 >
                                     {notification.message.slice(0, 20)}{notification.message.length > 10 ? '...' : ''}
-                                    {notification.status === 'Unread' && (
-                                        <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                                    )}
                                 </li>
                             ))
                         ) : (
@@ -97,15 +94,15 @@ function Notification() {
                 </div>
             )}
             {selectedNotification && (
-                <div className="fixed top-0 left-0 right-0 bottom-0 bg-gray-800 bg-opacity-50 flex justify-center items-center cursor-default">
-                    <div className={`p-4 sm:p-6 rounded-lg shadow-lg w-[90%] sm:w-[400px] ${theme === 'Dark' ? 'text-white bg-gray-800' : 'text-gray-800 bg-white'}`}>
+                <div className="fixed top-0 left-0 right-0 bottom-0 bg-gray-800 bg-opacity-50 flex justify-center items-center cursor-default z-50">
+                    <div className={`relative p-4 sm:p-6 rounded-lg shadow-lg w-[90%] sm:w-[400px] ${theme === 'Dark' ? 'text-white bg-gray-800' : 'text-gray-800 bg-white'}`}>
                         <h3 className="text-lg font-semibold">Notification</h3>
                         <p>{selectedNotification.message}</p>
                         <button
                             onClick={() => setSelectedNotification(null)}
-                            className="mt-4 p-2 bg-blue-500 text-white rounded-lg"
+                            className="absolute top-2 right-2 p-2 bg-blue-500 hover:bg-blue-400 text-white rounded-lg"
                         >
-                            Close
+                            <FaTimes />
                         </button>
                     </div>
                 </div>

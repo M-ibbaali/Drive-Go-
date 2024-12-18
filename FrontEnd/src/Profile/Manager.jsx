@@ -42,7 +42,7 @@ function Manager({ isLoggedIn }) {
 
         if (activeSection === "Security") {
             return (
-                isLoggedIn && <Security />
+                isLoggedIn && <Security user={data.user_id} />
             )
         }
 
