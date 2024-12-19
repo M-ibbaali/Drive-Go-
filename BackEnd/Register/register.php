@@ -73,8 +73,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     http_response_code(405);
     echo json_encode(['message' => 'Invalid request method.']);
 }
-
-function emailExists($email) {
-    $domain = substr(strrchr($email, "@"), 1);
-    return checkdnsrr($domain, "MX");
-}
