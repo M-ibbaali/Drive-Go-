@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import FAQ from "./Faq"
+import FAQ from "./FAQ"
 import Contact from './Contact'
 
 function SectionAide() {
