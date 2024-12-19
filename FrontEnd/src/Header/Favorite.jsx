@@ -46,9 +46,6 @@ function Favorite() {
         }
 
         fetchFavorites()
-        
-        const intervalId = setInterval(fetchFavorites, 100)
-        return () => clearInterval(intervalId)
     }, [user])
 
     const removeFromFavorites = async (vehicleId) => {
