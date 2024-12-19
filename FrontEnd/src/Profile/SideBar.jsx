@@ -8,13 +8,7 @@ function SideBar({ data, activeSection, setActiveSection, renderContent, isLogge
             {/* Sidebar */}
             <div className="w-full md:w-1/4 bg-white text-black shadow-lg p-4 md:p-6 rounded-xl md:rounded-l-xl">
                 <div className="flex items-center space-x-4 mb-8">
-                    <div className="w-12 h-12 bg-gray-300 rounded-full flex justify-center items-center">
-                        <img
-                            className="w-12 h-12 rounded-full cursor-pointer hover:border-4 hover:border-blue-500"
-                            src={isLoggedIn ? "/Pictures/User-2.jpg" : "/User-3.jpg"}
-                            alt="Profile"
-                        />
-                    </div>
+                    
                     <div>
                         <h2 className="text-lg font-semibold">{data.full_name || 'Guest'}</h2>
                         <p className="text-sm text-gray-500">{data.email || ''}</p>

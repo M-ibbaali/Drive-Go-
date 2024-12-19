@@ -28,6 +28,7 @@
     "framer-motion": "^11.13.5",
     "i18next": "^24.1.0",
     "jquery": "^3.7.1",
+    "lucide-react": "^0.468.0",
     "node-fetch": "^3.3.2",
     "primeicons": "^7.0.0",
     "primereact": "^10.8.4",

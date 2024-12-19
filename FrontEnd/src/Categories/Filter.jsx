@@ -97,3 +97,4 @@ function Filter({ price, setPrice, types, capacities, priceRange, handleTypeChan
 }
 
 export default Filter;
+
