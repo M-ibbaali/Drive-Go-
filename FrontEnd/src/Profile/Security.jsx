@@ -1,16 +1,45 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 function Security({ user }) {
     document.title = "DriveGo - Security"
 
     const [secondEmail, setSecondEmail] = useState('')
     const [secondPhoneNumber, setSecondPhoneNumber] = useState('')
+    const [initialValues, setInitialValues] = useState({ email: '', phone: '' })
 
     const [successMessage, setSuccessMessage] = useState('')
     const [errorMessage, setErrorMessage] = useState('')
 
     const [secondEmailError, setSecondEmailError] = useState(false)
     const [secondPhoneNumberError, setSecondPhoneNumberError] = useState(false)
+
+    useEffect(() => {
+        if (user) {
+            const emailPhone = async () => {
+                try {
+                    const response = await fetch('http://localhost/drive-go/BackEnd/Profile/existSecurity.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({userId: user}),
+                    })
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch vehicles.')
+                    }
+                    const data = await response.json()
+
+                    setSecondEmail(data.secondEmail)
+                    setSecondPhoneNumber(data.secondPhone)
+                    setInitialValues({ email: data.secondEmail, phone: data.secondPhone })
+                } catch (err) {
+                    setError(err.message)
+                }
+            }
+
+            emailPhone()
+        }
+    }, [user])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -37,7 +66,7 @@ function Security({ user }) {
         }
 
         try {
-            const response = await fetch('http://localhost/drive-go/BackEnd/Profile/updateSecurity.php', {
+            const response = await fetch('http://localhost/drive-go/BackEnd/Profile/security.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -66,6 +95,11 @@ function Security({ user }) {
             setErrorMessage('An error occurred')
             setTimeout(() => setErrorMessage(''), 3000)
         }
+    }
+
+    const handleCancel = () => {
+        setSecondEmail(initialValues.email)
+        setSecondPhoneNumber(initialValues.phone)
     }
 
     return (
@@ -120,6 +154,7 @@ function Security({ user }) {
                     <div className="flex justify-end space-x-4 flex-wrap">
                         <button
                             type="button"
+                            onClick={handleCancel}
                             className="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-500"
                         >
                         Cancel

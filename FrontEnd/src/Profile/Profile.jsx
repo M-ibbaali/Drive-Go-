@@ -3,6 +3,8 @@ import { FaPencilAlt } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 
 function Profile({ setData }) {
+    document.title = 'DriveGo - Profile'
+
     const currentDate = new Date()
     const options = {
         weekday: "long",
