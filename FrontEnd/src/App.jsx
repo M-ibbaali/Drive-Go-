@@ -8,6 +8,7 @@ import Loading from './Progress/Loading'
 import TitleChange from './TitleChange'
 import ForgotPassword from './Login/ForgotPassword'
 import ResetPassword from './Login/ResetPassword'
+import { SearchProvider } from "./Categories/SearchContext";
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(null)
@@ -60,6 +61,7 @@ function App() {
 
     return (
         <>
+           <SearchProvider>
             {/* <BrowserRouter basename="Drive-Go" future={future}> */}
             <HashRouter>
                 <TitleChange isLoggedIn={isLoggedIn} ></TitleChange>
@@ -88,6 +90,7 @@ function App() {
                 </Routes>
             </HashRouter>
             {/* </BrowserRouter> */}
+            </SearchProvider>
         </>
     )
 }
