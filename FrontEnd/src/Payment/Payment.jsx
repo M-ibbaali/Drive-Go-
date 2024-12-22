@@ -22,20 +22,6 @@ function Payment() {
   const [dropoffDate, setDropoffDate] = useState("");
   const [rentalError, setRentalError] = useState(null);
 
-  const [paymentMethod, setPaymentMethod] = useState("creditCard");
-  const [paymentData, setPaymentData] = useState({
-    cardNumber: "",
-    expirationDate: "",
-    cardHolder: "",
-    cvc: "",
-    paypalEmail: "",
-    paypalAmount: "",
-    transactionId: "",
-    bitcoinAddress: "",
-    bitcoinAmount: "",
-  });
-  const [payError, setPayError] = useState(null);
-
   const [isTermsChecked, setIsTermsChecked] = useState("");
 
   // Fetch user data
@@ -141,61 +127,6 @@ function Payment() {
   };
 
   // Handle payment
-  const handlePayment = async () => {
-    let paymentDataToSend = {};
-
-    if (paymentMethod === "creditCard") {
-      paymentDataToSend = {
-        method: "creditCard",
-        cardNumber: paymentData.cardNumber,
-        expirationDate: paymentData.expirationDate,
-        cardHolder: paymentData.cardHolder,
-        cvc: paymentData.cvc,
-      };
-    } else if (paymentMethod === "paypal") {
-      paymentDataToSend = {
-        method: "paypal",
-        paypalEmail: paymentData.paypalEmail,
-        amount: paymentData.paypalAmount,
-        transactionId: paymentData.transactionId,
-      };
-    } else if (paymentMethod === "bitcoin") {
-      paymentDataToSend = {
-        method: "bitcoin",
-        bitcoinAddress: paymentData.bitcoinAddress,
-        amount: paymentData.bitcoinAmount,
-      };
-    }
-
-    if (!paymentDataToSend.method) {
-      setPayError("Please select a payment method.");
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        "http://localhost/drive-go/backend/BankTest/payment.php",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(paymentDataToSend),
-        }
-      );
-
-      const result = await response.json();
-
-      if (result.success) {
-        alert("Payment successful!");
-        handleNext();
-      } else {
-        setPayError("Payment failed: " + result.error);
-      }
-    } catch (error) {
-      setPayError("Error processing payment: " + error.message);
-    }
-  };
 
   const validateStep = async () => {
     switch (step) {
@@ -220,7 +151,7 @@ function Payment() {
         }
         break;
       case 3:
-        if (!paymentMethod) {
+        if (!pickupLocation) {
           return false;
         }
         break;
@@ -233,7 +164,6 @@ function Payment() {
         return true;
     }
 
-    setPayError("");
     return true;
   };
 
@@ -242,7 +172,6 @@ function Payment() {
     if (isValid) {
       if (step === 4) {
         await handleReservation();
-        await handlePayment();
       } else {
         nextStep();
       }
@@ -259,44 +188,6 @@ function Payment() {
 
   return (
     <>
-      {/* <div className="flex flex-row-reverse justify-between p-5">
-                <RentalSummary
-                    car={carData}
-                    error={error}
-                />
-                <div className="w-2/3 flex flex-col items-start">
-                    {step === 1 && <BillingInfo userData={userData}/>}
-                    {step === 2 &&
-                        <RentalInfo 
-                            pickupLocation={pickupLocation}
-                            setPickupLocation={setPickupLocation}
-                            pickupDate={pickupDate}
-                            setPickupDate={setPickupDate}
-                            dropoffLocation={dropoffLocation}
-                            setDropoffLocation={setDropoffLocation}
-                            dropoffDate={dropoffDate}
-                            setDropoffDate={setDropoffDate}
-                            error={rentalError}
-                            setError={setRentalError}
-                        />
-                    }
-                    {step === 3 &&
-                        <PaymentMethod
-                            paymentMethod={paymentMethod}
-                            setPaymentMethod={setPaymentMethod}
-                            paymentData={paymentData}
-                            setPaymentData={setPaymentData}
-                        />}
-                    {step === 4 &&
-                        <Confirmation
-                            handleReservation={handleReservation}
-                        />}
-                    <div className="flex gap-4 mt-4">
-                        {step > 1 && <button onClick={prevStep} className="w-full p-2 bg-gray-400 text-white rounded-md hover:bg-gray-500">Back</button>}
-                        {step < 4 && <button onClick={handleNext} className="w-full p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Next</button>}
-                    </div>
-                </div>
-            </div> */}
       <div className="flex flex-col lg:flex-row-reverse lg:justify-between p-5 gap-5">
         <RentalSummary car={carData} error={error} />
         <div className="w-full lg:w-2/3 flex flex-col items-start">
@@ -316,12 +207,7 @@ function Payment() {
             />
           )}
           {step === 3 && (
-            <PaymentMethod
-              paymentMethod={paymentMethod}
-              setPaymentMethod={setPaymentMethod}
-              paymentData={paymentData}
-              setPaymentData={setPaymentData}
-            />
+            <PaymentMethod />
           )}
           {step === 4 && <Confirmation handleReservation={handleReservation} />}
           <div className="flex flex-col sm:flex-row gap-4 mt-4 w-full">

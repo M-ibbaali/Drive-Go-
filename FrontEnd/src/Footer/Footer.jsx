@@ -63,7 +63,7 @@ function Footer() {
                                 className={`flex justify-between items-center border-b pb-2 sm:border-none cursor-pointer ${theme === 'Dark' ? 'text-white' : 'text-gray-700'}`}
                                 onClick={() => toggleSection('about')}
                             >
-                                <h3 className="text-lg font-bold text-gray-700">About</h3>
+                                <h3 className={`text-lg font-bold ${theme === 'Dark' ? 'text-white' : 'text-gray-700'}`}>About</h3>
                                 <span className="sm:hidden">
                                     {isAboutOpen ? '−' : '+'}
                                 </span>
@@ -85,7 +85,7 @@ function Footer() {
                                 className={`flex justify-between items-center border-b pb-2 sm:border-none cursor-pointer ${theme === 'Dark' ? 'text-white' : 'text-gray-700'}`}
                                 onClick={() => toggleSection('community')}
                             >
-                                <h3 className="text-lg font-bold text-gray-700">Community</h3>
+                                <h3 className={`text-lg font-bold ${theme === 'Dark' ? 'text-white' : 'text-gray-700'}`}>Community</h3>
                                 <span className="sm:hidden">
                                     {isCommunityOpen ? '−' : '+'}
                                 </span>
@@ -107,7 +107,7 @@ function Footer() {
                                 className={`flex justify-between items-center border-b pb-2 sm:border-none cursor-pointer ${theme === 'Dark' ? 'text-white' : 'text-gray-700'}`}
                                 onClick={() => toggleSection('socials')}
                             >
-                                <h3 className="text-lg font-bold text-gray-700">Socials</h3>
+                                <h3 className={`text-lg font-bold ${theme === 'Dark' ? 'text-white' : 'text-gray-700'}`}>Socials</h3>
                                 <span className="sm:hidden">
                                     {isSocialsOpen ? '−' : '+'}
                                 </span>

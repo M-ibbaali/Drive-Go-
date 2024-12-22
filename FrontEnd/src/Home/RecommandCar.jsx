@@ -9,6 +9,8 @@ function RecommandCar() {
     const [error, setError] = useState(null)
     const [alert, setAlert] = useState({ message: "", type: "" })
 
+    const theme = localStorage.getItem('theme')
+
     useEffect(() => {
         if (alert.message) {
             const timer = setTimeout(() => setAlert({ message: "", type: "" }), 2000)
@@ -111,7 +113,7 @@ function RecommandCar() {
 
     return (
         <div className="p-4">
-            <h2 className="text-xl font-bold mb-4 flex items-center">Recommended Cars</h2>
+            <h2 className={`text-xl font-bold mb-4 flex items-center ${theme === 'Dark' ? 'text-white' : ''}`}>Recommended Cars</h2>
             {alert.message && (
                 <div
                     className={`fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg ${
@@ -136,34 +138,34 @@ function RecommandCar() {
                         </div>
                     ) : (
                         cars.slice(0, 4).map((car, index) => (
-                            <div key={index} className="bg-primary p-4 rounded-xl shadow-md">
-                                <h3 className="text-lg font-semibold flex items-center">
+                            <div key={index} className={`p-4 rounded-xl shadow-md ${theme === 'Dark' ? 'bg-gray-800' : 'bg-primary'}`}>
+                                <h3 className={`text-lg font-semibold flex items-center ${theme === 'Dark' ? 'text-white' : ''}`}>
                                     {car.name}
                                     <FaHeart
-                                        className={`cursor-pointer ml-auto ${favorites[index] ? 'text-red-600' : 'text-gray-500'}`}
+                                        className={`cursor-pointer ml-auto ${favorites[index] ? 'text-red-600' : theme === 'Dark' ? 'text-gray-400' : 'text-gray-500'}`}
                                         onClick={() => handleFavoriteToggle(index, car.vehicle_id)}
                                     />
                                 </h3>
-                                <p className="text-gray-500">{car.type}</p>
+                                <p className={`${theme === 'Dark' ? 'text-gray-400' : 'text-gray-500'}`}>{car.type}</p>
                                 <img
                                     src={car.first_img}
                                     alt={car.name}
-                                    className="w-full h-48 object-contain rounded mt-2"
+                                    className={`w-full h-48 object-contain rounded mt-2 ${theme === 'Dark' ? 'filter brightness-75' : ''}`}
                                 />
-                                <div className="flex mt-2 text-gray-700">
+                                <div className={`flex mt-2 ${theme === 'Dark' ? 'text-gray-300' : 'text-gray-700'} flex-wrap`}>
                                     <p className="mr-5"><FaGasPump className="inline-block mr-2" />{car.gas_capacity}</p>
                                     <p className="mr-5"><FaCogs className="inline-block mr-2" />{car.gear}</p>
                                     <p className="mr-5"><FaUsers className="inline-block mr-2" />{car.passengers} People</p>
                                 </div>
                                 <div className="flex justify-between items-center mt-2">
-                                    <p className="text-black font-bold">
-                                        {car.price} /<span className="text-gray-300 font-semibold">day</span>
+                                    <p className={`${theme === 'Dark' ? 'text-white' : 'text-black'} font-bold`}>
+                                        {car.price} /<span className={`${theme === 'Dark' ? 'text-gray-400' : 'text-gray-300'} font-semibold`}>day</span>
                                     </p>
                                     <Link to={`/reservation/${car.vehicle_id}`}>
-                                        <button className="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-full">Rent Now</button>
+                                        <button className={`px-4 py-2 ${theme === 'Dark' ? 'bg-blue-600 hover:bg-blue-500' : 'bg-blue-500 hover:bg-blue-700'} text-white rounded-full`}>Rent Now</button>
                                     </Link>
                                 </div>
-                                <p className="text-gray-300 font-semibold line-through">{car.last_price}</p>
+                                <p className={`${theme === 'Dark' ? 'text-gray-500' : 'text-gray-300'} font-semibold line-through`}>{car.last_price}</p>
                             </div>
                         ))
                     )}
@@ -172,7 +174,7 @@ function RecommandCar() {
             <div className="flex items-center mt-4">
                 <Link
                     to="/categories"
-                    className="mx-auto px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-full text-center"
+                    className={`mx-auto px-4 py-2 ${theme === 'Dark' ? 'bg-blue-600 hover:bg-blue-500' : 'bg-blue-500 hover:bg-blue-700'} text-white rounded-full text-center`}
                 >
                     Show more cars
                 </Link>

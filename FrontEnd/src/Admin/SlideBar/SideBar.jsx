@@ -13,6 +13,7 @@ function SideBar({ activeItem, onItemClick, setIsLoggedIn }) {
 
     const toggleTheme = () => {
         setTheme(theme === 'Light' ? 'Dark' : 'Light')
+        window.location.reload()
     }
 
     const handleLogout = () => {

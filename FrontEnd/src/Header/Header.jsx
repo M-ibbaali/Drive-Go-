@@ -5,12 +5,14 @@ import Notification from './Notification'
 import Settings from './Settings'
 import Profile from './Profile'
 import Inscription from './Inscription'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { FaBars, FaTimes } from 'react-icons/fa'
 
 function Header({ isLoggedIn, setIsLoggedIn, isGuest }) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const theme = localStorage.getItem('theme')
+
+    const location = useLocation()
 
     useEffect(() => {
         document.documentElement.className = theme === 'Dark' ? 'dark' : ''
@@ -39,7 +41,7 @@ function Header({ isLoggedIn, setIsLoggedIn, isGuest }) {
 
                 {/* Desktop Search */}
                 <div className="hidden md:block w-full max-w-xl mx-4">
-                    <Search />
+                    {location.pathname === '/categories' && <Search />}
                 </div>
 
                 {/* Mobile Menu Toggle */}

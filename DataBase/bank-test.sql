@@ -27,22 +27,10 @@ CREATE TABLE Accounts (
 CREATE TABLE Transactions (
     transaction_id INT AUTO_INCREMENT PRIMARY KEY,
     account_id INT NOT NULL,
-    transaction_type ENUM('credit', 'debit') NOT NULL,
     amount DECIMAL(10, 2) NOT NULL,
     transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status ENUM('success', 'failed', 'pending') DEFAULT 'success',
     FOREIGN KEY (account_id) REFERENCES Accounts(account_id)
-);
-
--- 4. CreditCards table
-CREATE TABLE CreditCards (
-    card_id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    card_number VARCHAR(16) UNIQUE NOT NULL,
-    expiration_date VARCHAR(5) NOT NULL,
-    card_holder VARCHAR(100) NOT NULL,
-    cvc VARCHAR(3) NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
 -- Insert
@@ -74,17 +62,3 @@ INSERT INTO Accounts (user_id, account_number, balance) VALUES
 (8, '555566667788', 5000.00),
 (9, '666677778899', 2500.00),
 (10, '777788889900', 4000.00);
-
--- CreditCards
-
-INSERT INTO CreditCards (user_id, card_number, expiration_date, card_holder, cvc) VALUES
-(1, '5678901256789012', '01/28', 'DriveGo', '345'),
-(2, '1234567812345678', '12/25', 'Bouzouggar Abdelhak', '123'),
-(3, '2345678923456789', '11/24', 'Mohamed Ibaali', '456'),
-(4, '3456789034567890', '08/26', 'Ettahiri Abdessamad', '789'),
-(5, '4567890145678901', '07/23', 'Mohamed Karim Kribi', '012'),
-(6, '6789012367890123', '03/25', 'Ali El Amrani', '678'),
-(7, '7890123478901234', '09/27', 'Nadia Benjelloun', '901'),
-(8, '8901234589012345', '02/24', 'Rachid Alami', '234'),
-(9, '9012345690123456', '06/29', 'Fatima Zahra', '567'),
-(10, '0123456701234567', '05/30', 'Omar Boudour', '890');

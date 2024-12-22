@@ -13,6 +13,7 @@ function Settings({ theme, setTheme, language, setLanguage, notification, setNot
         setTheme(tempTheme)
         setLanguage(tempLanguage)
         setNotification(tempNotification)
+        window.location.reload()
     }
 
     const handleCancel = () => {
