@@ -62,7 +62,7 @@ function App() {
     return (
         <>
            <SearchProvider>
-            <BrowserRouter basename="Drive-Go" future={future}>
+            <BrowserRouter future={future}>
             {/* <HashRouter> */}
                 <TitleChange isLoggedIn={isLoggedIn} ></TitleChange>
                 <ProgressBar></ProgressBar>
