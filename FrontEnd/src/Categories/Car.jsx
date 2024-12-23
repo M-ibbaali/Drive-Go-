@@ -1,3 +1,4 @@
+// Car.jsx
 import React from 'react';
 import { FaGasPump, FaCogs, FaUsers, FaHeart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -12,7 +13,7 @@ function Car({ index, car, favorites, handleFavoriteToggle }) {
                     className="w-full h-56 object-contain"
                 />
                 <div 
-                    className="absolute top-4 right-4 bg-white/80 p-2 rounded-full cursor-pointer"
+                    className="absolute top-4 right-4 bg-white/80 p-2 rounded-full cursor-pointer hover:scale-110 transition-transform"
                     onClick={() => handleFavoriteToggle(index, car.vehicle_id)}
                 >
                     <FaHeart 
