@@ -62,8 +62,8 @@ function App() {
     return (
         <>
            <SearchProvider>
-            {/* <BrowserRouter basename="Drive-Go" future={future}> */}
-            <HashRouter>
+            <BrowserRouter basename="Drive-Go" future={future}>
+            {/* <HashRouter> */}
                 <TitleChange isLoggedIn={isLoggedIn} ></TitleChange>
                 <ProgressBar></ProgressBar>
                 <Routes>
@@ -88,8 +88,8 @@ function App() {
                         element={<ResetPassword />}
                     />
                 </Routes>
-            </HashRouter>
-            {/* </BrowserRouter> */}
+            {/* </HashRouter> */}
+            </BrowserRouter>
             </SearchProvider>
         </>
     )
