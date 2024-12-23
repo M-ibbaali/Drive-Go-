@@ -4,7 +4,7 @@ import CarRental from './Cars/CarRental'
 import Insight from './Insight/Insight'
 import Reservations from './Reservations/Reservations'
 import Inbox from './Inbox/Inbox'
-import CalendarPage from './Calendar/CalendarPage'
+import Users from './Users/Users'
 
 function Content({ activeItem }) {
     const renderContent = () => {
@@ -19,8 +19,8 @@ function Content({ activeItem }) {
                 return <Reservations></Reservations>
             case 'Inbox':
                 return <Inbox></Inbox>
-            case 'Calendar':
-                return <CalendarPage></CalendarPage>
+            case 'Users':
+                return <Users></Users>
             default:
                 return <div>Select an option from the menu</div>
         }

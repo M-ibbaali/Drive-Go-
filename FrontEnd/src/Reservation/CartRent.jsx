@@ -175,7 +175,7 @@ function CarRentalDashboard() {
 
     if (error || !carData) {
         return (
-            <div className="text-center text-red-500 mt-10">
+            <div className="text-center text-gray-800 mt-10">
                 {error || "No car data available"}
             </div>
         )

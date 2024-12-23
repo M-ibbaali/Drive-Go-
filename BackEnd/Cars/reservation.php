@@ -17,7 +17,7 @@ if (isset($_GET['carID']) && !empty($_GET['carID'])) {
         $connexion->exec("USE drivego");
 
         // Get Specifique vehicle
-        $query = $connexion->prepare("SELECT * FROM Vehicles WHERE vehicle_id = :carID");
+        $query = $connexion->prepare("SELECT * FROM Vehicles WHERE vehicle_id = :carID AND availability_status = TRUE");
         $query->bindParam(':carID', $carID, PDO::PARAM_INT);
         $query->execute();
         $car = $query->fetchAll(PDO::FETCH_ASSOC);

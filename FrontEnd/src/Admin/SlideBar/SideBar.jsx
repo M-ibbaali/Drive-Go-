@@ -1,7 +1,7 @@
 import { useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import SidebarItem from './SideBarItem'
-import { FaSignOutAlt, FaCarSide, FaChartLine, FaInbox, FaRegCalendarAlt, FaSun, FaMoon, FaWallet } from 'react-icons/fa'
+import { FaSignOutAlt, FaCarSide, FaChartLine, FaInbox, FaUser, FaSun, FaMoon, FaWallet } from 'react-icons/fa'
 
 function SideBar({ activeItem, onItemClick, setIsLoggedIn }) {
     const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'Light')
@@ -59,10 +59,10 @@ function SideBar({ activeItem, onItemClick, setIsLoggedIn }) {
                         onClick={() => onItemClick('Inbox')}
                     />
                     <SidebarItem
-                        icon={<FaRegCalendarAlt />}
-                        label="Calendar"
-                        active={activeItem === 'Calendar'}
-                        onClick={() => onItemClick('Calendar')}
+                        icon={<FaUser />}
+                        label="Users"
+                        active={activeItem === 'Users'}
+                        onClick={() => onItemClick('Users')}
                     />
                 </div>
 

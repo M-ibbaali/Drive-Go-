@@ -6,6 +6,10 @@ function Reservations() {
     const [error, setError] = useState(null)
     const [filter, setFilter] = useState({ type: '', value: '' })
 
+    const [currentPage, setCurrentPage] = useState(1)
+    const reservationsPerPage = 5
+    const totalPages = Math.ceil(filteredReservations.length / reservationsPerPage)
+
     const getStatusClass = (status) => {
         switch (status) {
             case "Pending":
@@ -63,6 +67,27 @@ function Reservations() {
             ...prevFilter,
             value: event.target.value,
         }))
+    }
+
+    const paginatedReservations = filteredReservations.slice(
+        (currentPage - 1) * reservationsPerPage,
+        currentPage * reservationsPerPage
+    )
+
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(prev => prev - 1)
+        }
+    }
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(prev => prev + 1)
+        }
+    }
+
+    const handlePageClick = (pageNumber) => {
+        setCurrentPage(pageNumber)
     }
 
     return (
@@ -144,7 +169,7 @@ function Reservations() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {filteredReservations.map((item) => (
+                                    {paginatedReservations.map((item) => (
                                         <tr key={item.id} className="hover:bg-gray-100 border-b">
                                             <td className="px-4 py-2">{item.id}</td>
                                             <td className="px-4 py-2">{item.full_name}</td>
@@ -164,6 +189,32 @@ function Reservations() {
                             </table>
                         )
                     }
+                </div>
+
+                <div className="flex justify-center space-x-2 mt-4">
+                    <button
+                        onClick={handlePreviousPage}
+                        disabled={currentPage === 1}
+                        className={`px-3 py-1 rounded ${currentPage === 1 ? "bg-gray-300" : "bg-blue-500 text-white hover:bg-blue-600"}`}
+                    >
+                        Previous
+                    </button>
+                    {Array.from({ length: totalPages }, (_, index) => (
+                        <button
+                            key={index}
+                            onClick={() => handlePageClick(index + 1)}
+                            className={`px-3 py-1 rounded ${currentPage === index + 1 ? "bg-blue-500 text-white" : "bg-gray-300 hover:bg-gray-400"}`}
+                        >
+                            {index + 1}
+                        </button>
+                    ))}
+                    <button
+                        onClick={handleNextPage}
+                        disabled={currentPage === totalPages}
+                        className={`px-3 py-1 rounded ${currentPage === totalPages ? "bg-gray-300" : "bg-blue-500 text-white hover:bg-blue-600"}`}
+                    >
+                        Next
+                    </button>
                 </div>
             </main>
         </div>

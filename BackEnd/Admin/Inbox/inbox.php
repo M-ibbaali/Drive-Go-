@@ -7,7 +7,7 @@ include ('../../Connection/connect.php');
 try {
     $connexion->exec("USE drivego");
 
-    $query = "SELECT u.full_name, cm.message_id, cm.subject, cm.sent_at, cm.status, cm.message_content FROM Users u JOIN ClientMessages cm ON u.user_id = cm.user_id ORDER BY cm.sent_at DESC";
+    $query = "SELECT u.user_id, u.full_name, cm.message_id, cm.subject, cm.sent_at, cm.status, cm.message_content FROM Users u JOIN ClientMessages cm ON u.user_id = cm.user_id WHERE status = 'Unread' ORDER BY cm.sent_at DESC";
     $stmt = $connexion->prepare($query);
     $stmt->execute();
     $messagesData = $stmt->fetchAll(PDO::FETCH_ASSOC);

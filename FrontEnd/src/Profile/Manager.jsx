@@ -3,6 +3,7 @@ import Profile from './Profile'
 import Password from './Password'
 import Security from './Security'
 import Settings from './Settings'
+import Historique from './Historique'
 import SideBar from './SideBar'
 
 function Manager({ isLoggedIn }) {
@@ -43,6 +44,12 @@ function Manager({ isLoggedIn }) {
         if (activeSection === "Security") {
             return (
                 isLoggedIn && <Security user={data.user_id} />
+            )
+        }
+
+        if (activeSection === "Historique") {
+            return (
+                <Historique user={data.user_id} />
             )
         }
 

@@ -22,7 +22,11 @@ function Payment() {
   const [dropoffDate, setDropoffDate] = useState("");
   const [rentalError, setRentalError] = useState(null);
 
+  const [accountNumber, setAccountNumber] = useState("");
+  const [alertPayment, setAlertPayment] = useState({ message: "", type: "" });
+
   const [isTermsChecked, setIsTermsChecked] = useState("");
+  const [isMarketingChecked, setIsMarketingChecked] = useState(false);
 
   // Fetch user data
   useEffect(() => {
@@ -82,52 +86,6 @@ function Payment() {
     fetchCarData();
   }, [car]);
 
-  // Calculate total price
-  const calculateTotalPrice = () => {
-    const pricePerDay = carData.pricePerDay || 0;
-    const rentalDays =
-      (new Date(dropoffDate) - new Date(pickupDate)) / (1000 * 3600 * 24);
-    return pricePerDay * rentalDays;
-  };
-
-  // Handle reservation
-  const handleReservation = async () => {
-    const totalPrice = calculateTotalPrice();
-
-    const reservationData = {
-      user_id: user,
-      vehicle_id: car,
-      start_date: pickupDate,
-      end_date: dropoffDate,
-      total_price: totalPrice,
-    };
-
-    try {
-      const response = await fetch(
-        "http://localhost/drive-go/backend/Reservation/addReservation.php",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(reservationData),
-        }
-      );
-
-      const result = await response.json();
-
-      if (result.success) {
-        alert("Reservation successfully created!");
-      } else {
-        alert("Failed to create reservation: " + result.error);
-      }
-    } catch (error) {
-      alert("Error: " + error.message);
-    }
-  };
-
-  // Handle payment
-
   const validateStep = async () => {
     switch (step) {
       case 1:
@@ -151,12 +109,13 @@ function Payment() {
         }
         break;
       case 3:
-        if (!pickupLocation) {
+        if (!accountNumber) {
+          setAlertPayment({message: 'Account Number is required !', type: 'error'});
           return false;
         }
         break;
       case 4:
-        if (!isTermsChecked) {
+        if (!isTermsChecked && !isMarketingChecked) {
           return false;
         }
         break;
@@ -171,7 +130,7 @@ function Payment() {
     const isValid = await validateStep();
     if (isValid) {
       if (step === 4) {
-        await handleReservation();
+        return;
       } else {
         nextStep();
       }
@@ -207,9 +166,26 @@ function Payment() {
             />
           )}
           {step === 3 && (
-            <PaymentMethod />
+            <PaymentMethod
+              accountNumber={accountNumber}
+              setAccountNumber={setAccountNumber}
+              alertPayment={alertPayment}
+              setAlertPayment={setAlertPayment}
+            />
           )}
-          {step === 4 && <Confirmation handleReservation={handleReservation} />}
+          {step === 4 && (
+            <Confirmation
+              userData={userData}
+              carData={carData}
+              isTermsChecked={isTermsChecked}
+              setIsTermsChecked={setIsTermsChecked}
+              isMarketingChecked={isMarketingChecked}
+              setIsMarketingChecked={setIsMarketingChecked}
+              pickupDate={pickupDate}
+              dropoffDate={dropoffDate}
+              accountNumber={accountNumber}
+            />
+          )}
           <div className="flex flex-col sm:flex-row gap-4 mt-4 w-full">
             {step > 1 && (
               <button

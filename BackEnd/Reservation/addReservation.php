@@ -40,10 +40,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $query->bindParam(':endDate', $endDate, PDO::PARAM_STR);
         $query->bindParam(':status', $status, PDO::PARAM_STR);
         $query->bindParam(':totalPrice', $totalPrice, PDO::PARAM_STR);
-
         $query->execute();
 
-        echo json_encode(["success" => true, "reservation_id" => $connexion->lastInsertId()]);
+        $reservationID = $connexion->lastInsertId();
+        if (!$reservationID) {
+            echo json_encode(["error" => "Failed to create reservation."]);
+            exit;
+        }
+
+        $updateQuery = $connexion->prepare("UPDATE Vehicles SET availability_status = FALSE WHERE vehicle_id = :vehicleID");
+        $updateQuery->bindParam(':vehicleID', $vehicleID, PDO::PARAM_INT);
+        $updateQuery->execute();
+
+        echo json_encode(["success" => true, "reservation_id" => $reservationID]);
     } catch (Exception $e) {
         echo json_encode(["error" => "Database error: " . $e->getMessage()]);
     }

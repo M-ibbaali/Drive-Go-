@@ -360,3 +360,49 @@ VALUES
 (3, 'Reservation Created', 8, 'User created a reservation for Land Rover Range Rover.'),
 (4, 'Payment Made', 9, 'Payment of 4000.00 for reservation completed.'),
 (5, 'Reservation Created', 10, 'User created a reservation for Tata Tiago EV.');
+
+-- Triggers :
+
+DELIMITER //
+
+-- Trigger for 'Reservation Created'
+CREATE TRIGGER after_reservation_created 
+AFTER INSERT ON Reservations
+FOR EACH ROW 
+BEGIN
+    INSERT INTO Historique (user_id, action_type, related_id, timestamp, details)
+    VALUES (NEW.user_id, 'Reservation Created', NEW.reservation_id, NOW(), CONCAT('Reservation created for vehicle with ID: ', NEW.vehicle_id));
+END//
+
+-- Trigger for 'Reservation Cancelled'
+CREATE TRIGGER after_reservation_cancelled 
+AFTER UPDATE ON Reservations
+FOR EACH ROW 
+BEGIN
+    IF OLD.status != 'Cancelled' AND NEW.status = 'Cancelled' THEN
+        INSERT INTO Historique (user_id, action_type, related_id, timestamp, details)
+        VALUES (NEW.user_id, 'Reservation Cancelled', NEW.reservation_id, NOW(), CONCAT('Reservation with ID: ', NEW.reservation_id, ' was cancelled.'));
+    END IF;
+END//
+
+-- Trigger for 'Payment Made'
+CREATE TRIGGER after_payment_made 
+AFTER INSERT ON Payments
+FOR EACH ROW 
+BEGIN
+    INSERT INTO Historique (user_id, action_type, related_id, timestamp, details)
+    VALUES (NEW.reservation_id, 'Payment Made', NEW.payment_id, NOW(), CONCAT('Payment of ', NEW.amount, ' made for reservation ID: ', NEW.reservation_id));
+END//
+
+-- Trigger for 'Vehicle Status Updated'
+CREATE TRIGGER after_vehicle_status_updated 
+AFTER UPDATE ON Vehicles
+FOR EACH ROW 
+BEGIN
+    IF OLD.availability_status != NEW.availability_status THEN
+        INSERT INTO Historique (user_id, action_type, related_id, timestamp, details)
+        VALUES (NEW.owner_id, 'Vehicle Status Updated', NEW.vehicle_id, NOW(), CONCAT('Vehicle with ID: ', NEW.vehicle_id, ' availability status updated to: ', NEW.availability_status));
+    END IF;
+END//
+
+DELIMITER ;

@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaUser, FaKey, FaShieldAlt, FaCog } from 'react-icons/fa'
+import { FaUser, FaKey, FaShieldAlt, FaCog, FaHistory } from 'react-icons/fa'
 
 function SideBar({ data, activeSection, setActiveSection, renderContent, isLoggedIn }) {
     return (
@@ -55,6 +55,19 @@ function SideBar({ data, activeSection, setActiveSection, renderContent, isLogge
                             >
                                 <FaShieldAlt className="text-lg" />
                                 <span>Security</span>
+                            </button>
+
+                            {/* Historique Button */}
+                            <button
+                                onClick={() => setActiveSection("Historique")}
+                                className={`w-full text-left px-4 py-2 rounded-md flex items-center space-x-3 ${
+                                    activeSection === "Historique"
+                                        ? "bg-blue-500 text-white"
+                                        : "text-black hover:bg-blue-500 hover:text-white"
+                                }`}
+                            >
+                                <FaHistory className="text-lg" />
+                                <span>Historique</span>
                             </button>
                         </>
                     )}
