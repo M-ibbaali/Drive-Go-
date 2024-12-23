@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { BrowserRouter, HashRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Routers from './Routes/Routers'
 import FirstTimeIn from './Login/FirstTimeIn'
 import FirstTimeUp from './Login/FirstTimeUp'
@@ -8,7 +8,7 @@ import Loading from './Progress/Loading'
 import TitleChange from './TitleChange'
 import ForgotPassword from './Login/ForgotPassword'
 import ResetPassword from './Login/ResetPassword'
-import { SearchProvider } from "./Categories/SearchContext";
+import { SearchProvider } from "./Categories/SearchContext"
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(null)
@@ -62,34 +62,32 @@ function App() {
     return (
         <>
            <SearchProvider>
-            <BrowserRouter future={future}>
-            {/* <HashRouter> */}
-                <TitleChange isLoggedIn={isLoggedIn} ></TitleChange>
-                <ProgressBar></ProgressBar>
-                <Routes>
-                    <Route
-                        path="/*"
-                        element={isLoggedIn || isGuest ? <Routers isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isGuest={isGuest}/> : <Navigate to="/login" replace />}
-                    />
-                    <Route
-                        path="/login"
-                        element={!isLoggedIn ? <FirstTimeIn setIsGuest={setIsGuest} setIsLoggedIn={setIsLoggedIn} /> : <Navigate to="/" replace />}
-                    />
-                    <Route
-                        path="/register"
-                        element={!isLoggedIn ? <FirstTimeUp /> : <Navigate to="/" replace />}
-                    />
-                    <Route
-                        path="/forgot-password"
-                        element={<ForgotPassword />}
-                    />
-                    <Route
-                        path="/reset-password"
-                        element={<ResetPassword />}
-                    />
-                </Routes>
-            {/* </HashRouter> */}
-            </BrowserRouter>
+                <BrowserRouter future={future}>
+                    <TitleChange isLoggedIn={isLoggedIn} ></TitleChange>
+                    <ProgressBar></ProgressBar>
+                    <Routes>
+                        <Route
+                            path="/*"
+                            element={isLoggedIn || isGuest ? <Routers isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} isGuest={isGuest}/> : <Navigate to="/login" replace />}
+                        />
+                        <Route
+                            path="/login"
+                            element={!isLoggedIn ? <FirstTimeIn setIsGuest={setIsGuest} setIsLoggedIn={setIsLoggedIn} /> : <Navigate to="/" replace />}
+                        />
+                        <Route
+                            path="/register"
+                            element={!isLoggedIn ? <FirstTimeUp /> : <Navigate to="/" replace />}
+                        />
+                        <Route
+                            path="/forgot-password"
+                            element={<ForgotPassword />}
+                        />
+                        <Route
+                            path="/reset-password"
+                            element={<ResetPassword />}
+                        />
+                    </Routes>
+                </BrowserRouter>
             </SearchProvider>
         </>
     )
