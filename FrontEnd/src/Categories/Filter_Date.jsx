@@ -44,7 +44,7 @@ const Filter_Date = ({
           </label>
           <div className="relative">
             <select
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 pl-10"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 pl-10"
               value={pickupLocation}
               onChange={(e) => onPickupLocationChange(e.target.value)}
             >
@@ -66,7 +66,7 @@ const Filter_Date = ({
           <div className="relative">
             <input
               type="date"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 pl-10"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 pl-10"
               value={pickupDate}
               onChange={handlePickupDateChange}
               min={today}
@@ -81,7 +81,7 @@ const Filter_Date = ({
           </label>
           <div className="relative">
             <select
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 pl-10"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 pl-10"
               value={dropoffLocation}
               onChange={(e) => onDropoffLocationChange(e.target.value)}
             >
@@ -103,7 +103,7 @@ const Filter_Date = ({
           <div className="relative">
             <input
               type="date"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 pl-10"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 pl-10"
               value={dropoffDate}
               onChange={(e) => onDropoffDateChange(e.target.value)}
               min={pickupDate || today}

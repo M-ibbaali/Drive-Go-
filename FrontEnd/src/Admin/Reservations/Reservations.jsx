@@ -10,41 +10,45 @@ function Reservations() {
     const reservationsPerPage = 5
     const totalPages = Math.ceil(filteredReservations.length / reservationsPerPage)
 
+    const [selectedReservation, setSelectedReservation] = useState(null)
+    const [showModal, setShowModal] = useState(false)
+    const [newStatus, setNewStatus] = useState('')
+
     const getStatusClass = (status) => {
         switch (status) {
             case "Pending":
-                return "bg-yellow-100 text-yellow-600"
+                return "bg-yellow-100 text-yellow-600 hover:bg-yellow-200"
             case "Confirmed":
-                return "bg-blue-100 text-blue-600"
+                return "bg-blue-100 text-blue-600 hover:bg-blue-200"
             case "Completed":
-                return "bg-green-100 text-green-600"
+                return "bg-green-100 text-green-600 hover:bg-green-200"
             case "Cancelled":
-                return "bg-red-100 text-red-600"
+                return "bg-red-100 text-red-600 hover:bg-red-200"
             default:
-                return "bg-gray-100 text-gray-600"
+                return "bg-gray-100 text-gray-600 hover:bg-gray-200"
+        }
+    }
+
+    const fetchReservations = async () => {
+        try {
+            const response = await fetch('http://localhost/drive-go/BackEnd/Admin/Reservations/reservation.php')
+            if (!response.ok) {
+                throw new Error('Failed to fetch reimbursements.')
+            }
+            const data = await response.json()
+
+            if (data.error) {
+                throw new Error(data.error)
+            }
+
+            setReservations(data.data)
+            setFilteredReservations(data.data)
+        } catch (err) {
+            setError(err.message)
         }
     }
 
     useEffect(() => {
-        const fetchReservations = async () => {
-            try {
-                const response = await fetch('http://localhost/drive-go/BackEnd/Admin/Reservations/reservation.php')
-                if (!response.ok) {
-                    throw new Error('Failed to fetch reimbursements.')
-                }
-                const data = await response.json()
-
-                if (data.error) {
-                    throw new Error(data.error)
-                }
-
-                setReservations(data.data)
-                setFilteredReservations(data.data)
-            } catch (err) {
-                setError(err.message)
-            }
-        }
-
         fetchReservations()
     }, [])
 
@@ -88,6 +92,51 @@ function Reservations() {
 
     const handlePageClick = (pageNumber) => {
         setCurrentPage(pageNumber)
+    }
+
+    const openModal = (reservation) => {
+        setSelectedReservation(reservation)
+        setNewStatus(reservation.status)
+        setShowModal(true)
+    }
+
+    const closeModal = () => {
+        setShowModal(false)
+        setSelectedReservation(null)
+    }
+
+    const handleStatusChange = async () => {
+        if (!selectedReservation || !newStatus) return
+    
+        try {
+            const response = await fetch('http://localhost/drive-go/BackEnd/Admin/Reservations/updateStatus.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    reservation_id: selectedReservation.id,
+                    new_status: newStatus,
+                }),
+            })
+    
+            const result = await response.json()
+    
+            if (result.error) {
+                alert('Error: ' + result.error)
+            } else {
+                setReservations(reservations.map(reservation =>
+                    reservation.id === selectedReservation.id
+                        ? { ...reservation, status: newStatus }
+                        : reservation
+                ))
+            }
+        } catch (err) {
+            alert('Error updating status: ' + err.message)
+        }
+    
+        closeModal()
+        fetchReservations()
     }
 
     return (
@@ -179,7 +228,10 @@ function Reservations() {
                                             <td className="px-4 py-2">{item.type}</td>
                                             <td className="px-4 py-2">{item.location}</td>
                                             <td className="px-4 py-2">
-                                                <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusClass(item.status)}`}>
+                                                <span
+                                                    onClick={() => openModal(item)}
+                                                    className={`px-3 py-1 rounded-full text-sm font-medium cursor-pointer ${getStatusClass(item.status)}`}
+                                                >
                                                     {item.status}
                                                 </span>
                                             </td>
@@ -190,6 +242,40 @@ function Reservations() {
                         )
                     }
                 </div>
+
+                {showModal && (
+                    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
+                        <div className="bg-white p-6 rounded-lg shadow-xl">
+                            <h3 className="text-xl font-semibold mb-4">Change Reservation Status</h3>
+                            <div className="mb-4">
+                                <select
+                                    value={newStatus}
+                                    onChange={(e) => setNewStatus(e.target.value)}
+                                    className="px-4 py-2 border focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
+                                >
+                                    <option value="Pending">Pending</option>
+                                    <option value="Confirmed">Confirmed</option>
+                                    <option value="Completed">Completed</option>
+                                    <option value="Cancelled">Cancelled</option>
+                                </select>
+                            </div>
+                            <div className="flex justify-between">
+                                <button
+                                    onClick={handleStatusChange}
+                                    className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-400"
+                                >
+                                    Confirm
+                                </button>
+                                <button
+                                    onClick={closeModal}
+                                    className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-400"
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 <div className="flex justify-center space-x-2 mt-4">
                     <button

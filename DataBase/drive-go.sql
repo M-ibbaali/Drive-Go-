@@ -394,6 +394,25 @@ BEGIN
     VALUES (NEW.reservation_id, 'Payment Made', NEW.payment_id, NOW(), CONCAT('Payment of ', NEW.amount, ' made for reservation ID: ', NEW.reservation_id));
 END//
 
+-- Trigger for 'Update Vehicle Status'
+
+CREATE TRIGGER update_vehicle_availability_status
+AFTER INSERT ON Reservations
+FOR EACH ROW
+BEGIN
+    IF NEW.start_date = CURRENT_DATE() THEN
+        UPDATE Vehicles
+        SET availability_status = FALSE
+        WHERE vehicle_id = NEW.vehicle_id;
+    END IF;
+
+    IF DATE_SUB(NEW.end_date, INTERVAL 1 DAY) = CURRENT_DATE() THEN
+        UPDATE Vehicles
+        SET availability_status = TRUE
+        WHERE vehicle_id = NEW.vehicle_id;
+    END IF;
+END//
+
 -- Trigger for 'Vehicle Status Updated'
 CREATE TRIGGER after_vehicle_status_updated 
 AFTER UPDATE ON Vehicles
