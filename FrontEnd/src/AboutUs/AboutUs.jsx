@@ -18,7 +18,7 @@ function AboutUs() {
                         <p className="text-lg leading-relaxed mb-4">
                             Welcome to <span className="font-semibold">Rent Cars</span>, your trusted partner for all your premium car rental needs. 
                             Whether you're planning a business trip, a vacation, or simply need a vehicle for a special occasion, 
-                            we provide a diverse fleet of top-quality vehicles to make your journey smooth and memorable.
+                             fleet of top-quality vehicles to make your journey smooth and memorable.
                         </p>
                         <p className="text-lg leading-relaxed mb-4">
                             Our mission is to offer seamless, affordable, and reliable car rental services that cater to your unique requirements. 
