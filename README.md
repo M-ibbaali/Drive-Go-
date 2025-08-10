@@ -38,9 +38,6 @@ Créer une plateforme sécurisée, évolutive et conviviale pour la location de 
 ### **Domaine :**
 Services de location de véhicules.
 
-### **Budget :**
-66 000 MAD
-
 ---
 
 ## **Fonctionnalités :**
