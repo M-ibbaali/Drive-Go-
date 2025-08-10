@@ -10,10 +10,9 @@ DriveGo est une plateforme de location de voitures innovante conçue pour simpli
 2. [Présentation du projet](#project-overview)
 3. [Fonctionnalités](#features)
 4. [Technologies utilisées](#technologies-used)
-5. [Budget du projet](#project-budget)
-6. [User Stories](#user-stories)
-7. [Risques et atténuation](#risks-and-mitigation)
-8. [Détails du sprint](#sprint-details)
+5. [User Stories](#user-stories)
+6. [Risques et atténuation](#risks-and-mitigation)
+7. [Détails du sprint](#sprint-details)
 
 ---
 
@@ -81,14 +80,6 @@ Services de location de véhicules.
 
 ---
 
-## **Budget du projet :**
-
-- **Coûts de développement :** 40 000 MAD
-- **Hébergement et domaine :** 6 000 MAD
-- **Maintenance :** 10 000 MAD
-- **Marketing :** 10 000 MAD
-
----
 
 ## **Témoignages d'utilisateurs :**
 
